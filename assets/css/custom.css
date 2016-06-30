@@ -1,0 +1,81 @@
+html {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100%;
+  
+  background: white; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(bottom, #2196F3, #FAFAFA, #FAFAFA); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom, #2196F3, #FAFAFA, #FAFAFA); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom, #2196F3, #FAFAFA, #FAFAFA); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(bottom, #2196F3, #FAFAFA, #FAFAFA); /* Standard syntax (must be last) */
+}
+
+html, body {
+    min-height: 100%
+}
+
+.demo-card-image.mdl-card {
+	width: 256px;
+  	height: 256px;
+  	background: url('../img/placeholder_image.png') center / cover;
+}
+
+.demo-card-image > .mdl-card__actions {
+  	height: 52px;
+  	padding: 16px;
+  	background: rgba(0, 0, 0, 0.2);
+}
+
+.demo-card-image__filename {
+  	color: #fff;
+  	font-size: 14px;
+  	font-weight: 500;
+}
+
+#main-container {
+	margin: 0 auto !important;
+}
+
+#main-container {
+	max-width: 960px;
+  /*background-color: #CCC;*/
+}
+
+.mdl-navigation img {
+  margin-right: 20px;
+}
+
+#about-text {
+  font-size: 18px;
+  max-width: 550px;
+}
+
+.page-topic, #about-text {
+  color: #757575 !important;
+}
+
+#contact-list {
+  max-width: 550px;
+}
+
+#drive-logo-button {
+  width: 260px;
+}
+
+#computer-image-button {
+  width: 260px;
+}
+
+#drive-logo-container, 
+#computer-image-container {
+  margin: 0 auto;
+  /*background-color: #EEE;*/
+  text-align: center;
+  padding: 15px;
+}
+
+#home-page-container {
+  margin-top: 50px;
+}

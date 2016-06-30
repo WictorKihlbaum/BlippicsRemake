@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
+        <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
+		<title>Sitename | Home</title>
+		<link rel="stylesheet" href="./assets/css/material.min.css">
+		<script src="./assets/js/material.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="./assets/css/custom.css">
+		<link rel="stylesheet" href="./assets/css/hover.css">
+	</head>
+	<body>
+
+		<!-- Always shows a header, even in smaller screens. -->
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			<header class="mdl-layout__header">
+		    	<div class="mdl-layout__header-row">
+		      	<!-- Title -->
+		      	<span class="mdl-layout-title">Title</span>
+
+				<!-- Google login/logout button -->
+			    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+			    <a href="#" id="signout-button">Sign out</a>
+			    <span id="profile-name"></span>
+
+		  	</header>
+		  	<div class="mdl-layout__drawer">
+		    	<span class="mdl-layout-title">Menu</span>
+	    		<nav class="mdl-navigation">
+	      			<a class="mdl-navigation__link hvr-underline-from-left" href="index.html">
+	      				<img src="./assets/img/icons/home-icon.png" alt="Visit home page">
+	      				Home
+	      			</a>
+      				<a class="mdl-navigation__link hvr-underline-from-left" href="about.html">
+      					<img src="./assets/img/icons/information-icon.png" alt="Visit about page">
+      					About
+      				</a>
+	      			<a class="mdl-navigation__link hvr-underline-from-left" href="contact.html">
+	      				<img src="./assets/img/icons/contact-icon.png" alt="Visit contact page">
+	      				Contact
+	      			</a>
+	    		</nav>
+		  	</div>
+		  	<main class="mdl-layout__content">
+		    	<div class="page-content" id="main-container">
+		    		
+		    		<!-- Content goes here -->
+
+		    		<div id="home-page-container" class="mdl-grid">
+
+			    		<div class="mdl-cell mdl-cell--5-col mdl-cell--middle" id="drive-logo-container">
+			    			<a href="#" class="hvr-bob">
+			    				<img src="./assets/img/drive_logo.png" 
+			    					 alt="Edit image from computer" 
+			    					 id="drive-logo-button" />
+			    			</a>
+			    		</div>
+
+			    		<div class="mdl-tooltip" for="drive-logo-container">
+							Edit image from Google Drive
+						</div>
+
+	  					<div class="mdl-cell mdl-cell--5-col mdl-cell--middle" id="computer-image-container">
+	  						<a href="#" class="hvr-bob">
+	  							<img src="./assets/img/computer.png" 
+	  								 alt="Edit image from Google Drive" 
+	  								 id="computer-image-button" />
+	  						</a>
+	  					</div>
+
+	  					<div class="mdl-tooltip" for="computer-image-container">
+							Edit image from computer
+						</div>
+
+					</div>
+
+		    	</div>
+		  	</main>
+		  	<footer class="mdl-mini-footer">
+  				<div class="mdl-mini-footer__middle-section">
+    				<ul class="mdl-mini-footer__link-list">
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook"></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter"></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address"></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub"></a></li>
+    				</ul>
+  				</div>
+			</footer>
+		</div>
+
+
+		<script>
+		    function onSignIn(googleUser) {
+		        SignEvent.signIn(googleUser);
+		    }
+		</script>
+
+		<!-- JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+		<!-- Google Platform Library -->
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+		<script src="./assets/js/SignEvent.js"></script>
+
+	</body>
+</html>
