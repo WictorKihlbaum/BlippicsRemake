@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="./assets/css/hover.css">
 		<link rel="stylesheet" href="./assets/css/loading.css">
 		<link rel="stylesheet" href="./assets/css/simplePagination.css">
+		<link rel="stylesheet" href="./assets/css/driveimage.css">
 	</head>
 	<body>
 
@@ -23,6 +24,18 @@
 		    	<div class="mdl-layout__header-row">
 		      	<!-- Title -->
 		      	<span class="mdl-layout-title">Title</span>
+		      	<div class="mdl-layout-spacer"></div>
+				<!-- Google login/logout button -->
+
+				<ul>
+					<li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
+					<li><a href="#" id="signout-button">Sign out</a></li>
+					<li><span id="profile-name"></span></li>
+				</ul>
+
+			    
+			    
+			    
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -42,11 +55,48 @@
 	    		</nav>
 		  	</div>
 		  	<main class="mdl-layout__content">
-		    	<div class="page-content mdl-grid" id="main-container">
-		    		
-		    		<!-- Content goes here -->
+		    	<div class="page-content" id="main-container">
 
-		    		<h1 class="mdl-typography--display-3 page-topic">Edit image from Google Drive</h1>
+		    		<div id="editonline-page-container">
+		    			<h1 class="mdl-typography--display-1 page-topic">Edit image from Google Drive</h1>
+
+		    			<!-- User-message will be placed here -->
+			            <div id="user-message"></div>
+			            
+			            <div id="need-to-login-text">
+			            	You have to login to be able to load your Google Drive images. 
+			                However, if you already have done so you should be able to see your images right away.
+			                Only images in formats Png and Jpg/Jpeg will be shown. These are the formats the photo editor accepts.
+			            </div>
+
+			            <!-- Loading animation -->
+			            <div id="loading-animation" class="loading-hide">
+			                <div class="sk-chasing-dots">
+			                    <div class="sk-child sk-dot1"></div>
+			                    <div class="sk-child sk-dot2"></div>
+			                </div>
+			                <p id="loading-animation-text">Loading images...</p>
+			            </div>
+			            
+			            <div id="top-text">
+			            	<p>Your Google Drive images will be listed here...</p>
+			            </div>
+
+			            
+			            
+			                    <div class="mdl-grid" id="image-list">
+
+			            		</div>
+			            
+						
+
+			            <p> <!-- Go back -->
+		            		<a href="index.html" 
+		            		   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" 
+		            		   id="go-back-button">Go back</a>
+		            	</p>
+
+		    		</div>
 
 		    	</div>
 		  	</main>
@@ -62,13 +112,25 @@
 			</footer>
 		</div>
 
+		<script>
+		    function onSignIn(googleUser) {
+		        SignEvent.signIn(googleUser);
+		    }
+		</script>
+
+		<script src="./assets/js/jquery-3.0.0.min.js"></script>
+		<script src="./assets/js/DriveClass.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+		<script src="./assets/js/SignEvent.js"></script>
+		<script src="//fast.eager.io/cluq6Cumbb.js"></script>
+
 		<script type="text/javascript" src="//feather.aviary.com/imaging/v3/editor.js"></script>
         <script src="./assets/js/jquery.simplePagination.js"></script>
         <script src="./assets/js/Fullscreen.js"></script>
-        <script src="./assets/js/DriveClass.js"></script>
         <script src="./assets/js/AviaryDrive.js"></script>
         <script src="./assets/js/Message.js"></script>
-		<script src="./assets/js/loadcard.js"></script> <!-- Remove this later -->
+
 
 	</body>
 </html>

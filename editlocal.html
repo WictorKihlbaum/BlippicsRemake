@@ -21,6 +21,11 @@
 		    	<div class="mdl-layout__header-row">
 		      	<!-- Title -->
 		      	<span class="mdl-layout-title">Title</span>
+		      	<div class="mdl-layout-spacer"></div>
+				<!-- Google login/logout button -->
+			    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+			    <a href="#" id="signout-button">Sign out</a>
+			    <span id="profile-name"></span>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -46,13 +51,13 @@
 
 		    		<div id="editlocal-page-container">
 
-			    		<h1 class="mdl-typography--display-2 page-topic">Edit image from computer</h1>
+			    		<h1 class="mdl-typography--display-1 page-topic">Edit image from computer</h1>
 
 			    		<button id="show-toast-button" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Help</button>
 
 			    		<div id="image-container">
-			                <div class="upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-			                	<label for="input" class="label-class">
+			                <div>
+			                	<label for="input" class="label-class mdl-button mdl-button--raised mdl-button--primary">
 			                        Choose image
 			                        <!-- I had to add "onchange" inline aswell to make it work -->
 			                        <input type="file"
@@ -66,7 +71,18 @@
 		                	</div>
 		            	</div>
 
-		            	<a href="index.html" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Go back</a>
+
+		            	<p> <!-- Edit -->
+                			<a href="#" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary edit-button" id="edit-button">Edit image</a>
+            			</p>
+			
+						<p> <!-- Download (will be added from 'LocalClass.js') -->
+                			<span id="download-button-field"></span>
+                		</p>
+
+                		<p> <!-- Go back -->
+		            		<a href="index.html" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" id="go-back-button">Go back</a>
+		            	</p>
 
 	            	</div>
 
@@ -91,11 +107,16 @@
 
 		</div>
 
+		<script src="./assets/js/jquery-3.0.0.min.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+		<script src="./assets/js/SignEvent.js"></script>
+		<script src="//fast.eager.io/cluq6Cumbb.js"></script>
+
 		<script type="text/javascript" src="//feather.aviary.com/imaging/v3/editor.js"></script>
 		<script src="./assets/js/toast.js"></script>
         <script src="./assets/js/AviaryLocal.js"></script>
         <script src="./assets/js/LocalClass.js"></script>
-        <script src="./assets/js/SignEvent.js"></script>
         <script src="./assets/js/Message.js"></script>
 
 	</body>

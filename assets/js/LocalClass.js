@@ -1,4 +1,4 @@
-/* This JS-file handles events connected to 'localimage.html' */
+/* This JS-file handles events connected to 'editlocal.html' */
 'use strict';
 
 const LocalClass = {
@@ -8,7 +8,8 @@ const LocalClass = {
 	},
 
 	handleFiles: () => {
-		const defaultImagePath = 'images/no_image_chosen.jpg';
+		console.log('test');
+		const defaultImagePath = 'images/placeholder_image.png';
 		let preview = $('#editable-image');
 		let selectedFile = document.getElementById('input').files[0];
 
@@ -46,15 +47,22 @@ const LocalClass = {
 	
 	addDownloadButton: url => {
 		const downloadField = $('#download-button-field');
-		downloadField.html(`<a href="${url}" download
-			class="button-class button-size-large download-button">
-			Download image</a>`);
+		downloadField.html(`
+			<a href="${url}" download
+				class="mdl-button 
+				   mdl-js-button 
+				   mdl-button--raised 
+				   mdl-js-ripple-effect 
+				   mdl-button--primary 
+				   download-button">
+				Download image</a>
+		`);
 	},
 	
 	addEventListeners: () => {
 		$('#input').change(LocalClass.handleFiles);
 		$('#close-info-message').click(LocalClass.closeWindow);
-		$('#edit').click({param: 'editable-image'}, LocalClass.isImageChosen);
+		$('#edit-button').click({param: 'editable-image'}, LocalClass.isImageChosen);
 	},
 	
 	closeWindow: () => {
@@ -68,7 +76,7 @@ const LocalClass = {
 	isImageChosen: id => {
 		const image = $(`#${id.data.param}`);
 		// Check if an image has been chosen before open photo editor.
-		if (!image.attr('src').match(/no_image_chosen/g)) {
+		if (!image.attr('src').match(/placeholder_image/g)) {
 			AviaryLocal.launchEditor(id.data.param);
 		} else {
 			// Show error message.

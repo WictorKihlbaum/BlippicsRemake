@@ -3,7 +3,7 @@
 
 const DriveClass = {
 
-	pagination: null,
+	//pagination: null,
 	imageArray: [],
 	imageList: null,
 	currentImageName: '',
@@ -16,11 +16,11 @@ const DriveClass = {
 		// Reset list.
 		DriveClass.imageList = $('#image-list');
 		DriveClass.imageList.html('');
-		DriveClass.pagination = $('.pagination-page');
+		//DriveClass.pagination = $('.pagination-page');
 	},
 
 	setupPagination: () => {
-		const items = $('#image-list li');
+		const items = $('#image-list li'); // Change li.
 		const numItems = items.length;
 		const perPage = 8;
 
@@ -45,9 +45,7 @@ const DriveClass = {
 			let hash = window.location.hash || '#page-1';
 			// Use regex to check the hash string
 			hash = hash.match(/^#page-(\d+)$/);
-
-			if (hash)
-				$("#pagination").pagination('selectPage', parseInt(hash[1]));
+			if (hash) $("#pagination").pagination('selectPage', parseInt(hash[1]));
 		};
 
 		// Call this function whenever the back/forward is pressed.
@@ -146,11 +144,11 @@ const DriveClass = {
 			}
 
 			$('#loading-animation').attr('class', 'loading-hide');
-			DriveClass.setupPagination();
+			//DriveClass.setupPagination();
 		});
 	},
 
-	renderListElement: image => {
+	renderListElementOld: image => {
 		DriveClass.imageList.append(`
 			<li>
 				<div class="thumbnail-frame">
@@ -176,6 +174,28 @@ const DriveClass = {
 				<span id="${image.id}-edited"></span>
 				<div id="${image.id}-upload"></div>
 			</li>
+		`);
+	},
+
+	renderListElement: image => {
+		DriveClass.imageList.append(`
+			<div class="card-image mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col" style="background: url('${image.thumbnailLink}') center / cover">
+				<div class="mdl-card__title mdl-card--expand"></div>
+				<div class="mdl-card__actions mdl-typography--text-right">
+					<span class="card-image__filename">${image.originalFilename}</span>
+					<button id="${image.id}" class="mdl-button mdl-js-button mdl-button--icon">
+						<i class="material-icons">more_vert</i>
+					</button>
+					<ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="${image.id}">
+						<li class="mdl-menu__item">
+							Download
+						</li>
+					  	<li class="mdl-menu__item">
+					  		Edit
+					  	</li>
+					</ul>
+				</div>
+			</div>
 		`);
 	},
 

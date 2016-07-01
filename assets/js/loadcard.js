@@ -6,7 +6,7 @@ const loadcard = {
 
 	
 	init: () => {
-		loadcard.container = document.getElementById('main-container');
+		loadcard.container = document.getElementById('image-list');
 		loadcard.renderCards();
 	},
 
@@ -18,7 +18,7 @@ const loadcard = {
 					<div class="mdl-card__actions mdl-typography--text-right">
 						<span class="demo-card-image__filename">Image.jpg</span>
 
-						<!-- Right aligned menu on top of button  -->
+						<!-- Right aligned menu on top of button -->
 						<button id="demo-menu-top-right-${i}"
 						        class="mdl-button mdl-js-button mdl-button--icon">
 							<i class="material-icons">more_vert</i>
