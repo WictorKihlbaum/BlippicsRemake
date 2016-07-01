@@ -4,6 +4,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
+        <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
 		<title>Sitename | Edit Local Image</title>
 		<link rel="stylesheet" href="./assets/css/material.min.css">
 		<script src="./assets/js/material.min.js"></script>
@@ -38,25 +40,63 @@
 	    		</nav>
 		  	</div>
 		  	<main class="mdl-layout__content">
-		    	<div class="page-content mdl-grid" id="main-container">
+		    	<div class="page-content" id="main-container">
 		    		
 		    		<!-- Content goes here -->
 
-		    		<h1 class="mdl-typography--display-3 page-topic">Edit image from computer</h1>
+		    		<div id="editlocal-page-container">
+
+			    		<h1 class="mdl-typography--display-2 page-topic">Edit image from computer</h1>
+
+			    		<button id="show-toast-button" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Help</button>
+
+			    		<div id="image-container">
+			                <div class="upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+			                	<label for="input" class="label-class">
+			                        Choose image
+			                        <!-- I had to add "onchange" inline aswell to make it work -->
+			                        <input type="file"
+			                               id="input"
+			                               onchange="LocalClass.handleFiles(this.files)"
+			                               multiple accept="image/png, image/jpg, image/jpeg" />
+			                    </label>
+			                </div>
+			                <div id="dropzone">
+			                    <img src="./assets/img/placeholder_image.png" alt="Preview of loaded image" id="editable-image" />
+		                	</div>
+		            	</div>
+
+		            	<a href="index.html" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Go back</a>
+
+	            	</div>
 
 		    	</div>
 		  	</main>
 		  	<footer class="mdl-mini-footer">
   				<div class="mdl-mini-footer__middle-section">
     				<ul class="mdl-mini-footer__link-list">
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook"></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter"></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address"></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub"></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook" /></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter" /></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" /></a></li>
+      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub" /></a></li>
     				</ul>
   				</div>
 			</footer>
+
+			<!-- Toast message will be shown here -->
+			<div id="toast-container" class="mdl-js-snackbar mdl-snackbar">
+				<div class="mdl-snackbar__text"></div>
+			  	<button class="mdl-snackbar__action" type="button"></button>
+			</div>
+
 		</div>
+
+		<script type="text/javascript" src="//feather.aviary.com/imaging/v3/editor.js"></script>
+		<script src="./assets/js/toast.js"></script>
+        <script src="./assets/js/AviaryLocal.js"></script>
+        <script src="./assets/js/LocalClass.js"></script>
+        <script src="./assets/js/SignEvent.js"></script>
+        <script src="./assets/js/Message.js"></script>
 
 	</body>
 </html>

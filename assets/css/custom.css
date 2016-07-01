@@ -35,29 +35,30 @@ html, body {
 }
 
 #main-container {
-	margin: 0 auto !important;
-}
-
-#main-container {
+  margin: 0 auto !important;
 	max-width: 960px;
-  /*background-color: #CCC;*/
+  padding: 0 20px;
 }
 
 .mdl-navigation img {
   margin-right: 20px;
 }
 
-#about-text {
+#about-text,
+#contact-text {
   font-size: 18px;
   max-width: 550px;
 }
 
-.page-topic, #about-text {
+.page-topic, 
+#about-text, 
+#contact-text {
   color: #757575 !important;
 }
 
-#contact-list {
+.contact-lists {
   max-width: 550px;
+  margin: 0 !important; 
 }
 
 #drive-logo-button {
@@ -71,11 +72,32 @@ html, body {
 #drive-logo-container, 
 #computer-image-container {
   margin: 0 auto;
-  /*background-color: #EEE;*/
   text-align: center;
   padding: 15px;
 }
 
 #home-page-container {
   margin-top: 50px;
+}
+
+#editlocal-page-container {
+  text-align: center;
+}
+
+/* Styling for "Choose image"-button */
+input[type="file"] {
+    display: none;
+}
+
+#show-toast-button {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+#toast-container {
+  background-color: #F0F8FF;
+}
+
+.mdl-snackbar__text {
+  color: #2196F3;
 }
