@@ -31,7 +31,7 @@ const Fullscreen = {
 			!document.mozFullScreenElement &&
 			!document.msFullscreenElement) {
 			
-			Fullscreen.thumbnail.className = 'thumbnail-image';
+			Fullscreen.thumbnail.className = 'card-thumbnails';
 			Fullscreen.thumbnail.src = Fullscreen.thumbnailSrc;
 		}
 	},
@@ -46,7 +46,7 @@ const Fullscreen = {
 			// Remove unnecessary part of url.
 			const newSrc = src.replace(/&export=download/i, '');
 			const image = document.getElementById(id);
-			
+
 			// Save thumbnail image source for later use.
 			Fullscreen.thumbnailSrc = image.src;
 			
@@ -77,11 +77,13 @@ const Fullscreen = {
 			
 		} else {
 			// Show error message.
-			const message = `Ooops! Unfortunately your browser
-				does not support fullscreen preview.`;
+			const message = `
+				Ooops! Unfortunately your browser
+				does not support fullscreen preview.
+			`;
 			Message.showErrorMessage(message);
 		}
-	},
+	}
 	
 };
 

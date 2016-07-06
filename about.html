@@ -6,22 +6,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
         <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
-		<title>Sitename | About</title>
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+		<title>Blippics | About</title>
 		<link rel="stylesheet" href="./assets/css/material.min.css">
 		<script src="./assets/js/material.min.js"></script>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="./assets/css/custom.css">
 		<link rel="stylesheet" href="./assets/css/hover.css">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+		<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Luckiest+Guy|Finger+Paint|Raleway|Paytone+One'>
 	</head>
 	<body>
-
 		<!-- Always shows a header, even in smaller screens. -->
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 		    	<div class="mdl-layout__header-row">
-		      	<!-- Title -->
-		      	<span class="mdl-layout-title">Title</span>
+		      	<span class="mdl-layout-title">Blippics</span>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -34,10 +33,15 @@
       					<img src="./assets/img/icons/information-icon.png" alt="Visit about page">
       					About
       				</a>
-	      			<a class="mdl-navigation__link hvr-underline-from-left" href="contact.html">
+	      			<a class="mdl-navigation__link hvr-underline-from-left mdl-menu__item--full-bleed-divider" href="contact.html">
 	      				<img src="./assets/img/icons/contact-icon.png" alt="Visit contact page">
 	      				Contact
 	      			</a>
+					<!-- Google login/logout button -->
+					<div class="g-signin2 mdl-navigation__link" data-onsuccess="onSignIn"></div>
+					<a href="#" id="signout-button" class="mdl-navigation__link">
+						Sign out
+					</a>
 	    		</nav>
 		  	</div>
 		  	<main class="mdl-layout__content">
@@ -45,36 +49,70 @@
 		    		
 		    		<h1 class="mdl-typography--display-3 page-topic">About</h1>
 
-		    		<p id="about-text">
-		    			Lorem ipsum dolor sit amet, no per explicari delicatissimi, utamur ponderum pri an, 
-		    			eius scriptorem vituperatoribus nam et. Et vim purto debet quando. Viris audiam adipisci ea vel, 
-		    			porro tantas doming no mea. An eros atomorum abhorreant vim. Zril vivendo convenire vel no. 
-		    			In eos ferri legere fuisset, odio nusquam efficiantur vim ut.
+		    		<div id="about-text">
+						<p>
+							Blippics is the product of a final project in one of my previously
+							courses at Linnaeus university. Blippics has been undergoing several
+							updates ever since and still is. The main idea with the Blippics site
+							is to offer you the tools you need to edit your desired images.
+							This webapplication gives you the chance to either edit an image from
+							your computer or one from your Google Drive.<br />
+							When you are done editing you can either download the image to your
+							computer locally or save it back to your Google Drive online.
+						</p>
 
-						Usu altera voluptatibus eu. Eos tale omittantur referrentur id, nec an rebum scribentur persequeris, 
-						ne eos movet mnesarchum concludaturque. Et duo alienum intellegam intellegebat. 
-						Dignissim vulputate vel id, meis soluta id usu.
-					</p>
 
-		    	</div>
+						<p>I hope you enjoy this site as much I did making it.</p>
+
+						<p>Happy editing!</p>
+
+						<p>
+							<span id="worth-noting">Worth noting</span>
+							The photo editor can open images in all resolutions.
+							However, by default, the photo editor works on a medium resolution
+							image in order to speed up the performance of the editor.
+							This means it will save a high-res image in lower quality.
+						</p>
+					</div>
+				</div>
 		  	</main>
-		  	<footer class="mdl-mini-footer">
-  				<div class="mdl-mini-footer__middle-section">
-    				<ul class="mdl-mini-footer__link-list">
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub" /></a></li>
-    				</ul>
-  				</div>
+			<footer class="mdl-mini-footer">
+				<div class="mdl-mini-footer__middle-section">
+					<ul class="mdl-mini-footer__link-list">
+						<li>
+							<a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook" />
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/WictorKihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter" />
+							</a>
+						</li>
+						<li>
+							<a href="#" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" />
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/WictorKihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub" />
+							</a>
+						</li>
+					</ul>
+				</div>
 			</footer>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-		<script src="//apis.google.com/js/platform.js" async defer></script>
-		<script type="text/javascript" src="//apis.google.com/js/client.js"></script>
-		<script src="./assets/js/SignEvent.js"></script>
-		<script src="//fast.eager.io/cluq6Cumbb.js"></script>
+		<script>
+			function onSignIn(googleUser) {
+				SignEvent.signIn(googleUser);
+			}
+		</script>
 
+		<script src="./assets/js/jquery-3.0.0.min.js"></script>
+		<script src="//apis.google.com/js/platform.js" async defer></script>
+		<script src="//apis.google.com/js/client.js"></script>
+		<script src="./assets/js/SignEvent.js"></script>
 	</body>
 </html>

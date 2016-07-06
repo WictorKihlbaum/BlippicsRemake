@@ -1,4 +1,4 @@
-/* CSS for 'driveimage.html' */
+/* CSS for 'editonline.html' */
 
 #need-to-login-text {
 	position: relative;
@@ -58,17 +58,10 @@
 	color: #4183D7; 
 }
 
-.thumbnail-frame {
-	width: 200px;
-	height: 200px;
-	background-color: white;
-}
-
-.thumbnail-image {
-	display: inline-block;
-	max-width: 200px;
-	max-height: 200px;
-	vertical-align: middle;
+.card-thumbnails {
+	width: 128px;
+	height: 128px;
+	cursor: pointer;
 }
 
 .thumbnail-image:hover {
@@ -80,21 +73,11 @@
 	max-height: 100%;	
 }
 
-.helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
-
 .loading-show {
 	display: inherit;
 }
 
 .loading-hide {
-	display: none;
-}
-
-.pagination-page {
 	display: none;
 }
 

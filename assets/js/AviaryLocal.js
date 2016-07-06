@@ -18,6 +18,7 @@ const AviaryLocal = {
 			tools: 'all',
 			appendTo: '',
 			displayImageSize: true,
+			showWaitIndicator: true,
 			
 			onSave: (imageID, newURL) => {
 				// Show the new edited image.

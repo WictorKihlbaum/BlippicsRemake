@@ -6,36 +6,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
         <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
-		<title>Sitename | Edit Online Image</title>
+		<title>Blippics | Edit image from Google Drive</title>
 		<link rel="stylesheet" href="./assets/css/material.min.css">
 		<script src="./assets/js/material.min.js"></script>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="./assets/css/custom.css">
 		<link rel="stylesheet" href="./assets/css/hover.css">
 		<link rel="stylesheet" href="./assets/css/loading.css">
 		<link rel="stylesheet" href="./assets/css/simplePagination.css">
-		<link rel="stylesheet" href="./assets/css/driveimage.css">
+		<link rel="stylesheet" href="assets/css/editonline.css">
+		<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Luckiest+Guy|Finger+Paint|Raleway|Paytone+One'>
 	</head>
 	<body>
-
 		<!-- Always shows a header, even in smaller screens. -->
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 		    	<div class="mdl-layout__header-row">
-		      	<!-- Title -->
-		      	<span class="mdl-layout-title">Title</span>
-		      	<div class="mdl-layout-spacer"></div>
-				<!-- Google login/logout button -->
-
-				<ul>
-					<li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
-					<li><a href="#" id="signout-button">Sign out</a></li>
-					<li><span id="profile-name"></span></li>
-				</ul>
-
-			    
-			    
-			    
+		      	<span class="mdl-layout-title">Blippics</span>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -48,10 +35,15 @@
       					<img src="./assets/img/icons/information-icon.png" alt="Visit about page">
       					About
       				</a>
-	      			<a class="mdl-navigation__link hvr-underline-from-left" href="contact.html">
+	      			<a class="mdl-navigation__link hvr-underline-from-left mdl-menu__item--full-bleed-divider" href="contact.html">
 	      				<img src="./assets/img/icons/contact-icon.png" alt="Visit contact page">
 	      				Contact
 	      			</a>
+					<!-- Google login/logout button -->
+					<div class="g-signin2 mdl-navigation__link" data-onsuccess="onSignIn"></div>
+					<a href="#" id="signout-button" class="mdl-navigation__link">
+						Sign out
+					</a>
 	    		</nav>
 		  	</div>
 		  	<main class="mdl-layout__content">
@@ -62,11 +54,16 @@
 
 		    			<!-- User-message will be placed here -->
 			            <div id="user-message"></div>
+
+						<div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
+							<div class="mdl-snackbar__text"></div>
+							<button class="mdl-snackbar__action" type="button"></button>
+						</div>
 			            
 			            <div id="need-to-login-text">
-			            	You have to login to be able to load your Google Drive images. 
-			                However, if you already have done so you should be able to see your images right away.
-			                Only images in formats Png and Jpg/Jpeg will be shown. These are the formats the photo editor accepts.
+			            	You have to login to be able to load your Google Drive images.
+			                Only images in formats Png and Jpg/Jpeg will be shown.
+							These are the formats the photo editor accepts.
 			            </div>
 
 			            <!-- Loading animation -->
@@ -79,58 +76,73 @@
 			            </div>
 			            
 			            <div id="top-text">
-			            	<p>Your Google Drive images will be listed here...</p>
+			            	<p>Your Google Drive images will be listed here.</p>
 			            </div>
 
-			            
-			            
-			                    <div class="mdl-grid" id="image-list">
-
-			            		</div>
-			            
-						
+						<div class="pagination-page"></div>
+							<div id="image-list" class="mdl-grid">
+								<!-- Images will be rendered from 'DriveClass.js' -->
+							</div>
+						<div class="pagination-page"></div>
 
 			            <p> <!-- Go back -->
-		            		<a href="index.html" 
-		            		   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" 
-		            		   id="go-back-button">Go back</a>
+		            		<a href="index.html"
+							   id="go-back-button"
+		            		   class="mdl-button
+		            		   		  mdl-js-button
+		            		   		  mdl-button--raised
+		            		   		  mdl-js-ripple-effect
+		            		   		  mdl-button--accent">
+								Go back
+							</a>
 		            	</p>
 
 		    		</div>
-
 		    	</div>
 		  	</main>
 		  	<footer class="mdl-mini-footer">
   				<div class="mdl-mini-footer__middle-section">
     				<ul class="mdl-mini-footer__link-list">
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" /></a></li>
-      					<li><a href="#" class="hvr-wobble-vertical"><img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub" /></a></li>
+      					<li>
+							<a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/facebook-icon.png" alt="Visit my Facebook" />
+							</a>
+						</li>
+      					<li>
+							<a href="https://twitter.com/WictorKihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/twitter-icon.png" alt="Visit my Twitter" />
+							</a>
+						</li>
+      					<li>
+							<a href="#" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" />
+							</a>
+						</li>
+      					<li>
+							<a href="https://github.com/WictorKihlbaum" class="hvr-wobble-vertical">
+								<img src="./assets/img/icons/github-icon.png" alt="Visit my GitHub" />
+							</a>
+						</li>
     				</ul>
   				</div>
 			</footer>
 		</div>
 
 		<script>
-		    function onSignIn(googleUser) {
-		        SignEvent.signIn(googleUser);
-		    }
+			function onSignIn(googleUser) {
+				SignEvent.signIn(googleUser);
+			}
 		</script>
 
+		<script src="//feather.aviary.com/imaging/v3/editor.js"></script>
 		<script src="./assets/js/jquery-3.0.0.min.js"></script>
+		<script src="./assets/js/jquery.simplePagination.js"></script>
+		<script src="./assets/js/Message.js"></script>
 		<script src="./assets/js/DriveClass.js"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+		<script src="//apis.google.com/js/platform.js" async defer></script>
+		<script src="//apis.google.com/js/client.js"></script>
 		<script src="./assets/js/SignEvent.js"></script>
-		<script src="//fast.eager.io/cluq6Cumbb.js"></script>
-
-		<script type="text/javascript" src="//feather.aviary.com/imaging/v3/editor.js"></script>
-        <script src="./assets/js/jquery.simplePagination.js"></script>
         <script src="./assets/js/Fullscreen.js"></script>
         <script src="./assets/js/AviaryDrive.js"></script>
-        <script src="./assets/js/Message.js"></script>
-
-
 	</body>
 </html>

@@ -12,7 +12,7 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-color: #36D7B7;
+    background-color: #2196F3;
     border-radius: 100%;
     -webkit-animation: sk-chasingDotsBounce 2s infinite ease-in-out;
     animation: sk-chasingDotsBounce 2s infinite ease-in-out; }

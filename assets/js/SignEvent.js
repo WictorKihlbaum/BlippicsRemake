@@ -3,50 +3,31 @@
 const SignEvent = {
 	
 	signOutButton: null,
-	profileName: null,
 	
 	
 	init: () => {
 		SignEvent.signOutButton = $('#signout-button');
-		SignEvent.profileName = $('#profile-name');
-
-		SignEvent.hideSignOutButton();
-		SignEvent.addEventListener();
+		SignEvent.signOutButton.hide();
+		SignEvent.signOutButton.click(SignEvent.signOut);
+		SignEvent.snackbarContainer = $('#welcome-toast');
 	},
 	
 	signIn: googleUser => {
 		const profile = googleUser.getBasicProfile();
-		SignEvent.showProfileName(profile.getName());
-		SignEvent.showSignOutButton();
-		// Check if user is authenticated.
-		DriveClass.checkAuth();
+		//SignEvent.profileName.html(profile.getName());
+		SignEvent.signOutButton.show();
+		// For Google Drive (Edit online) view.
+		if (window.location.href.match('editonline')) {
+			DriveClass.checkAuth();
+		}
 	},
 	
 	signOut: () => {
 		const auth2 = gapi.auth2.getAuthInstance();
-
-		auth2.signOut().then(() =>
-			console.log('User signed out.'));
-		// Revoke all tokens and scopes.
+		auth2.signOut();
 		auth2.disconnect();
 		window.location.reload();
-  	},
-	
-	showSignOutButton: () => {
-		SignEvent.signOutButton.css('visibility', 'visible');
-	},
-	
-	hideSignOutButton: () => {
-		SignEvent.signOutButton.css('visibility', 'hidden');
-	},
-	
-	showProfileName: name => {
-		SignEvent.profileName.html(name);
-	},
-	
-	addEventListener: () => {
-		SignEvent.signOutButton.click(SignEvent.signOut);
-	}
+  	}
 	
 };
 
