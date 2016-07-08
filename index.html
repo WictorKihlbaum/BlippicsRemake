@@ -18,7 +18,8 @@
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 		    	<div class="mdl-layout__header-row">
-		      	<span class="mdl-layout-title">Blippics</span>
+		      		<span class="mdl-layout-title">Blippics</span>
+				</div>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -53,8 +54,7 @@
 			    					 id="drive-logo-button" />
 			    			</a>
 			    		</div>
-
-			    		<div class="mdl-tooltip" mdl-data-for="drive-logo-container">
+			    		<div class="mdl-tooltip" for="drive-logo-container">
 							Edit image from Google Drive
 						</div>
 
@@ -65,8 +65,7 @@
 	  								 id="computer-image-button" />
 	  						</a>
 	  					</div>
-
-	  					<div class="mdl-tooltip" mdl-data-for="computer-image-container">
+	  					<div class="mdl-tooltip" for="computer-image-container">
 							Edit image from computer
 						</div>
 
@@ -74,7 +73,7 @@
 		    	</div>
 		  	</main>
 			<footer class="mdl-mini-footer">
-				<div class="mdl-mini-footer__middle-section">
+				<div class="mdl-mini-footer__left-section">
 					<ul class="mdl-mini-footer__link-list">
 						<li>
 							<a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-wobble-vertical">
@@ -106,9 +105,8 @@
 				SignEvent.signIn(googleUser);
 			}
 		</script>
-
 		<script src="./assets/js/jquery-3.0.0.min.js"></script>
-		<script src="//apis.google.com/js/platform.js" async defer></script>
+		<script src="//apis.google.com/js/platform.js"></script>
 		<script src="//apis.google.com/js/client.js"></script>
 		<script src="./assets/js/SignEvent.js"></script>
 	</body>

@@ -2,91 +2,84 @@
 'use strict';
 
 const LocalClass = {
-	
-	init: () => {
-		LocalClass.addEventListeners();
-	},
 
-	handleFiles: () => {
-		console.log('test');
-		const defaultImagePath = 'images/placeholder_image.png';
+	defaultImagePath: 'assets/img/placeholder_image.png',
+
+
+	handleFiles: fileList => {
 		let preview = $('#editable-image');
-		let selectedFile = document.getElementById('input').files[0];
+		let selectedFile = fileList[0];
 
 		if (LocalClass.isValidImageFormat(selectedFile)) {
-			// In case a message has been shown.
+			// In case a message has been shown earlier.
 			Message.removeUserMessage();
 			
 			const reader = new FileReader();
-			reader.onloadend = () =>
+			reader.onloadend = () => {
 				preview.attr('src', reader.result);
+				LocalClass.addEditButton();
+			};
 
-			if (selectedFile) reader.readAsDataURL(selectedFile);
-			else preview.attr('src', defaultImagePath);
+			if (selectedFile) {
+				reader.readAsDataURL(selectedFile);
+			} else {
+				preview.attr('src', LocalClass.defaultImagePath);
+				LocalClass.removeActionButtons();
+			}
 
 		} else {
-			// Show error message.
 			const message = `
 				File is not valid! The file is either not an image
 				or the format is wrong. Valid formats are Png and Jpg/Jpeg.
-				Please try again.`;
+				Please try again.
+			`;
 			Message.showUserMessage(message, 'user-message-error');
-			// Change back to default image.
-			preview.attr('src', defaultImagePath);
+			preview.attr('src', LocalClass.defaultImagePath);
+			LocalClass.removeActionButtons();
 		}
 	},
 
-	isValidImageFormat: image => {
+	removeActionButtons: () => {
+		$('#edit-button').remove();
+		$('#download-button').remove();
+	},
+
+	isValidImageFormat: file => {
 		// Aviary photo editor only supports Png and Jpg/Jpeg.
-		if (image.type == 'image/png' ||
-			image.type == 'image/jpg' ||
-			image.type == 'image/jpeg') {
+		if (file.type == 'image/png' ||
+			file.type == 'image/jpg' ||
+			file.type == 'image/jpeg') {
 			return true
 		}
 	},
-	
-	addDownloadButton: url => {
-		const downloadField = $('#download-button-field');
-		downloadField.html(`
-			<a href="${url}" download
-				class="mdl-button 
-				   mdl-js-button 
-				   mdl-button--raised 
-				   mdl-js-ripple-effect 
-				   mdl-button--primary 
-				   download-button">
-				Download image</a>
+
+	addEditButton: () => {
+		$('#edit-button-field').html(`
+			<a href="#"
+			   id="edit-button"
+			   onclick="AviaryLocal.launchEditor('editable-image')"
+			   class="mdl-button
+					  mdl-js-button
+					  mdl-button--raised
+					  mdl-js-ripple-effect
+					  mdl-button--primary
+					  edit-button">
+				Edit image
+			</a>
 		`);
 	},
 	
-	addEventListeners: () => {
-		$('#input').change(LocalClass.handleFiles);
-		$('#close-info-message').click(LocalClass.closeWindow);
-		$('#edit-button').click({param: 'editable-image'}, LocalClass.isImageChosen);
-	},
-	
-	closeWindow: () => {
-		const infoWindow = $('#step-by-step');
-		infoWindow.attr('class', 'fadeout');
-
-		setTimeout(() =>
-			infoWindow.css('display', 'none'), 500);
-	},
-	
-	isImageChosen: id => {
-		const image = $(`#${id.data.param}`);
-		// Check if an image has been chosen before open photo editor.
-		if (!image.attr('src').match(/placeholder_image/g)) {
-			AviaryLocal.launchEditor(id.data.param);
-		} else {
-			// Show error message.
-			const message = `
-				You have to choose an image before you can edit.
-				Please try again.`;
-			Message.showUserMessage(message, 'user-message-error');
-		}
+	addDownloadButton: url => {
+		$('#download-button-field').html(`
+			<a href="${url}" download
+			   id="download-button"
+			   class="mdl-button 
+				   	  mdl-js-button 
+				   	  mdl-button--raised 
+				      mdl-js-ripple-effect 
+				      mdl-button--primary">Download image
+			</a>
+		`);
 	}
 	
-};				
-
-window.onload = LocalClass.init();
+};

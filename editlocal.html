@@ -18,7 +18,8 @@
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 		    	<div class="mdl-layout__header-row">
-		      	<span class="mdl-layout-title">Blippics</span>
+		      		<span class="mdl-layout-title">Blippics</span>
+				</div>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -45,19 +46,39 @@
 		  	<main class="mdl-layout__content">
 		    	<div class="page-content" id="main-container">
 
+					<!-- TODO: Add an option to take a selfie with connected camera. -->
+
 		    		<div id="editlocal-page-container">
+
+						<!--<div class="mdl-layout-spacer"></div>-->
+						<button id="show-dialog"
+								type="button"
+								class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+							Show Help
+						</button>
 
 			    		<h1 class="mdl-typography--display-1 page-topic">Edit image from computer</h1>
 
-			    		<button id="show-toast-button"
-								class="mdl-button mdl-js-button mdl-button--raised"
-								type="button">Show Help</button>
+						<dialog class="mdl-dialog">
+							<h4 class="mdl-dialog__title">Help</h4>
+							<div class="mdl-dialog__content">
+								<ul>
+									<li>1. Press "Choose image" to choose which image you want to edit (Png or Jpg/Jpeg).</li>
+									<li>2. Press "Edit image". The photo editor will automatically open.</li>
+									<li>3. Press "Apply" in the upper-right corner, after you are done with each tool.</li>
+									<li>4. Press "Save" in the upper-right corner when you are done and then close the editor.</li>
+									<li>5. Press "Download image" to download your edited image to your computer.</li>
+								</ul>
+							</div>
+							<div class="mdl-dialog__actions">
+								<button type="button" class="mdl-button close">Close</button>
+							</div>
+						</dialog>
 
 			    		<div id="image-container">
 			                <div>
 			                	<label for="input" class="label-class mdl-button mdl-button--raised mdl-button--primary">
 			                        Choose image
-			                        <!-- I had to add "onchange" inline aswell to make it work -->
 			                        <input type="file"
 			                               id="input"
 			                               onchange="LocalClass.handleFiles(this.files)"
@@ -71,20 +92,11 @@
 		                	</div>
 		            	</div>
 
-		            	<p> <!-- Edit -->
-                			<a href="#"
-							   id="edit-button"
-							   class="mdl-button
-							   		  mdl-js-button
-							   		  mdl-button--raised
-							   		  mdl-js-ripple-effect
-							   		  mdl-button--primary
-							   		  edit-button">
-								Edit image
-							</a>
-            			</p>
+						<p> <!-- Edit (added from 'LocalClass.js') -->
+							<span id="edit-button-field"></span>
+						</p>
 			
-						<p> <!-- Download (will be added from 'LocalClass.js') -->
+						<p> <!-- Download (added from 'AviaryLocal.js') -->
                 			<span id="download-button-field"></span>
                 		</p>
 
@@ -129,26 +141,31 @@
 					</ul>
 				</div>
 			</footer>
-
-			<!-- Toast message will be shown here -->
-			<div id="toast-container" class="mdl-js-snackbar mdl-snackbar">
-				<div class="mdl-snackbar__text"></div>
-			  	<button class="mdl-snackbar__action" type="button"></button>
-			</div>
 		</div>
 
+		<script>
+			var dialog = document.querySelector('dialog');
+			var showDialogButton = document.querySelector('#show-dialog');
+			if (! dialog.showModal) {
+				dialogPolyfill.registerDialog(dialog);
+			}
+			showDialogButton.addEventListener('click', function() {
+				dialog.showModal();
+			});
+			dialog.querySelector('.close').addEventListener('click', function() {
+				dialog.close();
+			});
+		</script>
 		<script>
 			function onSignIn(googleUser) {
 				SignEvent.signIn(googleUser);
 			}
 		</script>
-
 		<script src="./assets/js/jquery-3.0.0.min.js"></script>
-		<script src="//apis.google.com/js/platform.js" async defer></script>
+		<script src="//apis.google.com/js/platform.js"></script>
 		<script src="//apis.google.com/js/client.js"></script>
 		<script src="./assets/js/SignEvent.js"></script>
-		<script src="//feather.aviary.com/imaging/v3/editor.js"></script>
-		<script src="./assets/js/toast.js"></script>
+		<script src="//dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
         <script src="./assets/js/AviaryLocal.js"></script>
         <script src="./assets/js/LocalClass.js"></script>
         <script src="./assets/js/Message.js"></script>

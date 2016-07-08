@@ -16,11 +16,11 @@
 		<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Luckiest+Guy|Finger+Paint|Raleway|Paytone+One'>
 	</head>
 	<body>
-		<!-- Always shows a header, even in smaller screens. -->
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 		    	<div class="mdl-layout__header-row">
-		      	<span class="mdl-layout-title">Blippics</span>
+		      		<span class="mdl-layout-title">Blippics</span>
+				</div>
 		  	</header>
 		  	<div class="mdl-layout__drawer">
 		    	<span class="mdl-layout-title">Menu</span>
@@ -73,6 +73,27 @@
 							image in order to speed up the performance of the editor.
 							This means it will save a high-res image in lower quality.
 						</p>
+
+						<h4 id="used-techniques">Used techniques</h4>
+
+						<ul class="demo-list-item mdl-list">
+							<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+							  Google Material Design Lite
+							</span>
+							</li>
+							<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+							  Adobe Aviary Photo Editor
+							</span>
+							</li>
+							<li class="mdl-list__item">
+							<span class="mdl-list__item-primary-content">
+							  Google APIs (Authentication, Drive)
+							</span>
+							</li>
+						</ul>
+
 					</div>
 				</div>
 		  	</main>
@@ -109,9 +130,8 @@
 				SignEvent.signIn(googleUser);
 			}
 		</script>
-
 		<script src="./assets/js/jquery-3.0.0.min.js"></script>
-		<script src="//apis.google.com/js/platform.js" async defer></script>
+		<script src="//apis.google.com/js/platform.js"></script>
 		<script src="//apis.google.com/js/client.js"></script>
 		<script src="./assets/js/SignEvent.js"></script>
 	</body>

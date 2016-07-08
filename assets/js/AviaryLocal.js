@@ -23,12 +23,10 @@ const AviaryLocal = {
 			onSave: (imageID, newURL) => {
 				// Show the new edited image.
 				$('#' + imageID).attr('src', newURL);
-				// Add download button for new image.
 				LocalClass.addDownloadButton(newURL);
 			},
 			
 			onError: errorObj => {
-				// Show error message.
 				console.log(errorObj.message);
 				const message = 'Error! Something went wrong.';
 				Message.showUserMessage(message, 'user-message-error')
@@ -40,7 +38,6 @@ const AviaryLocal = {
 		AviaryLocal.featherEditor.launch({
 			image: id
 		});
-
 		return false;
 	}
 		

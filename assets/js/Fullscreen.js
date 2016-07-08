@@ -76,7 +76,6 @@ const Fullscreen = {
 			}
 			
 		} else {
-			// Show error message.
 			const message = `
 				Ooops! Unfortunately your browser
 				does not support fullscreen preview.
