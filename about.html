@@ -111,9 +111,11 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="hvr-wobble-vertical">
-								<img src="./assets/img/icons/gmail-icon.png" alt="My Gmail address" />
-							</a>
+							<img src="./assets/img/icons/gmail-icon.png"
+								 alt="My Gmail address"
+								 data-clipboard-text="wictor.kihlbaum@gmail.com"
+								 id="my-gmail-address"
+								 class="hvr-wobble-vertical" />
 						</li>
 						<li>
 							<a href="https://github.com/WictorKihlbaum" class="hvr-wobble-vertical">
@@ -125,14 +127,16 @@
 			</footer>
 		</div>
 
-		<script>
-			function onSignIn(googleUser) {
-				SignEvent.signIn(googleUser);
-			}
-		</script>
+		<script src="./assets/js/clipboard.min.js"></script>
 		<script src="./assets/js/jquery-3.0.0.min.js"></script>
 		<script src="//apis.google.com/js/platform.js"></script>
 		<script src="//apis.google.com/js/client.js"></script>
 		<script src="./assets/js/SignEvent.js"></script>
+		<script>
+			function onSignIn(googleUser) {
+				SignEvent.signIn(googleUser);
+			}
+			new Clipboard('#my-gmail-address');
+		</script>
 	</body>
 </html>

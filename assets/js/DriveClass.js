@@ -294,7 +294,7 @@ const DriveClass = {
 	},
 
 	showSuccessMessage: () => {
-		const snackbarContainer = $('#success-toast');
+		const snackbarContainer = document.querySelector('#success-toast');
 		const data = {
 			message: 'The image was successfully uploaded to your Google Drive',
 			timeout: 7000
