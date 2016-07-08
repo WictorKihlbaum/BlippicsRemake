@@ -6,9 +6,28 @@ const LocalClass = {
 	defaultImagePath: 'assets/img/placeholder_image.png',
 
 
+	init: () => {
+		LocalClass.setupDialog();
+	},
+
+	setupDialog: () => {
+		const dialog = document.querySelector('dialog');
+		const showDialogButton = document.querySelector('#show-dialog');
+
+		if (!dialog.showModal) {
+			dialogPolyfill.registerDialog(dialog);
+		}
+		showDialogButton.addEventListener('click', () => {
+			dialog.showModal();
+		});
+		dialog.querySelector('.close').addEventListener('click', () => {
+			dialog.close();
+		});
+	},
+
 	handleFiles: fileList => {
-		let preview = $('#editable-image');
-		let selectedFile = fileList[0];
+		const preview = $('#editable-image');
+		const selectedFile = fileList[0];
 
 		if (LocalClass.isValidImageFormat(selectedFile)) {
 			// In case a message has been shown earlier.
@@ -26,7 +45,6 @@ const LocalClass = {
 				preview.attr('src', LocalClass.defaultImagePath);
 				LocalClass.removeActionButtons();
 			}
-
 		} else {
 			const message = `
 				File is not valid! The file is either not an image
@@ -83,3 +101,5 @@ const LocalClass = {
 	}
 	
 };
+
+window.onload = LocalClass.init();

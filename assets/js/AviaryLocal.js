@@ -27,8 +27,8 @@ const AviaryLocal = {
 			},
 			
 			onError: errorObj => {
-				console.log(errorObj.message);
-				const message = 'Error! Something went wrong.';
+				console.log(errorObj);
+				const message = `Error! Something went wrong. Message: ${errorObj.message}`;
 				Message.showUserMessage(message, 'user-message-error')
 			}
 		});

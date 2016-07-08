@@ -73,14 +73,6 @@
 	max-height: 100%;	
 }
 
-.loading-show {
-	display: inherit;
-}
-
-.loading-hide {
-	display: none;
-}
-
 #loading-animation-text {
 	font-size: 18px;
 	color: #BDC3C7;

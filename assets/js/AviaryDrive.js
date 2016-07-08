@@ -23,15 +23,14 @@ const AviaryDrive = {
 			onSave: (imageID, newURL) => {
 				// Show the new edited image.
 				$('#' + imageID).attr('src', newURL);
-				// Add download- and upload-button for new image.
+				// Add action buttons for new image.
 				DriveClass.addDownloadButton(imageID, newURL);
 				DriveClass.addUploadButton(imageID, newURL);
 			},
 			
 			onError: errorObj => {
-				// Show error message.
-				console.log(errorObj.message);
-				const message = 'Error! Something went wrong.';
+				console.log(errorObj);
+				const message = `Error! Something went wrong. Message: ${errorObj.message}`;
 				Message.showUserMessage(message, 'user-message-error')
 			}
 		});
@@ -42,7 +41,6 @@ const AviaryDrive = {
 			image: id,
 			url: src
 		});
-		
 		return false;
 	}
 		

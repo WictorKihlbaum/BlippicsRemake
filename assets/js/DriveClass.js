@@ -12,9 +12,8 @@ const DriveClass = {
 	
 			  
 	init: () => {
-		DriveClass.addEventEventListener();
+		$('#loading-animation').hide();
 		DriveClass.imageList = $('#image-list');
-		DriveClass.imageList.html('');
 		DriveClass.pagination = $('.pagination-page');
 	},
 
@@ -42,7 +41,7 @@ const DriveClass = {
 		const checkFragment = () => {
 			// If there's no hash, make sure to go to page 1.
 			let hash = window.location.hash || '#page-1';
-			// Use regex to check the hash string
+			// Check the hash string.
 			hash = hash.match(/^#page-(\d+)$/);
 			if (hash) $("#pagination").pagination('selectPage', parseInt(hash[1]));
 		};
@@ -50,10 +49,6 @@ const DriveClass = {
 		// Call this function whenever the back/forward is pressed.
 		$(window).bind('popstate', checkFragment);
 		checkFragment();
-	},
-	
-	addEventEventListener: () => {
-		$('#close-info-message').click(DriveClass.closeWindow);
 	},
 	
 	addDownloadButton: (id, url) => {
@@ -71,20 +66,12 @@ const DriveClass = {
 	addUploadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
-			<a href="#" onclick="DriveClass.getImageFromAmazon(\'${url}\')">
-				<img src="./assets/img/icons/upload-icon.png" 
-					 alt="Upload edited ${id}" 
-				 	 title="Upload edited image" 
-				 	 class="icon-images" />
-			</a>
+			<img src="./assets/img/icons/upload-icon.png" 
+				 alt="Upload edited ${id}" 
+				 title="Upload edited image" 
+				 class="icon-images" 
+				 onclick="DriveClass.getImageFromAmazon(\'${url}\')" />
 		`);
-	},
-	
-	closeWindow: () => {
-		const infoWindow = $('#need-to-login-text');
-		infoWindow.attr('class', 'fadeout');
-		setTimeout(() =>
-			infoWindow.css('display', 'none'), 500);
 	},
 		
 	/**
@@ -129,8 +116,8 @@ const DriveClass = {
 	 */
 	listImages: () => {
 		// Show loading animation while images are being loaded.
-		$('#loading-animation').attr('class', 'loading-show');
-		DriveClass.imageList.html('');
+		$('#loading-animation').show();
+		//DriveClass.imageList.html('');
 		
 		const request = gapi.client.drive.files.list({
 			'maxResults': 100, // Change this to get more images.
@@ -143,11 +130,7 @@ const DriveClass = {
 
 			if (files && files.length > 0) {
 				for (let file of files) {
-					// Only list images in these formats.
-					if (file.mimeType === 'image/png' ||
-						file.mimeType === 'image/jpg' ||
-						file.mimeType === 'image/jpeg') {
-
+					if (DriveClass.isValidImageFormat(file)) {
 						DriveClass.renderListElement(file);
 					}
 				}
@@ -155,9 +138,18 @@ const DriveClass = {
 				$('#top-text').html('No valid images (Png, Jpg/Jpeg) found in your Google Drive.');
 			}
 
-			$('#loading-animation').attr('class', 'loading-hide');
+			$('#loading-animation').hide();
 			DriveClass.setupPagination();
 		});
+	},
+
+	isValidImageFormat: file => {
+		// Aviary photo editor only supports Png and Jpg/Jpeg.
+		if (file.mimeType == 'image/png' ||
+			file.mimeType == 'image/jpg' ||
+			file.mimeType == 'image/jpeg') {
+			return true
+		}
 	},
 
 	renderListElement: image => {
@@ -175,12 +167,12 @@ const DriveClass = {
 						 title="Show in fullscreen">
 				</div>
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
-					<a href="#" onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">
-						<img src="./assets/img/icons/edit-icon.png" 
-							 alt="Edit ${image.originalFilename}" 
-							 title="Edit image" 
-							 class="icon-images" />
-					</a>
+					<img src="./assets/img/icons/edit-icon.png" 
+						 alt="Edit ${image.originalFilename}" 
+						 title="Edit image" 
+						 class="icon-images" 
+						 onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')" />
+						 
 					<a href="${image.webContentLink}" download>
 						<img src="./assets/img/icons/download-original-icon.png" 
 							 alt="Download ${image.originalFilename} original" 
@@ -247,8 +239,6 @@ const DriveClass = {
 		document.body.className = 'cursor-wait';
   		
 		const boundary = '-------314159265358979323846';
-		//const delimiter = "\r\n--" + boundary + "\r\n";
-		//const close_delim = "\r\n--" + boundary + "--";
         const delimiter = `\r\n--${boundary}\r\n`;
         const close_delim = `\r\n--${boundary}--`;
 	
@@ -315,15 +305,12 @@ const DriveClass = {
 	setCurrentImageName: imageID => {
 		let imageName = DriveClass.currentImageName;
 		const images = DriveClass.imageArray;
+		const image = images.find(i => i.id == imageID);
+		imageName = image.originalFilename;
 
-		for (let image of images) {
-			if (imageID == image.id) {
-				imageName = image.originalFilename;
-				if (!image.originalFilename.match(/_Edited/g)) {
-					imageName = imageName.substr(0, imageName.lastIndexOf('.')) || imageName;
-					imageName += '_Edited';
-				}
-			}
+		if (!image.originalFilename.match(/_Edited/g)) {
+			imageName = imageName.substr(0, imageName.lastIndexOf('.')) || imageName;
+			imageName += '_Edited';
 		}
 		DriveClass.currentImageName = imageName;
 	}

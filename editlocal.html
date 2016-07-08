@@ -50,7 +50,6 @@
 
 		    		<div id="editlocal-page-container">
 
-						<!--<div class="mdl-layout-spacer"></div>-->
 						<button id="show-dialog"
 								type="button"
 								class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
@@ -58,6 +57,9 @@
 						</button>
 
 			    		<h1 class="mdl-typography--display-1 page-topic">Edit image from computer</h1>
+
+						<!-- Response messages will be shown here. -->
+						<div id="user-message"></div>
 
 						<dialog class="mdl-dialog">
 							<h4 class="mdl-dialog__title">Help</h4>
@@ -100,17 +102,17 @@
                 			<span id="download-button-field"></span>
                 		</p>
 
-                		<p> <!-- Go back -->
-		            		<a href="index.html"
+						<p> <!-- Go back -->
+							<a href="index.html"
 							   id="go-back-button"
 							   class="mdl-button
-							   		  mdl-js-button
-							   		  mdl-button--raised
-							   		  mdl-js-ripple-effect
-							   		  mdl-button--primary">
+		            		   		  mdl-js-button
+		            		   		  mdl-button--raised
+		            		   		  mdl-js-ripple-effect
+		            		   		  mdl-button--accent">
 								Go back
 							</a>
-		            	</p>
+						</p>
 
 	            	</div>
 		    	</div>
@@ -143,19 +145,6 @@
 			</footer>
 		</div>
 
-		<script>
-			var dialog = document.querySelector('dialog');
-			var showDialogButton = document.querySelector('#show-dialog');
-			if (! dialog.showModal) {
-				dialogPolyfill.registerDialog(dialog);
-			}
-			showDialogButton.addEventListener('click', function() {
-				dialog.showModal();
-			});
-			dialog.querySelector('.close').addEventListener('click', function() {
-				dialog.close();
-			});
-		</script>
 		<script>
 			function onSignIn(googleUser) {
 				SignEvent.signIn(googleUser);

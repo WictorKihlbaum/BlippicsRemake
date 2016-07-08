@@ -1,4 +1,3 @@
-/* This JS-file handles success/error-messages. */
 'use strict';
 
 const Message = {
@@ -24,8 +23,8 @@ const Message = {
 
 	getCloseButton: () => {
 		return `
-			<img src="assets/images/close_button_small.png"
-			alt="Close button for message"
+			<img src="assets/img/close_button.png"
+			alt="Close error message"
 			title="Close message"
 			class="close-message"
 			onclick="Message.removeUserMessage()" />`;
