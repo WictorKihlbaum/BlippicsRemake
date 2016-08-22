@@ -27,7 +27,8 @@ const Message = {
 			alt="Close error message"
 			title="Close message"
 			class="close-message"
-			onclick="Message.removeUserMessage()" />`;
+			onclick="Message.removeUserMessage()" />
+		`;
 	}
 	
 };

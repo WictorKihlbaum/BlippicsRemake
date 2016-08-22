@@ -11,6 +11,7 @@ const LocalClass = {
 	},
 
 	setupDialog: () => {
+		/* Function doesn't work if rewritten in JQuery. */
 		const dialog = document.querySelector('dialog');
 		const showDialogButton = document.querySelector('#show-dialog');
 
@@ -63,12 +64,8 @@ const LocalClass = {
 	},
 
 	isValidImageFormat: file => {
-		// Aviary photo editor only supports Png and Jpg/Jpeg.
-		if (file.type == 'image/png' ||
-			file.type == 'image/jpg' ||
-			file.type == 'image/jpeg') {
-			return true
-		}
+		// Adobe Aviary photo editor only supports Png and Jpg/Jpeg.
+		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
 	},
 
 	addEditButton: () => {
@@ -82,6 +79,7 @@ const LocalClass = {
 					  mdl-js-ripple-effect
 					  mdl-button--primary
 					  edit-button">
+				<i class="material-icons">edit</i>
 				Edit image
 			</a>
 		`);
@@ -95,7 +93,9 @@ const LocalClass = {
 				   	  mdl-js-button 
 				   	  mdl-button--raised 
 				      mdl-js-ripple-effect 
-				      mdl-button--primary">Download image
+				      mdl-button--primary">
+				<i class="material-icons">file_download</i>
+		    	Download image
 			</a>
 		`);
 	}

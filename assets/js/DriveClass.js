@@ -108,13 +108,10 @@ const DriveClass = {
 	 * Load Drive API client library.
 	 */
 	loadDriveApi: () => {
-		gapi.client.load('drive', 'v2', DriveClass.listImages);
+		gapi.client.load('drive', 'v2', DriveClass.renderImages);
 	},
-	
-	/**
-	 * Render images.
-	 */
-	listImages: () => {
+
+	renderImages: () => {
 		// Show loading animation while images are being loaded.
 		$('#loading-animation').show();
 		//DriveClass.imageList.html('');
@@ -131,7 +128,7 @@ const DriveClass = {
 			if (files && files.length > 0) {
 				for (let file of files) {
 					if (DriveClass.isValidImageFormat(file)) {
-						DriveClass.renderListElement(file);
+						DriveClass.renderImageElement(file);
 					}
 				}
 			} else {
@@ -144,22 +141,20 @@ const DriveClass = {
 	},
 
 	isValidImageFormat: file => {
-		// Aviary photo editor only supports Png and Jpg/Jpeg.
-		if (file.mimeType == 'image/png' ||
-			file.mimeType == 'image/jpg' ||
-			file.mimeType == 'image/jpeg') {
-			return true
-		}
+		// Adobe Aviary photo editor only supports Png and Jpg/Jpeg.
+		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.mimeType);
 	},
 
-	renderListElement: image => {
+	renderImageElement: image => {
 		DriveClass.imageList.append(`
-			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
+			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col" 
+				 itemscope itemtype ="http://schema.org/ImageObject">
 				<div class="mdl-card__title">
-					<h2 class="mdl-card__title-text">${image.originalFilename}</h2>
+					<h2 class="mdl-card__title-text" itemprop="name">${image.originalFilename}</h2>
 				</div>
 				<div class="mdl-card__media">
-					<img id="${image.id}"
+					<img itemprop="thumbnail"
+						 id="${image.id}"
 						 src="${image.thumbnailLink}" 
 						 class="card-thumbnails" 
 						 alt="${image.originalFilename}"
@@ -190,7 +185,8 @@ const DriveClass = {
 			
 		if (downloadURL) {
 			const accessToken = gapi.auth.getToken().access_token;
-			const xhr = new XMLHttpRequest();
+
+			/*const xhr = new XMLHttpRequest();
 
 			xhr.onload = () => {
 				const reader = new FileReader();
@@ -209,7 +205,24 @@ const DriveClass = {
 			xhr.open('GET', downloadURL);
 			xhr.responseType = 'blob';
 			xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-			xhr.send();
+			xhr.send();*/
+
+			$.ajax({
+				url: downloadURL,
+				type: 'GET',
+				headers: {'Authorization': `Bearer ${accessToken}`},
+				success: success => {
+					console.log('success');
+				},
+				error: error => {
+					console.log('Error');
+				},
+				done: hej => {
+					console.log('hej');
+				},
+				dataType: 'blob'
+			});
+
 		}
 	},
 	
@@ -280,8 +293,8 @@ const DriveClass = {
 			if (!callback) {
       			callback = file => {
 					DriveClass.showSuccessMessage();
-					// List all images again to show the newly uploaded one.
-					DriveClass.listImages();
+					// Render all images again to show the newly uploaded one.
+					DriveClass.renderImages();
 					document.body.className = 'cursor-default';
       			};
     		} else {
@@ -305,7 +318,7 @@ const DriveClass = {
 	setCurrentImageName: imageID => {
 		let imageName = DriveClass.currentImageName;
 		const images = DriveClass.imageArray;
-		const image = images.find(i => i.id == imageID);
+		const image = images.find(image => image.id == imageID);
 		imageName = image.originalFilename;
 
 		if (!image.originalFilename.match(/_Edited/g)) {
