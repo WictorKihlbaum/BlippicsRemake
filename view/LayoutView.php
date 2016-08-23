@@ -238,7 +238,7 @@ class LayoutView {
         $this -> pageTitle = 'Edit Online';
         $this -> pageContent = $this -> editOnlineView -> response();
         $this -> pageSpecificScripts = '
-          <script src="//dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+          <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
@@ -256,7 +256,7 @@ class LayoutView {
         $this -> pageTitle = 'Edit Local';
         $this -> pageContent = $this -> editLocalView -> response();
         $this -> pageSpecificScripts = '
-          <script src="//dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+          <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/AviaryLocal.js"></script>
           <script src="./assets/js/LocalClass.js"></script>
           <script src="./assets/js/Message.js"></script>

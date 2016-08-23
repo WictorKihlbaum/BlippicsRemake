@@ -55,10 +55,9 @@ const DriveClass = {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
 			<a href="${url}" download>
-				<img src="./assets/img/icons/download-edited-icon.png" 
-					 alt="Download edited ${id}" 
-				 	 title="Download edited image" 
-				 	 class="icon-images" />
+				<i alt="Download edited ${id}" 
+				   title="Download edited image" 
+				   class="material-icons">file_download</i>
 			</a>
 		`);
 	},
@@ -66,11 +65,10 @@ const DriveClass = {
 	addUploadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
-			<img src="./assets/img/icons/upload-icon.png" 
-				 alt="Upload edited ${id}" 
-				 title="Upload edited image" 
-				 class="icon-images" 
-				 onclick="DriveClass.getImageFromAmazon(\'${url}\')" />
+			<i alt="Upload edited ${id}" 
+			   title="Upload edited image" 
+			   class="material-icons" 
+			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">cloud_upload</i>
 		`);
 	},
 		
@@ -97,10 +95,12 @@ const DriveClass = {
 		if (authResult && !authResult.error) {
             $('#need-to-login-text').hide();
             $('#top-text').hide();
+            $('.g-signin2').hide();
 			DriveClass.loadDriveApi();
 		} else {
             $('#need-to-login-text').show();
             $('#top-text').show();
+            $('.g-signin2').show();
 		}
 	},
 	
@@ -162,18 +162,18 @@ const DriveClass = {
 						 title="Show in fullscreen">
 				</div>
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
-					<img src="./assets/img/icons/edit-icon.png" 
-						 alt="Edit ${image.originalFilename}" 
-						 title="Edit image" 
-						 class="icon-images" 
-						 onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')" />
-						 
-					<a href="${image.webContentLink}" download>
-						<img src="./assets/img/icons/download-original-icon.png" 
-							 alt="Download ${image.originalFilename} original" 
-							 title="Download original image" 
-							 class="icon-images" />
+
+					<i alt="Edit ${image.originalFilename}" 
+					   title="Edit image" 
+					   class="material-icons" 
+					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">edit</i>
+
+				    <a href="${image.webContentLink}" download>
+						<i alt="Download ${image.originalFilename} original" 
+						   title="Download original image" 
+						   class="material-icons">cloud_download</i>
 					</a>
+
 				</div>
 			</div>
 		`);
@@ -186,7 +186,7 @@ const DriveClass = {
 		if (downloadURL) {
 			const accessToken = gapi.auth.getToken().access_token;
 
-			/*const xhr = new XMLHttpRequest();
+			const xhr = new XMLHttpRequest();
 
 			xhr.onload = () => {
 				const reader = new FileReader();
@@ -205,8 +205,9 @@ const DriveClass = {
 			xhr.open('GET', downloadURL);
 			xhr.responseType = 'blob';
 			xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-			xhr.send();*/
+			xhr.send();
 
+			/*
 			$.ajax({
 				url: downloadURL,
 				type: 'GET',
@@ -222,7 +223,7 @@ const DriveClass = {
 				},
 				dataType: 'blob'
 			});
-
+			*/
 		}
 	},
 	

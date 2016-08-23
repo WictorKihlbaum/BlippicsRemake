@@ -101,11 +101,18 @@ h1 {
 .mdl-card__actions img {
     cursor: pointer;
 }
-
 /* Avoid small green "dots" near icons. */
 .mdl-card__actions a {
     color: transparent;
 }
+
+.mdl-card__actions i {
+    color: #2196F3;
+}
+.mdl-card__actions i:hover {
+    color: #B2FF59;
+    cursor: pointer;
+} 
 
 .icon-images {
     width: 20px;
