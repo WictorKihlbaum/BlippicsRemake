@@ -186,12 +186,12 @@ class LayoutView {
           <script src="//apis.google.com/js/client.js"></script>
           <script src="./assets/js/SignEvent.js"></script>
           <script src="./assets/js/header.js"></script>
+          '. $this -> getPageSpecificScripts() .'
           <script>
             function onSignIn(googleUser) {
               SignEvent.signIn(googleUser);
             }
           </script>
-          '. $this -> getPageSpecificScripts() .'
 
         </body>
       </html>
@@ -242,7 +242,6 @@ class LayoutView {
           <script src="./assets/js/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
-          <script src="./assets/js/SignEvent.js"></script>
           <script src="./assets/js/Fullscreen.js"></script>
           <script src="./assets/js/AviaryDrive.js"></script>
         ';
@@ -269,7 +268,9 @@ class LayoutView {
         $this -> pageTitle = 'Attribution';
         $this -> pageContent = $this -> attributionView -> response();
         $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
+        $this -> pageSpecificStyles = '
+          <link rel="stylesheet" href="./assets/css/topic.css" />
+        ';
         break;
       
       default: 

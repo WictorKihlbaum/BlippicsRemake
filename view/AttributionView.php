@@ -10,6 +10,13 @@ class AttributionView {
 
 	public function response() : string {
 		return '
+
+			<div class="wrapper">
+		      	<div class="clip-text clip-text_one">
+		      		Attribution
+		      	</div>
+		  	</div>
+
 			<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
 	    		Attribution
 	    	</h1>

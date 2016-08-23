@@ -12,7 +12,7 @@ class EditOnlineView {
 		return '
 			<div id="editonline-page-container">
     			<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
-    				Edit image from Google Drive
+    				Edit image on Google Drive
     			</h1>
 
 	            <div id="user-message"></div>
@@ -27,6 +27,13 @@ class EditOnlineView {
 	                Only images in formats Png and Jpg/Jpeg will be shown.
 					These are the formats the photo editor accepts.
 	            </div>
+
+	            <div class="g-signin2 mdl-layout--large-screen-only" 
+	            	 data-width="960px" 
+	            	 data-height="100" 
+	            	 data-longtitle="true" 
+	            	 data-theme="dark"
+	            	 data-onsuccess="onSignIn"></div>
 
 	            <div id="loading-animation">
 	                <div class="sk-chasing-dots">
