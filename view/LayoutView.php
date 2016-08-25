@@ -186,6 +186,7 @@ class LayoutView {
           <script src="//apis.google.com/js/client.js"></script>
           <script src="./assets/js/SignEvent.js"></script>
           <script src="./assets/js/header.js"></script>
+          <script src="//fast.eager.io/cluq6Cumbb.js"></script>
           '. $this -> getPageSpecificScripts() .'
           <script>
             function onSignIn(googleUser) {
