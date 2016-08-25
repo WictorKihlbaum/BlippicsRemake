@@ -268,9 +268,7 @@ class LayoutView {
         $this -> pageTitle = 'Attribution';
         $this -> pageContent = $this -> attributionView -> response();
         $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '
-          <link rel="stylesheet" href="./assets/css/topic.css" />
-        ';
+        $this -> pageSpecificStyles = '';
         break;
       
       default: 

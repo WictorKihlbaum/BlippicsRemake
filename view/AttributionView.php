@@ -10,38 +10,79 @@ class AttributionView {
 
 	public function response() : string {
 		return '
+			<div id="attribution-container">
 
-			<div class="wrapper">
-		      	<div class="clip-text clip-text_one">
-		      		Attribution
-		      	</div>
-		  	</div>
+				<h1 class="mdl-typography--display-3 mdl-color-text--primary page-topic">
+		    		Attribution
+		    	</h1>
 
-			<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
-	    		Attribution
-	    	</h1>
+		    	<p id="attribution-subtext">
+		    		The purpose of this page is to give credit to all used techniques 
+		    		and resources which I have been using to develop this website.  
+		    	</p>
 
-	    	<p>
-	    		The purpose of this page is to give credit to all used techniques 
-	    		and resources which I have been using to develop this website.  
-	    	</p>
 
-	    	<h2>Images</h2>
-	    		<a href="http://www.freepik.com/"></a>
+		    	<h2 class="attribution-topics">Images</h2>
 
-	    	<h2>Framework</h2>
-	    		<a href="https://getmdl.io/">Material Design Lite (MDL)</a> 
+		    	<ul class="mdl-list attribution-list">
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://www.freepik.com/">FreePik</a>
+				    </span>
+				  </li>
+				</ul>
+		    		
 
-	    	<h2>APIs</h2>
-    			<a href="https://creativesdk.adobe.com/docs/web/#/articles/gettingstarted/index.html">
-	    			Adobe Aviary Photo Editor (part of Adobe Creative SDK) 
-	    		</a>
-	    		Google Drive API
+		    	<h2 class="attribution-topics">Frameworks</h2>
 
-	    	<h2>JS/CSS Libraries</h2>
-	    		<a href="http://jquery.com/">JQuery</a>
-	    		<a href="http://ianlunn.github.io/Hover/">Hover</a>
-	    		<a href="http://kushagragour.in/lab/hint/">Hint</a>
+		    	<ul class="mdl-list attribution-list">
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="https://getmdl.io/">Material Design Lite (MDL)</a> 
+				    </span>
+				  </li>
+				</ul>
+		    		
+
+		    	<h2 class="attribution-topics">APIs</h2>
+
+		    	<ul class="mdl-list attribution-list">
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="https://creativesdk.adobe.com/docs/web/#/articles/gettingstarted/index.html">
+		    			Adobe Aviary Photo Editor (part of Adobe Creative SDK) 
+		    		  </a>
+				    </span>
+				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      Google Drive APIs
+				    </span>
+				  </li>
+				</ul>
+
+
+		    	<h2 class="attribution-topics">JS/CSS Libraries</h2>
+
+		    	<ul class="mdl-list attribution-list">
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://jquery.com/">JQuery</a>
+				    </span>
+				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://ianlunn.github.io/Hover/">Hover</a>
+				    </span>
+				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://kushagragour.in/lab/hint/">Hint</a>
+				    </span>
+				  </li>
+				</ul>
+
+			</div>
 		';
 	}
 
