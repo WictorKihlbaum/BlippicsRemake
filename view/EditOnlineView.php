@@ -15,6 +15,17 @@ class EditOnlineView {
     				Edit image on Google Drive
     			</h1>
 
+    			Images per page
+    			<button id="menu-amount" class="mdl-button mdl-js-button mdl-button--icon">
+				    <i class="material-icons">format_list_numbered</i>
+				</button>
+				<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect" for="menu-amount">
+				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(8)">8</li>
+				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(16)">16</li>
+				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(32)">32</li>
+				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(64)">64</li>
+				</ul>
+
 	            <div id="user-message"></div>
 
 				<div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
