@@ -3,6 +3,9 @@
 declare(strict_types = 1);
 
 class EditOnlineView {
+
+	private static $indexURL = '';
+
 	
 	function __construct() {
 		// Empty.
@@ -15,6 +18,7 @@ class EditOnlineView {
     				Edit image on Google Drive
     			</h1>
 
+    			<!--
     			Images per page
     			<button id="menu-amount" class="mdl-button mdl-js-button mdl-button--icon">
 				    <i class="material-icons">format_list_numbered</i>
@@ -25,6 +29,7 @@ class EditOnlineView {
 				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(32)">32</li>
 				    <li class="mdl-menu__item" onclick="DriveClass.setupPagination(64)">64</li>
 				</ul>
+				-->
 
 	            <div id="user-message"></div>
 
@@ -66,7 +71,7 @@ class EditOnlineView {
 
 	            <p> 
 	            	<!-- Go back -->
-            		<a href="index.html"
+            		<a href="?'.self::$indexURL.'"
 					   id="go-back-button"
             		   class="mdl-button
             		   		  mdl-js-button

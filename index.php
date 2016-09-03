@@ -1,13 +1,17 @@
 <?php
 
-/* TODO: (When PHP V 7.1+ is implemented)
-   Add return type "void" to all functions 
-   that doesn't return anything. */
+/** 
+ * TODO: (When PHP V 7.1+ is implemented by Mamp & CPanel)
+ * Add return type "void" to all functions 
+ * that doesn't return anything. 
+ */
 
 declare(strict_types = 1);
 
-/* Make sure errors are shown.
-   (Turn off for production). */
+/** 
+ * Make sure all errors are shown.
+ * (Turn off for production). 
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
@@ -28,8 +32,10 @@ require_once('view/AttributionView.php');
 // Controllers
 // ...
 
-/* Add all views in an array to avoid long 
-   parameter row in LayoutView.php constructor. */
+/**
+ * Add all views in an array to avoid long 
+ * parameter row in LayoutView.php constructor. 
+ */
 $views = [
 	'index' => new IndexView(), 
 	'about' => new AboutView(),

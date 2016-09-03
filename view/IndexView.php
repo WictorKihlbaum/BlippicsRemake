@@ -20,7 +20,7 @@ class IndexView {
 			  	<span class="hint--bottom" aria-label="Edit image on Google Drive">
 					<a href="?'.self::$editOnlineURL.'" class="hvr-bob">
 					  <img src="./assets/img/drive_logo.png" width="47%" 
-					       alt="Edit image from Google Drive" 
+					       alt="Edit image on Google Drive" 
 					       id="drive-logo-button" />
 					</a>
 				</span>
@@ -31,7 +31,7 @@ class IndexView {
 			  	<span class="hint--bottom" aria-label="Edit image on computer">
 				  	<a href="?'.self::$editLocalURL.'" class="hvr-bob">
 				  	  <img src="./assets/img/laptop.png" width="60%" 
-				  	       alt="Edit image from computer" 
+				  	       alt="Edit image on computer" 
 				  	       id="computer-image-button" />
 				  	</a>
 			  	</span>

@@ -11,6 +11,13 @@ header {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2196F3', endColorstr='#B2FF59',GradientType=1 ); /* IE6-9 */
 }
 
+#top-button {
+    position: fixed;
+    right: 50px;
+    bottom: 130px;
+    z-index: 1000;
+}
+
 /*
 #header-topic {
   -webkit-animation-duration: 3s;

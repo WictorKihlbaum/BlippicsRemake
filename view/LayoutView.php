@@ -39,6 +39,7 @@ class LayoutView {
           <title>Blippics | '. $this -> pageTitle .'</title>
           <!-- Google Material Lite -->
           <link rel="stylesheet" href="./assets/css/material.min.css" />
+          <link rel="stylesheet" href="./assets/css/pace-theme.css" />
           <link rel="stylesheet" href="./assets/css/custom.css" />
           <link rel="stylesheet" href="./assets/css/hamburger.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -50,7 +51,8 @@ class LayoutView {
           '. $this -> getPageSpecificStyles() .'
         </head>
         <body>
-          <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+          <div class="mdl-layout mdl-js-layout">
+            <a name="top"></a> <!-- Top anchor -->
             <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary-dark" id="page-header">
               <div class="mdl-layout--large-screen-only mdl-layout__header-row" id="social-buttons-row">
                 
@@ -121,66 +123,64 @@ class LayoutView {
             <div class="mdl-layout__drawer mdl-layout--small-screen-only">
               <span class="mdl-layout-title">Menu</span>
               <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="?'.self::$indexURL.'">Home</a>
-                <a class="mdl-navigation__link" href="?'.self::$aboutURL.'">About</a>
-                <a class="mdl-navigation__link" href="?'.self::$contactURL.'">Contact</a>
+                <a class="mdl-navigation__link" href="?'.self::$indexURL.'">
+                  Home
+                </a>
+                <a class="mdl-navigation__link" href="?'.self::$aboutURL.'">
+                  About
+                </a>
+                <a class="mdl-navigation__link" href="?'.self::$contactURL.'">
+                  Contact
+                </a>
               </nav>
             </div>
             <main class="mdl-layout__content">
               <div class="page-content">
-
                 '. $this -> pageContent .'
-
-                <!-- Hamburger button filters (large screen) -->
-                <!-- Comment for now.
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="mdl-layout--large-screen-only">
-                  <defs>
-                    <filter id="shadowed-goo">
-                      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
-                      <feGaussianBlur in="goo" stdDeviation="2" result="shadow" />
-                      <feColorMatrix in="shadow" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2" result="shadow" />
-                      <feOffset in="shadow" dx="1" dy="1" result="shadow" />
-                      <feBlend in2="shadow" in="goo" result="goo" />
-                      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-                    </filter>
-                    <filter id="goo">
-                      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
-                      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-                    </filter>
-                  </defs>
-                </svg>
-                -->
-
               </div>
-              <footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                  <div class="mdl-logo">© 2016 Blippics</div>
-                  <ul class="mdl-mini-footer__link-list">
-                    <li>
-                      <a href="?'.self::$aboutURL.'">
-                        About
-                      </a>
-                    </li>
-                    <li>
-                      <a href="?'.self::$contactURL.'">
-                        Contact
-                      </a>
-                    </li>
-                    <li>
-                      <a href="?'.self::$attributionURL.'">
-                        Attribution
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </footer>
             </main>
+            <footer class="mdl-mini-footer">
+              <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">© 2016 Blippics</div>
+                <ul class="mdl-mini-footer__link-list">
+                  <li>
+                    <a href="?'.self::$aboutURL.'">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="?'.self::$contactURL.'">
+                      Contact
+                    </a>
+                  </li>
+                  <li>
+                    <a href="?'.self::$attributionURL.'">
+                      Attribution
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </div>
+
+          <!-- Go-to-top-button (Needs to be outside framework container div) -->
+          <div id="top-button">
+            <span class="hint--left" aria-label="Back to Top">
+              <a href="#top"
+                 class="mdl-button mdl-js-button 
+                        mdl-button--fab 
+                        mdl-js-ripple-effect 
+                        mdl-button--colored">
+                <i class="material-icons">
+                  keyboard_arrow_up
+                </i>
+              </a>
+            </span>
           </div>
 
           <!-- Google Material Lite -->
           <script src="./assets/js/material.min.js"></script>
+          <script src="./assets/js/pace.js"></script>
           <script src="./assets/js/jquery-3.1.0.min.js"></script>
           <script src="//apis.google.com/js/platform.js"></script>
           <script src="//apis.google.com/js/client.js"></script>
@@ -217,22 +217,16 @@ class LayoutView {
       case self::$indexURL: 
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
-        $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
         break;
 
       case self::$aboutURL:
         $this -> pageTitle = 'About';
         $this -> pageContent = $this -> aboutView -> response();
-        $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
         break;
 
       case self::$contactURL: 
         $this -> pageTitle = 'Contact';
         $this -> pageContent = $this -> contactView -> response();
-        $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
         break;
 
       case self::$editOnlineURL: 
@@ -262,21 +256,16 @@ class LayoutView {
           <script src="./assets/js/LocalClass.js"></script>
           <script src="./assets/js/Message.js"></script>
         ';
-        $this -> pageSpecificStyles = '';
         break;
 
       case self::$attributionURL:
         $this -> pageTitle = 'Attribution';
         $this -> pageContent = $this -> attributionView -> response();
-        $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
         break;
       
       default: 
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
-        $this -> pageSpecificScripts = '';
-        $this -> pageSpecificStyles = '';
         break;  
     }
   }

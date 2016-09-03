@@ -80,6 +80,21 @@ class AttributionView {
 				      <a href="http://kushagragour.in/lab/hint/">Hint</a>
 				    </span>
 				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://flaviusmatis.github.io/simplePagination.js/">SimplePagination</a>
+				    </span>
+				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="https://daneden.github.io/animate.css/">Animate</a>
+				    </span>
+				  </li>
+				  <li class="mdl-list__item">
+				    <span class="mdl-list__item-primary-content">
+				      <a href="http://tobiasahlin.com/spinkit/">SpinKit</a>
+				    </span>
+				  </li>
 				</ul>
 
 			</div>
