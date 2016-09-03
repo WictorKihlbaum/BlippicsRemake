@@ -222,11 +222,17 @@ class LayoutView {
       case self::$aboutURL:
         $this -> pageTitle = 'About';
         $this -> pageContent = $this -> aboutView -> response();
+        $this -> pageSpecificStyles = '
+          <link rel="stylesheet" href="./assets/css/background-edge.css" />
+        ';
         break;
 
       case self::$contactURL: 
         $this -> pageTitle = 'Contact';
         $this -> pageContent = $this -> contactView -> response();
+        $this -> pageSpecificStyles = '
+          <link rel="stylesheet" href="./assets/css/background-edge.css" />
+        ';
         break;
 
       case self::$editOnlineURL: 

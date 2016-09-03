@@ -20,7 +20,9 @@ class EditLocalView {
 				<button id="show-dialog"
 						type="button"
 						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-					<i class="material-icons">help_outline</i>
+					<i class="material-icons">
+						help_outline
+					</i>
 					Show Help
 				</button>
 

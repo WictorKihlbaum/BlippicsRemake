@@ -9,6 +9,15 @@ const DriveClass = {
 	currentImageName: '',
 	CLIENT_ID: '788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com',
 	SCOPES: ['https://www.googleapis.com/auth/drive'],
+
+	// User messages.
+	uploadSuccessMessage: 'The image was successfully uploaded to your Google Drive',
+	uploadErrorMessage: 'The image failed to upload to your Google Drive!',
+	driveErrorMessage: 'Error! Could not get image from Google Drive.',
+	amazonErrorMessage: `
+		An error occurred! Failed to get the edited image. 
+		Therefore an upload to your Google Drive can not be pursued.
+	`,
 	
 			  
 	init: () => {
@@ -22,7 +31,7 @@ const DriveClass = {
 		const numItems = items.length;
 		const perPage = amount || 8;
 
-		// Only show the first "perPage" images initially.
+		// Only show the first 8 images initially.
 		items.slice(perPage).hide();
 
 		$('.pagination-page').pagination({
@@ -127,9 +136,8 @@ const DriveClass = {
 
 			if (files && files.length > 0) {
 				for (let file of files) {
-					if (DriveClass.isValidImageFormat(file)) {
+					if (DriveClass.isValidImageFormat(file)) 
 						DriveClass.renderImageElement(file);
-					}
 				}
 			} else {
 				$('#top-text').html('No valid images (Png, Jpg/Jpeg) found in your Google Drive.');
@@ -180,12 +188,11 @@ const DriveClass = {
 	},
 
 	getImageFromDrive: (id, downloadURL) => {
-		// In case an earlier message has been shown.
-		Message.removeUserMessage();
+		// In case an earlier user message has been shown.
+		Message.remove();
 			
 		if (downloadURL) {
 			const accessToken = gapi.auth.getToken().access_token;
-
 			const xhr = new XMLHttpRequest();
 
 			xhr.onload = () => {
@@ -197,16 +204,15 @@ const DriveClass = {
 				reader.readAsDataURL(xhr.response);
 			};
 
-			xhr.onerror = () => {
-				const message = 'Error! Could not get image from Google Drive.';
-				Message.showUserMessage(message, 'user-message-error');
-			};
+			xhr.onerror = () => 
+				Message.show(DriveClass.driveErrorMessage, 'user-message-error');
 				
 			xhr.open('GET', downloadURL);
 			xhr.responseType = 'blob';
 			xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
 			xhr.send();
 
+			// TODO: Rewrite for JQuery.
 			/*
 			$.ajax({
 				url: downloadURL,
@@ -227,20 +233,17 @@ const DriveClass = {
 		}
 	},
 	
-	// Aviary photo editor saves image temporarily on Amazon server.
+	/**
+	 * Aviary photo editor saves image temporarily on Amazon server.
+	 */
 	getImageFromAmazon: url => {
 		const xhr = new XMLHttpRequest();
 
-		xhr.onload = () => {
+		xhr.onload = () => 
 			DriveClass.postImageToDrive(xhr.response);
-		};
-		xhr.onerror = () => {
-			const message = `
-			    An error occurred! Failed to get the edited image.
-				Therefore an upload to Google Drive could not be done.
-			`;
-			Message.showUserMessage(message, 'user-message-error');
-		};
+
+		xhr.onerror = () => 
+			Message.show(DriveClass.amazonErrorMessage, 'user-message-error');
 			
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
@@ -284,9 +287,7 @@ const DriveClass = {
                     'path': '/upload/drive/v2/files',
                     'method': 'POST',
                     'params': {'uploadType': 'multipart'},
-                    'headers': {
-                        'Content-Type': `multipart/mixed; boundary="${boundary}"`
-                    },
+                    'headers': {'Content-Type': `multipart/mixed; boundary="${boundary}"`},
                     'body': multipartRequestBody
                 }
             );
@@ -299,8 +300,7 @@ const DriveClass = {
 					document.body.className = 'cursor-default';
       			};
     		} else {
-				const message = 'The image failed to upload to your Google Drive!';
-				Message.showUserMessage(message, 'user-message-error');
+				Message.show(DriveClass.uploadErrorMessage, 'user-message-error');
 				document.body.className = 'cursor-default';
 			}
 			request.execute(callback);
@@ -310,7 +310,7 @@ const DriveClass = {
 	showSuccessMessage: () => {
 		const snackbarContainer = document.querySelector('#success-toast');
 		const data = {
-			message: 'The image was successfully uploaded to your Google Drive',
+			message: DriveClass.uploadSuccessMessage,
 			timeout: 7000
 		};
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);

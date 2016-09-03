@@ -11,19 +11,15 @@ const LocalClass = {
 	},
 
 	setupDialog: () => {
-		/* Function doesn't work if rewritten in JQuery. */
-		const dialog = document.querySelector('dialog');
-		const showDialogButton = document.querySelector('#show-dialog');
+		const dialog = $('dialog')[0];
+		const showDialogButton = $('#show-dialog')[0];
+		const closeDialogButton = $('.close')[0];
 
-		if (!dialog.showModal) {
+		if (!dialog.showModal) 
 			dialogPolyfill.registerDialog(dialog);
-		}
-		showDialogButton.addEventListener('click', () => {
-			dialog.showModal();
-		});
-		dialog.querySelector('.close').addEventListener('click', () => {
-			dialog.close();
-		});
+		
+		showDialogButton.addEventListener('click', () => dialog.showModal());
+		closeDialogButton.addEventListener('click', () => dialog.close());
 	},
 
 	handleFiles: fileList => {
@@ -31,8 +27,8 @@ const LocalClass = {
 		const selectedFile = fileList[0];
 
 		if (LocalClass.isValidImageFormat(selectedFile)) {
-			// In case a message has been shown earlier.
-			Message.removeUserMessage();
+			// In case an earlier user message has been shown.
+			Message.remove();
 			
 			const reader = new FileReader();
 			reader.onloadend = () => {
@@ -52,7 +48,7 @@ const LocalClass = {
 				or the format is wrong. Valid formats are Png and Jpg/Jpeg.
 				Please try again.
 			`;
-			Message.showUserMessage(message, 'user-message-error');
+			Message.show(message, 'user-message-error');
 			preview.attr('src', LocalClass.defaultImagePath);
 			LocalClass.removeActionButtons();
 		}

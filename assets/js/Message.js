@@ -2,32 +2,32 @@
 
 const Message = {
 
-	userMessage: null,
+	message: null,
 
 
 	init: () => {
-		Message.userMessage = $('#user-message');
+		Message.message = $('#user-message');
 	},
 
-	showUserMessage: (message, messageID) => {
-		Message.userMessage.html(message + Message.getCloseButton());
-		Message.userMessage.attr('class', 'user-message-show');
-		Message.userMessage.attr('id', messageID);
+	show: (message, messageID) => {
+		Message.message.html(message + Message.getCloseButton());
+		Message.message.attr('class', 'user-message-show');
+		Message.message.attr('id', messageID);
 	},
 
-	removeUserMessage: () => {
-		Message.userMessage.addClass('fadeout');
+	remove: () => {
+		Message.message.addClass('fadeout');
 		setTimeout(() =>
-			Message.userMessage.attr('class', 'message-hide'), 500);
+			Message.message.attr('class', 'message-hide'), 500);
 	},
 
 	getCloseButton: () => {
 		return `
 			<img src="assets/img/close_button.png"
-			alt="Close error message"
-			title="Close message"
-			class="close-message"
-			onclick="Message.removeUserMessage()" />
+				 alt="Close error message"
+				 title="Close message"
+				 class="close-message"
+				 onclick="Message.remove()" />
 		`;
 	}
 	
