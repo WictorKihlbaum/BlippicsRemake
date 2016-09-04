@@ -244,7 +244,6 @@ class LayoutView {
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
-          <script src="./assets/js/Fullscreen.js"></script>
           <script src="./assets/js/AviaryDrive.js"></script>
         ';
         $this -> pageSpecificStyles = '

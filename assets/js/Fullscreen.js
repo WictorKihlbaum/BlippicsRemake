@@ -1,26 +1,21 @@
 'use strict';
 
+// Place on clickable element.
+//onclick="Fullscreen.showFullScreen(\'${image.id}\', \'${image.webContentLink}\')"
+
 const Fullscreen = {
 
 	thumbnail: '',
 	thumbnailSrc: '',
-	errorMessage: `
-	  Ooops! Unfortunately your browser does
-		not support fullscreen preview.
-	`,
 
 
 	init: () => {
 		// Make it work for all major browsers.
-		// Call 'fullscreenChanged' everytime fullscreen is opened or closed.
-		document.addEventListener("fullscreenchange", () =>
-		  Fullscreen.fullscreenChanged());
-		document.addEventListener("webkitfullscreenchange", () =>
-		  Fullscreen.fullscreenChanged());
-		document.addEventListener("mozfullscreenchange", () =>
-		  Fullscreen.fullscreenChanged());
-		document.addEventListener("MSFullscreenChange", () =>
-		  Fullscreen.fullscreenChanged());
+		// Call 'fullscreenChanged' everytime fullscreen are opened or closed.
+		document.addEventListener("fullscreenchange", () => { Fullscreen.fullscreenChanged(); });
+		document.addEventListener("webkitfullscreenchange", () => { Fullscreen.fullscreenChanged(); });
+		document.addEventListener("mozfullscreenchange", () => { Fullscreen.fullscreenChanged(); });
+		document.addEventListener("MSFullscreenChange", () => { Fullscreen.fullscreenChanged(); });
 	},
 
 	fullscreenChanged: () => {
@@ -39,7 +34,7 @@ const Fullscreen = {
 			!document.mozFullScreenElement &&
 			!document.msFullscreenElement) {
 
-			Fullscreen.thumbnail.className = 'card-thumbnails';
+			Fullscreen.thumbnail.className = 'thumbnail-image';
 			Fullscreen.thumbnail.src = Fullscreen.thumbnailSrc;
 		}
 	},
@@ -83,8 +78,13 @@ const Fullscreen = {
 				Fullscreen.thumbnail = document.msFullscreenElement;
 			}
 
-		} else Message.show(Fullscreen.errorMessage);
-	}
+		} else {
+			// Show error message.
+			const message = `Ooops! Unfortunately your browser
+				does not support fullscreen preview.`;
+			Message.show(message);
+		}
+	},
 
 };
 

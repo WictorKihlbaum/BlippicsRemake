@@ -8,7 +8,7 @@
 	color: #4183D7;
 	background-color: #E4F1FE;
 	border-radius: 8px;
-	
+
 	/* Fadeout effect */
 	-webkit-transition: opacity 0.5s;
     -moz-transition: opacity 0.5s;
@@ -18,11 +18,11 @@
 }
 
 .cursor-default {
-	cursor: default;	
+	cursor: default;
 }
 
 .cursor-wait {
-	cursor: wait;	
+	cursor: wait;
 }
 
 #top-text {
@@ -30,7 +30,7 @@
 	max-width: 960px;
 	font-size: 18px;
 	color: #00ACED;
-	text-align: center;	
+	text-align: center;
 }
 
 #image-list {
@@ -46,7 +46,7 @@
 	display: inline-block;
 	width: 200px;
 	height: auto;
-	text-align: center;	
+	text-align: center;
 	vertical-align: top;
 	/* If image name is to long */
 	overflow: hidden;
@@ -55,7 +55,7 @@
 }
 
 .image-name {
-	color: #4183D7; 
+	color: #4183D7;
 }
 
 .card-thumbnails {
@@ -64,14 +64,16 @@
 	cursor: pointer;
 }
 
+/*
 .thumbnail-image:hover {
 	cursor: pointer;
 }
 
 .thumbnail-image-opened {
-	max-width: 100%;
-	max-height: 100%;	
+	max-width: 100% !important;
+	max-height: 100% !important;
 }
+*/
 
 #loading-animation-text {
 	font-size: 18px;

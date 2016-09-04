@@ -158,6 +158,9 @@ const DriveClass = {
 	},
 
 	renderImageElement: image => {
+    // Remove unwanted part of url.
+		const largeImageLink = image.webContentLink.replace(/&export=download/i, '');
+
 		DriveClass.imageList.append(`
 			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col animated zoomIn"
 			     itemscope itemtype ="http://schema.org/ImageObject">
@@ -167,23 +170,23 @@ const DriveClass = {
 					</h2>
 				</div>
 				<div class="mdl-card__media">
-					<img itemprop="thumbnail"
-						 id="${image.id}"
-						 src="${image.thumbnailLink}"
-						 class="card-thumbnails"
-						 alt="${image.originalFilename}"
-						 onclick="Fullscreen.showFullScreen(\'${image.id}\', \'${image.webContentLink}\')"
-						 title="Show in fullscreen" />
+				  <a href="${largeImageLink}"
+					   title="View large image"
+						 aria-label="View large image">
+					  <img itemprop="thumbnail"
+						   id="${image.id}"
+						   src="${image.thumbnailLink}"
+						   class="card-thumbnails"
+						   alt="${image.originalFilename}" />
+				  </a>
 				</div>
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
-
 					<i alt="Edit ${image.originalFilename}"
 					   title="Edit image"
 					   class="material-icons"
 					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">
 					  edit
 					</i>
-
 				  <a href="${image.webContentLink}" download>
 						<i alt="Download ${image.originalFilename} original"
 						   title="Download original image"
@@ -191,7 +194,6 @@ const DriveClass = {
 						  cloud_download
 						</i>
 					</a>
-
 				</div>
 			</div>
 		`);
