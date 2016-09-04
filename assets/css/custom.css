@@ -84,8 +84,6 @@ h1 {
 	margin-top: 120px;
 }
 
-
-
 #attribution-container {
     max-width: 550px;
 }
@@ -321,19 +319,20 @@ input[type="file"] {
     margin-top: 50px;
 }
 
-.mdl-dialog {
-    width: 80%;
+/* Dialog window */
+@media screen and (min-width: 1025px) { 
+    .mdl-dialog {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 1024px) { 
+    .mdl-dialog {
+        width: 90%;
+    }
 }
 
-.mdl-dialog ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.mdl-dialog ul li {
-    text-align: left;
-    margin: 8px 0;
+.mdl-dialog .material-icons {
+    color: #2196F3;
 }
 
 #go-back-button {

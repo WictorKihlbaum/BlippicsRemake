@@ -27,6 +27,7 @@ const Message = {
 				 alt="Close error message"
 				 title="Close message"
 				 class="close-message"
+				 aria-label="Close message"
 				 onclick="Message.remove()" />
 		`;
 	}
