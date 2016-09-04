@@ -108,6 +108,8 @@ class EditLocalView {
                 	</div>
             	</div>
 
+            	<div id="progressbar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+
 				<p> 
 					<!-- Edit (added from "LocalClass.js") -->
 					<span id="edit-button-field"></span>

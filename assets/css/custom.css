@@ -18,6 +18,10 @@ header {
     z-index: 1000;
 }
 
+#progressbar {
+    margin: 10px auto;
+}
+
 /*
 #header-topic {
   -webkit-animation-duration: 3s;

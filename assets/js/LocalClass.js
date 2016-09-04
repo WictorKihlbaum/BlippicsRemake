@@ -5,9 +5,18 @@ const LocalClass = {
 
 	defaultImagePath: 'assets/img/placeholder_image.png',
 
+	// Error messages.
+	loadingImageError: 'An error occurred while loading the image! Please try again.',
+	invalidImageError: `
+		File is not valid! The file is either not an image
+		or the format is wrong. Valid formats are Png and Jpg/Jpeg.
+		Please try again.
+	`,
+
 
 	init: () => {
 		LocalClass.setupDialog();
+		LocalClass.toggleProgressBar();
 	},
 
 	setupDialog: () => {
@@ -22,6 +31,13 @@ const LocalClass = {
 		closeDialogButton.addEventListener('click', () => dialog.close());
 	},
 
+	toggleProgressBar: () => {
+		const progressbar = $('#progressbar');
+		if (progressbar.is(':visible')) 
+			progressbar.hide();
+		else progressbar.show();
+	},
+
 	handleFiles: fileList => {
 		const preview = $('#editable-image');
 		const selectedFile = fileList[0];
@@ -31,24 +47,30 @@ const LocalClass = {
 			Message.remove();
 			
 			const reader = new FileReader();
+
 			reader.onloadend = () => {
 				preview.attr('src', reader.result);
 				LocalClass.addEditButton();
+				setTimeout(() => // Dev purpose.
+					LocalClass.toggleProgressBar(), 3000);
 			};
 
-			if (selectedFile) {
+			reader.onerror = error => {
+				console.log('Error: ' + error); // Dev purpose.
+				Message.show(LocalClass.loadingImageError, 'user-message-error');
+			}
+
+			reader.onprogress = () => 
+				LocalClass.toggleProgressBar();
+
+			if (selectedFile) 
 				reader.readAsDataURL(selectedFile);
-			} else {
+			else {
 				preview.attr('src', LocalClass.defaultImagePath);
 				LocalClass.removeActionButtons();
 			}
 		} else {
-			const message = `
-				File is not valid! The file is either not an image
-				or the format is wrong. Valid formats are Png and Jpg/Jpeg.
-				Please try again.
-			`;
-			Message.show(message, 'user-message-error');
+			Message.show(LocalClass.invalidImageError, 'user-message-error');
 			preview.attr('src', LocalClass.defaultImagePath);
 			LocalClass.removeActionButtons();
 		}
