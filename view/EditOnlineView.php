@@ -71,7 +71,7 @@ class EditOnlineView {
 						      <i class="material-icons mdl-list__item-icon">
 						    	  file_download
 						    	</i>
-						    	= Download edited image.
+						    	= Download edited image (will be shown when done editing).
 						  	</span>
 						  </li>
 						  <li class="mdl-list__item">
@@ -79,7 +79,7 @@ class EditOnlineView {
 						      <i class="material-icons mdl-list__item-icon">
 						    	  cloud_upload
 						    	</i>
-						    	= Upload edited image.
+						    	= Upload edited image (will be shown when done editing).
 						  	</span>
 						  </li>
 						</ul>

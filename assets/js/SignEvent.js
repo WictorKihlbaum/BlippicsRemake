@@ -25,7 +25,7 @@ const SignEvent = {
 		auth2.signOut();
 		auth2.disconnect();
 		window.location.reload();
-  	}
+  }
 
 };
 

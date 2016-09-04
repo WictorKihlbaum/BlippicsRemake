@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 class AboutView {
-	
+
 	function __construct() {
 		// Empty.
 	}
@@ -15,9 +15,9 @@ class AboutView {
 			</h1>
 
 			<div class="quote">
-	  			<div id="about-text">
-					<p class="mdl-typography--display-2">
-						Blippics is the product of a final project in one of my previously
+	  	  <div id="about-text">
+				  <p class="mdl-typography--display-2">
+					  Blippics is the product of a final project in one of my previously
 						courses at Linnaeus university. Blippics has been undergoing several
 						updates ever since and still is. The main idea with the Blippics site
 						is to offer you the tools you need to edit your desired images.

@@ -68,7 +68,9 @@ const DriveClass = {
 			<a href="${url}" download>
 				<i alt="Download edited ${id}"
 				   title="Download edited image"
-				   class="material-icons animated flash">file_download</i>
+				   class="material-icons animated flash">
+				  file_download
+				</i>
 			</a>
 		`);
 	},
@@ -79,7 +81,9 @@ const DriveClass = {
 			<i alt="Upload edited ${id}"
 			   title="Upload edited image"
 			   class="material-icons"
-			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">cloud_upload</i>
+			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">
+			  cloud_upload
+			</i>
 		`);
 	},
 
@@ -141,9 +145,7 @@ const DriveClass = {
 					if (DriveClass.isValidImageFormat(file))
 						DriveClass.renderImageElement(file);
 				}
-			} else {
-				$('#top-text').html(DriveClass.noValidImages);
-			}
+			} else $('#top-text').html(DriveClass.noValidImages);
 
 			$('#loading-animation').hide();
 			DriveClass.setupPagination();
@@ -178,12 +180,16 @@ const DriveClass = {
 					<i alt="Edit ${image.originalFilename}"
 					   title="Edit image"
 					   class="material-icons"
-					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">edit</i>
+					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">
+					  edit
+					</i>
 
 				  <a href="${image.webContentLink}" download>
 						<i alt="Download ${image.originalFilename} original"
 						   title="Download original image"
-						   class="material-icons">cloud_download</i>
+						   class="material-icons">
+						  cloud_download
+						</i>
 					</a>
 
 				</div>
