@@ -14,6 +14,16 @@ class EditOnlineView {
 	public function response() : string {
 		return '
 			<div id="editonline-page-container">
+
+				<button type="button" 
+						id="show-dialog"
+						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+					<i class="material-icons">
+						help_outline
+					</i>
+					Show Help
+				</button>
+
     			<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
     				Edit image on Google Drive
     			</h1>
@@ -31,7 +41,55 @@ class EditOnlineView {
 				</ul>
 				-->
 
+				<!-- Response messages will be shown here. -->
 	            <div id="user-message"></div>
+
+	            <dialog class="mdl-dialog">
+					<h4 class="mdl-dialog__title">
+						Help
+					</h4>
+					<div class="mdl-dialog__content">
+						<ul class="mdl-list">
+						    <li class="mdl-list__item">
+								<span class="mdl-list__item-primary-content">
+						    		<i class="material-icons mdl-list__item-icon">
+						    			edit
+						    		</i>
+						    		= Edit image.
+								</span>
+						  	</li>
+						  	<li class="mdl-list__item">
+						    	<span class="mdl-list__item-primary-content">
+						    		<i class="material-icons mdl-list__item-icon">
+						    			cloud_download
+						    		</i>
+						    		= Download original image.
+						  		</span>
+						  	</li>
+						  	<li class="mdl-list__item">
+						    	<span class="mdl-list__item-primary-content">
+						    		<i class="material-icons mdl-list__item-icon">
+						    			file_download
+						    		</i>
+						    		= Download edited image.
+						  		</span>
+						  	</li>
+						  	<li class="mdl-list__item">
+						    	<span class="mdl-list__item-primary-content">
+						    		<i class="material-icons mdl-list__item-icon">
+						    			cloud_upload
+						    		</i>
+						    		= Upload edited image.
+						  		</span>
+						  	</li>
+						</ul>
+					</div>
+					<div class="mdl-dialog__actions">
+						<button type="button" class="mdl-button close mdl-js-button mdl-button--raised mdl-button--colored">
+							Close
+						</button>
+					</div>
+				</dialog>
 
 				<div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
 					<div class="mdl-snackbar__text"></div>

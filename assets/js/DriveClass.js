@@ -21,6 +21,7 @@ const DriveClass = {
 	
 			  
 	init: () => {
+		HelpDialog.setupDialog();
 		$('#loading-animation').hide();
 		DriveClass.imageList = $('#image-list');
 		DriveClass.pagination = $('.pagination-page');
@@ -308,7 +309,7 @@ const DriveClass = {
 	},
 
 	showSuccessMessage: () => {
-		const snackbarContainer = document.querySelector('#success-toast');
+		const snackbarContainer = $('#success-toast')[0];
 		const data = {
 			message: DriveClass.uploadSuccessMessage,
 			timeout: 7000

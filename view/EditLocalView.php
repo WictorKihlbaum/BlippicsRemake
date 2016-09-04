@@ -41,7 +41,9 @@ class EditLocalView {
 						<ul class="mdl-list">
 						    <li class="mdl-list__item">
 								<span class="mdl-list__item-primary-content">
-						    		<i class="material-icons mdl-list__item-icon" aria-label="Step one">looks_one</i>
+						    		<i class="material-icons mdl-list__item-icon" aria-label="Step one">
+						    			looks_one
+						    		</i>
 						    		Press "<strong>Choose image</strong>" to choose which image you want to edit (Png or Jpg/Jpeg).
 								</span>
 						  	</li>
@@ -108,6 +110,7 @@ class EditLocalView {
                 	</div>
             	</div>
 
+            	<!-- Progressbar will be shown while image is being loaded. -->
             	<div id="progressbar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 
 				<p> 

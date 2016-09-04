@@ -242,6 +242,7 @@ class LayoutView {
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
+          <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
           <script src="./assets/js/Fullscreen.js"></script>
           <script src="./assets/js/AviaryDrive.js"></script>
@@ -258,6 +259,7 @@ class LayoutView {
         $this -> pageContent = $this -> editLocalView -> response();
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+          <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/AviaryLocal.js"></script>
           <script src="./assets/js/LocalClass.js"></script>
           <script src="./assets/js/Message.js"></script>
