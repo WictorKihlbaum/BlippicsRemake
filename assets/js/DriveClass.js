@@ -28,10 +28,10 @@ const DriveClass = {
 		DriveClass.pagination = $('.pagination-page');
 	},
 
-	setupPagination: amount => {
+	setupPagination: () => {
 		const items = $('#image-list .mdl-card');
 		const numItems = items.length;
-		const perPage = amount || 8;
+		const perPage = 8;
 
 		// Only show the first images initially.
 		items.slice(perPage).hide();

@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 class LayoutView {
 
-  public static $indexURL = '';
-  public static $aboutURL = 'about';
-  public static $contactURL = 'contact';
+  protected static $indexURL = '';
+  protected static $aboutURL = 'about';
+  protected static $contactURL = 'contact';
   private static $editOnlineURL = 'editonline';
   private static $editLocalURL = 'editlocal';
-  public static $attributionURL = 'attribution';
+  protected static $attributionURL = 'attribution';
 
   private $pageSpecificScripts = '';
   private $pageSpecificStyles = '';

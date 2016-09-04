@@ -113,6 +113,8 @@ h1 {
 #need-to-login-text {
 	margin: 20px auto !important;
 	text-align: left;
+	font-size: 18px;
+	line-height: 1.5;
 }
 
 #header-list {
