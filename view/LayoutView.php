@@ -4,24 +4,27 @@ declare(strict_types = 1);
 
 class LayoutView {
 
-  private static $indexURL = '';
-  private static $aboutURL = 'about';
-  private static $contactURL = 'contact';
+  public static $indexURL = '';
+  public static $aboutURL = 'about';
+  public static $contactURL = 'contact';
   private static $editOnlineURL = 'editonline';
   private static $editLocalURL = 'editlocal';
-  private static $attributionURL = 'attribution';
+  public static $attributionURL = 'attribution';
 
   private $pageSpecificScripts = '';
   private $pageSpecificStyles = '';
 
 
-  function __construct(array $views) {
+  function __construct(array $views, array $sharedViews) {
     $this -> indexView = $views['index'];
 		$this -> aboutView = $views['about'];
 		$this -> contactView = $views['contact'];
     $this -> editOnlineView = $views['editonline'];
     $this -> editLocalView = $views['editlocal'];
     $this -> attributionView = $views['attribution'];
+
+    $this -> headerView = $sharedViews['header'];
+    $this -> footerView = $sharedViews['footer'];
 
     $this -> setCurrentURL();
     $this -> setupPageContent();
@@ -54,71 +57,7 @@ class LayoutView {
           <div class="mdl-layout mdl-js-layout">
             <a name="top"></a> <!-- Top anchor -->
             <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary-dark" id="page-header">
-              <div class="mdl-layout--large-screen-only mdl-layout__header-row" id="social-buttons-row">
-
-                <!-- Social buttons -->
-                <div class="mdl-layout-spacer"></div>
-
-                <!-- Facebook -->
-                <span class="hint--bottom" aria-label="Visit my Facebook">
-                  <a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-grow">
-                    <img src="./assets/img/facebook-button.png"
-                         alt="Visit my Facebook"
-                         class="header-social-buttons" />
-                  </a>
-                </span>
-
-                <!-- Twitter -->
-                <span class="hint--bottom" aria-label="Visit my Twitter">
-                  <a href="https://twitter.com/WictorKihlbaum" class="hvr-grow">
-                    <img src="./assets/img/twitter-button.png"
-                         alt="Visit my Twitter"
-                         class="header-social-buttons" />
-                  </a>
-                </span>
-
-                <!-- GitHub -->
-                <span class="hint--bottom-left" aria-label="Visit my GitHub">
-                  <a href="https://github.com/WictorKihlbaum" class="hvr-grow">
-                    <img src="./assets/img/github-button.png"
-                         alt="Visit my GitHub"
-                         class="header-social-buttons" />
-                  </a>
-                </span>
-
-              </div>
-              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <nav class="menu">
-                  <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
-                  <label class="menu-open-button" for="menu-open">
-                    <span class="hamburger hamburger-1"></span>
-                    <span class="hamburger hamburger-2"></span>
-                    <span class="hamburger hamburger-3"></span>
-                  </label>
-                  <a href="?'.self::$indexURL.'" class="menu-item">
-                    <i class="fa fa-home"></i>
-                  </a>
-                  <a href="?'.self::$aboutURL.'" class="menu-item">
-                    <i class="fa fa-info-circle"></i>
-                  </a>
-                  <a href="?'.self::$contactURL.'" class="menu-item">
-                    <i class="fa fa-at"></i>
-                  </a>
-                </nav>
-              </div>
-              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <h1 class="mdl-typography--display-4
-                           mdl-typography--display-4-color-white"
-                           id="header-topic">
-                  Blippics
-                </h1>
-              </div>
-              <div class="mdl-layout__header-row mdl-layout--large-screen-only">
-                <!-- Empty -->
-              </div>
-              <div class="mdl-layout__header-row mdl-layout--large-screen-only">
-                <!-- Empty -->
-              </div>
+              '. $this -> headerView -> renderHeader() .'
             </header>
             <div class="mdl-layout__drawer mdl-layout--small-screen-only">
               <span class="mdl-layout-title">Menu</span>
@@ -140,26 +79,7 @@ class LayoutView {
               </div>
             </main>
             <footer class="mdl-mini-footer">
-              <div class="mdl-mini-footer__left-section">
-                <div class="mdl-logo">© 2016 Blippics</div>
-                <ul class="mdl-mini-footer__link-list">
-                  <li>
-                    <a href="?'.self::$aboutURL.'">
-                      About
-                    </a>
-                  </li>
-                  <li>
-                    <a href="?'.self::$contactURL.'">
-                      Contact
-                    </a>
-                  </li>
-                  <li>
-                    <a href="?'.self::$attributionURL.'">
-                      Attribution
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              '. $this -> footerView -> renderFooter() .'
             </footer>
           </div>
 

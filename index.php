@@ -1,16 +1,16 @@
 <?php
 
-/** 
+/**
  * TODO: (When PHP V 7.1+ is implemented by Mamp & CPanel)
- * Add return type "void" to all functions 
- * that doesn't return anything. 
+ * Add return type "void" to all functions
+ * that doesn't return anything.
  */
 
 declare(strict_types = 1);
 
-/** 
+/**
  * Make sure all errors are shown.
- * (Turn off for production). 
+ * (Turn off for production).
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
@@ -29,15 +29,19 @@ require_once('view/EditOnlineView.php');
 require_once('view/EditLocalView.php');
 require_once('view/AttributionView.php');
 
+// Shared views
+require_once('view/shared/HeaderView.php');
+require_once('view/shared/FooterView.php');
+
 // Controllers
 // ...
 
 /**
- * Add all views in an array to avoid long 
- * parameter row in LayoutView.php constructor. 
+ * Add all views in arrays to avoid long
+ * parameter row in 'LayoutView.php' constructor.
  */
 $views = [
-	'index' => new IndexView(), 
+	'index' => new IndexView(),
 	'about' => new AboutView(),
 	'contact' => new ContactView(),
 	'editonline' => new EditOnlineView(),
@@ -45,6 +49,11 @@ $views = [
 	'attribution' => new AttributionView()
 ];
 
-$layoutView = new LayoutView($views);
+$sharedViews = [
+	'header' => new HeaderView(),
+	'footer' => new FooterView()
+];
+
+$layoutView = new LayoutView($views, $sharedViews);
 
 $layoutView -> renderLayout();
