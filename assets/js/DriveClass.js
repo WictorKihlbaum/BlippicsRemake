@@ -15,11 +15,12 @@ const DriveClass = {
 	uploadErrorMessage: 'The image failed to upload to your Google Drive!',
 	driveErrorMessage: 'Error! Could not get image from Google Drive.',
 	amazonErrorMessage: `
-		An error occurred! Failed to get the edited image. 
+		An error occurred! Failed to get the edited image.
 		Therefore an upload to your Google Drive can not be pursued.
 	`,
-	
-			  
+	noValidImages: 'No valid images (Png, Jpg/Jpeg) found in your Google Drive.',
+
+
 	init: () => {
 		HelpDialog.setupDialog();
 		$('#loading-animation').hide();
@@ -32,7 +33,7 @@ const DriveClass = {
 		const numItems = items.length;
 		const perPage = amount || 8;
 
-		// Only show the first 8 images initially.
+		// Only show the first images initially.
 		items.slice(perPage).hide();
 
 		$('.pagination-page').pagination({
@@ -52,68 +53,68 @@ const DriveClass = {
 			// If there's no hash, make sure to go to page 1.
 			let hash = window.location.hash || '#page-1';
 			// Check the hash string.
-			hash = hash.match(/^#page-(\d+)$/);
-			if (hash) $("#pagination").pagination('selectPage', parseInt(hash[1]));
+			if (hash = hash.match(/^#page-(\d+)$/))
+				$("#pagination").pagination('selectPage', parseInt(hash[1]));
 		};
 
 		// Call this function whenever the back/forward is pressed.
 		$(window).bind('popstate', checkFragment);
 		checkFragment();
 	},
-	
+
 	addDownloadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
 			<a href="${url}" download>
-				<i alt="Download edited ${id}" 
-				   title="Download edited image" 
-				   class="material-icons">file_download</i>
+				<i alt="Download edited ${id}"
+				   title="Download edited image"
+				   class="material-icons animated flash">file_download</i>
 			</a>
 		`);
 	},
-	
+
 	addUploadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
-			<i alt="Upload edited ${id}" 
-			   title="Upload edited image" 
-			   class="material-icons" 
+			<i alt="Upload edited ${id}"
+			   title="Upload edited image"
+			   class="material-icons"
 			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">cloud_upload</i>
 		`);
 	},
-		
+
 	/**
 	 * Check if current user has authorized this application.
 	 */
 	checkAuth: () => {
 		gapi.auth.authorize(
-            {
-                'client_id': DriveClass.CLIENT_ID,
-                'scope': DriveClass.SCOPES.join(' '),
-                'immediate': true
-            },
-            DriveClass.handleAuthResult
-        );
+      {
+        'client_id': DriveClass.CLIENT_ID,
+        'scope': DriveClass.SCOPES.join(' '),
+        'immediate': true
+      },
+      DriveClass.handleAuthResult
+    );
 	},
-	
+
 	/**
 	 * Handle response from authorization server.
 	 *
 	 * @param {Object} authResult Authorization result.
 	 */
 	handleAuthResult: authResult => {
-		if (authResult && !authResult.error) {
-            $('#need-to-login-text').hide();
-            $('#top-text').hide();
-            $('.g-signin2').hide();
+    if (authResult && !authResult.error) {
+      $('#need-to-login-text').hide();
+      $('#top-text').hide();
+      $('.g-signin2').hide();
 			DriveClass.loadDriveApi();
 		} else {
-            $('#need-to-login-text').show();
-            $('#top-text').show();
-            $('.g-signin2').show();
+      $('#need-to-login-text').show();
+      $('#top-text').show();
+      $('.g-signin2').show();
 		}
 	},
-	
+
 	/**
 	 * Load Drive API client library.
 	 */
@@ -124,24 +125,24 @@ const DriveClass = {
 	renderImages: () => {
 		// Show loading animation while images are being loaded.
 		$('#loading-animation').show();
-		//DriveClass.imageList.html('');
-		
+		DriveClass.imageList.html('');
+
 		const request = gapi.client.drive.files.list({
 			'maxResults': 100, // Change this to get more images.
 			'orderBy': 'createdDate desc'
 		});
-	
+
 		request.execute(resp => {
 			const files = resp.items;
 			DriveClass.imageArray = files;
 
 			if (files && files.length > 0) {
 				for (let file of files) {
-					if (DriveClass.isValidImageFormat(file)) 
+					if (DriveClass.isValidImageFormat(file))
 						DriveClass.renderImageElement(file);
 				}
 			} else {
-				$('#top-text').html('No valid images (Png, Jpg/Jpeg) found in your Google Drive.');
+				$('#top-text').html(DriveClass.noValidImages);
 			}
 
 			$('#loading-animation').hide();
@@ -156,30 +157,32 @@ const DriveClass = {
 
 	renderImageElement: image => {
 		DriveClass.imageList.append(`
-			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col" 
-				 itemscope itemtype ="http://schema.org/ImageObject">
+			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col animated zoomIn"
+			     itemscope itemtype ="http://schema.org/ImageObject">
 				<div class="mdl-card__title">
-					<h2 class="mdl-card__title-text" itemprop="name">${image.originalFilename}</h2>
+					<h2 class="mdl-card__title-text" itemprop="name">
+					  ${image.originalFilename}
+					</h2>
 				</div>
 				<div class="mdl-card__media">
 					<img itemprop="thumbnail"
 						 id="${image.id}"
-						 src="${image.thumbnailLink}" 
-						 class="card-thumbnails" 
+						 src="${image.thumbnailLink}"
+						 class="card-thumbnails"
 						 alt="${image.originalFilename}"
 						 onclick="Fullscreen.showFullScreen(\'${image.id}\', \'${image.webContentLink}\')"
-						 title="Show in fullscreen">
+						 title="Show in fullscreen" />
 				</div>
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
 
-					<i alt="Edit ${image.originalFilename}" 
-					   title="Edit image" 
-					   class="material-icons" 
+					<i alt="Edit ${image.originalFilename}"
+					   title="Edit image"
+					   class="material-icons"
 					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">edit</i>
 
-				    <a href="${image.webContentLink}" download>
-						<i alt="Download ${image.originalFilename} original" 
-						   title="Download original image" 
+				  <a href="${image.webContentLink}" download>
+						<i alt="Download ${image.originalFilename} original"
+						   title="Download original image"
 						   class="material-icons">cloud_download</i>
 					</a>
 
@@ -191,7 +194,7 @@ const DriveClass = {
 	getImageFromDrive: (id, downloadURL) => {
 		// In case an earlier user message has been shown.
 		Message.remove();
-			
+
 		if (downloadURL) {
 			const accessToken = gapi.auth.getToken().access_token;
 			const xhr = new XMLHttpRequest();
@@ -199,78 +202,58 @@ const DriveClass = {
 			xhr.onload = () => {
 				const reader = new FileReader();
 				reader.onloadend = () => {
-                    DriveClass.setCurrentImageName(id);
+          DriveClass.setCurrentImageName(id);
 					AviaryDrive.launchEditor(id, reader.result);
 				};
 				reader.readAsDataURL(xhr.response);
 			};
 
-			xhr.onerror = () => 
+			xhr.onerror = () =>
 				Message.show(DriveClass.driveErrorMessage, 'user-message-error');
-				
+
 			xhr.open('GET', downloadURL);
 			xhr.responseType = 'blob';
 			xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
 			xhr.send();
-
-			// TODO: Rewrite for JQuery.
-			/*
-			$.ajax({
-				url: downloadURL,
-				type: 'GET',
-				headers: {'Authorization': `Bearer ${accessToken}`},
-				success: success => {
-					console.log('success');
-				},
-				error: error => {
-					console.log('Error');
-				},
-				done: hej => {
-					console.log('hej');
-				},
-				dataType: 'blob'
-			});
-			*/
 		}
 	},
-	
+
 	/**
 	 * Aviary photo editor saves image temporarily on Amazon server.
 	 */
 	getImageFromAmazon: url => {
 		const xhr = new XMLHttpRequest();
 
-		xhr.onload = () => 
+		xhr.onload = () =>
 			DriveClass.postImageToDrive(xhr.response);
 
-		xhr.onerror = () => 
+		xhr.onerror = () =>
 			Message.show(DriveClass.amazonErrorMessage, 'user-message-error');
-			
+
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
-		xhr.send();	
+		xhr.send();
 	},
-	
+
 	postImageToDrive: (fileData, callback) => {
 		/* Indicate image is being uploaded to Google Drive
 		and to avoid user pressing anything. */
 		document.body.className = 'cursor-wait';
-  		
+
 		const boundary = '-------314159265358979323846';
-        const delimiter = `\r\n--${boundary}\r\n`;
-        const close_delim = `\r\n--${boundary}--`;
-	
+    const delimiter = `\r\n--${boundary}\r\n`;
+    const close_delim = `\r\n--${boundary}--`;
+
 		const reader = new FileReader();
 		reader.readAsBinaryString(fileData);
-		
+
 		reader.onload = () => {
 			const contentType = fileData.type || 'application/octet-stream';
+			const base64Data = btoa(reader.result);
 			const metadata = {
 				'title': DriveClass.currentImageName,
 				'mimeType': contentType
-			};
-	
-			const base64Data = btoa(reader.result);
+		  };
 
 			const multipartRequestBody =
 				delimiter +
@@ -283,24 +266,24 @@ const DriveClass = {
 				base64Data +
 				close_delim;
 
-            const request = gapi.client.request(
-                {
-                    'path': '/upload/drive/v2/files',
-                    'method': 'POST',
-                    'params': {'uploadType': 'multipart'},
-                    'headers': {'Content-Type': `multipart/mixed; boundary="${boundary}"`},
-                    'body': multipartRequestBody
-                }
-            );
-				
+      const request = gapi.client.request(
+        {
+          'path': '/upload/drive/v2/files',
+          'method': 'POST',
+          'params': {'uploadType': 'multipart'},
+          'headers': {'Content-Type': `multipart/mixed; boundary="${boundary}"`},
+          'body': multipartRequestBody
+        }
+      );
+
 			if (!callback) {
-      			callback = file => {
-					DriveClass.showSuccessMessage();
+        callback = file => {
+				  DriveClass.showSuccessMessage();
 					// Render all images again to show the newly uploaded one.
 					DriveClass.renderImages();
 					document.body.className = 'cursor-default';
-      			};
-    		} else {
+      	};
+    	} else {
 				Message.show(DriveClass.uploadErrorMessage, 'user-message-error');
 				document.body.className = 'cursor-default';
 			}
@@ -329,7 +312,7 @@ const DriveClass = {
 		}
 		DriveClass.currentImageName = imageName;
 	}
-	  
+
 };
 
 window.onload = DriveClass.init();

@@ -1,4 +1,4 @@
-/* Primary color: #2196F3 
+/* Primary color: #2196F3
    Accent color: #B2FF59 */
 
 
@@ -21,14 +21,6 @@ header {
 #progressbar {
     margin: 10px auto;
 }
-
-/*
-#header-topic {
-  -webkit-animation-duration: 3s;
-  -webkit-animation-delay: 3s;
-  -webkit-animation-iteration-count: infinite;
-}
-*/
 
 #social-buttons-row {
 	padding: 20px 10px 0 0;
@@ -145,7 +137,7 @@ h1 {
 .mdl-card__actions i:hover {
     color: #B2FF59;
     cursor: pointer;
-} 
+}
 
 .icon-images {
     width: 20px;
@@ -169,7 +161,7 @@ h1 {
 
 .contact-lists {
     max-width: 550px;
-    margin: 0 !important; 
+    margin: 0 !important;
 }
 
 .contact-lists img {
@@ -177,7 +169,7 @@ h1 {
     margin-right: 15px;
 }
 
-#drive-logo-container, 
+#drive-logo-container,
 #computer-image-container {
     margin: 0 auto;
     text-align: center;
@@ -319,12 +311,12 @@ input[type="file"] {
 }
 
 /* Dialog window */
-@media screen and (min-width: 1025px) { 
+@media screen and (min-width: 1025px) {
     .mdl-dialog {
         width: 50%;
     }
 }
-@media screen and (max-width: 1024px) { 
+@media screen and (max-width: 1024px) {
     .mdl-dialog {
         width: 90%;
     }

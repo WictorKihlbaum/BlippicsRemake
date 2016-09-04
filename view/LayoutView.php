@@ -38,16 +38,16 @@ class LayoutView {
           <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
           <title>Blippics | '. $this -> pageTitle .'</title>
           <!-- Google Material Lite -->
-          <link rel="stylesheet" href="./assets/css/material.min.css" />
-          <link rel="stylesheet" href="./assets/css/pace-theme.css" />
+          <link rel="stylesheet" href="./assets/css/framework/material.min.css" />
+          <link rel="stylesheet" href="./assets/css/libs/pace-theme.css" />
           <link rel="stylesheet" href="./assets/css/custom.css" />
           <link rel="stylesheet" href="./assets/css/hamburger.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-          <link rel="stylesheet" href="./assets/css/hover.css" />
-          <link rel="stylesheet" href="./assets/css/hint.min.css" />
-          <link rel="stylesheet" href="./assets/css/animate.css" />
+          <link rel="stylesheet" href="./assets/css/libs/hover.css" />
+          <link rel="stylesheet" href="./assets/css/libs/hint.min.css" />
+          <link rel="stylesheet" href="./assets/css/libs/animate.min.css" />
           '. $this -> getPageSpecificStyles() .'
         </head>
         <body>
@@ -55,15 +55,15 @@ class LayoutView {
             <a name="top"></a> <!-- Top anchor -->
             <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary-dark" id="page-header">
               <div class="mdl-layout--large-screen-only mdl-layout__header-row" id="social-buttons-row">
-                
+
                 <!-- Social buttons -->
                 <div class="mdl-layout-spacer"></div>
 
                 <!-- Facebook -->
                 <span class="hint--bottom" aria-label="Visit my Facebook">
                   <a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-grow">
-                    <img src="./assets/img/facebook-button.png" 
-                         alt="Visit my Facebook" 
+                    <img src="./assets/img/facebook-button.png"
+                         alt="Visit my Facebook"
                          class="header-social-buttons" />
                   </a>
                 </span>
@@ -71,8 +71,8 @@ class LayoutView {
                 <!-- Twitter -->
                 <span class="hint--bottom" aria-label="Visit my Twitter">
                   <a href="https://twitter.com/WictorKihlbaum" class="hvr-grow">
-                    <img src="./assets/img/twitter-button.png" 
-                         alt="Visit my Twitter" 
+                    <img src="./assets/img/twitter-button.png"
+                         alt="Visit my Twitter"
                          class="header-social-buttons" />
                   </a>
                 </span>
@@ -80,8 +80,8 @@ class LayoutView {
                 <!-- GitHub -->
                 <span class="hint--bottom-left" aria-label="Visit my GitHub">
                   <a href="https://github.com/WictorKihlbaum" class="hvr-grow">
-                    <img src="./assets/img/github-button.png" 
-                         alt="Visit my GitHub" 
+                    <img src="./assets/img/github-button.png"
+                         alt="Visit my GitHub"
                          class="header-social-buttons" />
                   </a>
                 </span>
@@ -107,8 +107,8 @@ class LayoutView {
                 </nav>
               </div>
               <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <h1 class="mdl-typography--display-4 
-                           mdl-typography--display-4-color-white" 
+                <h1 class="mdl-typography--display-4
+                           mdl-typography--display-4-color-white"
                            id="header-topic">
                   Blippics
                 </h1>
@@ -167,9 +167,9 @@ class LayoutView {
           <div id="top-button">
             <span class="hint--left" aria-label="Back to Top">
               <a href="#top"
-                 class="mdl-button mdl-js-button 
-                        mdl-button--fab 
-                        mdl-js-ripple-effect 
+                 class="mdl-button mdl-js-button
+                        mdl-button--fab
+                        mdl-js-ripple-effect
                         mdl-button--colored">
                 <i class="material-icons">
                   keyboard_arrow_up
@@ -179,9 +179,9 @@ class LayoutView {
           </div>
 
           <!-- Google Material Lite -->
-          <script src="./assets/js/material.min.js"></script>
-          <script src="./assets/js/pace.js"></script>
-          <script src="./assets/js/jquery-3.1.0.min.js"></script>
+          <script src="./assets/js/framework/material.min.js"></script>
+          <script src="./assets/js/libs/pace.js"></script>
+          <script src="./assets/js/libs/jquery-3.1.0.min.js"></script>
           <script src="//apis.google.com/js/platform.js"></script>
           <script src="//apis.google.com/js/client.js"></script>
           <script src="./assets/js/SignEvent.js"></script>
@@ -213,8 +213,8 @@ class LayoutView {
 
   private function setupPageContent() {
     switch ($this -> currentURL) {
-    
-      case self::$indexURL: 
+
+      case self::$indexURL:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
         break;
@@ -227,7 +227,7 @@ class LayoutView {
         ';
         break;
 
-      case self::$contactURL: 
+      case self::$contactURL:
         $this -> pageTitle = 'Contact';
         $this -> pageContent = $this -> contactView -> response();
         $this -> pageSpecificStyles = '
@@ -235,12 +235,12 @@ class LayoutView {
         ';
         break;
 
-      case self::$editOnlineURL: 
+      case self::$editOnlineURL:
         $this -> pageTitle = 'Edit Online';
         $this -> pageContent = $this -> editOnlineView -> response();
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
-          <script src="./assets/js/jquery.simplePagination.js"></script>
+          <script src="./assets/js/libs/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
@@ -248,13 +248,13 @@ class LayoutView {
           <script src="./assets/js/AviaryDrive.js"></script>
         ';
         $this -> pageSpecificStyles = '
-          <link rel="stylesheet" href="./assets/css/loading.css" />
-          <link rel="stylesheet" href="./assets/css/simplePagination.css" />
+          <link rel="stylesheet" href="./assets/css/libs/loading.css" />
+          <link rel="stylesheet" href="./assets/css/libs/simplePagination.css" />
           <link rel="stylesheet" href="./assets/css/editonline.css" />
         ';
         break;
 
-      case self::$editLocalURL: 
+      case self::$editLocalURL:
         $this -> pageTitle = 'Edit Local';
         $this -> pageContent = $this -> editLocalView -> response();
         $this -> pageSpecificScripts = '
@@ -270,11 +270,11 @@ class LayoutView {
         $this -> pageTitle = 'Attribution';
         $this -> pageContent = $this -> attributionView -> response();
         break;
-      
-      default: 
+
+      default:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
-        break;  
+        break;
     }
   }
 }

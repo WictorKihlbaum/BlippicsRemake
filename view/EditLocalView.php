@@ -6,7 +6,7 @@ class EditLocalView {
 
 	private static $indexURL = '';
 
-	
+
 	function __construct() {
 		// Empty.
 	}
@@ -17,7 +17,7 @@ class EditLocalView {
 
     		<div id="editlocal-page-container">
 
-				<button type="button" 
+				<button type="button"
 						id="show-dialog"
 						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
 					<i class="material-icons">
@@ -33,7 +33,7 @@ class EditLocalView {
 				<!-- Response messages will be shown here. -->
 				<div id="user-message"></div>
 
-				<dialog class="mdl-dialog">
+				<dialog class="mdl-dialog animated zoomIn">
 					<h4 class="mdl-dialog__title">
 						Help
 					</h4>
@@ -52,7 +52,7 @@ class EditLocalView {
 						    		<i class="material-icons mdl-list__item-icon" aria-label="Step two">
 						    			looks_two
 						    		</i>
-						    		Press "<strong>Edit image</strong>". 
+						    		Press "<strong>Edit image</strong>".
 						    		The photo editor will automatically open.
 						  		</span>
 						  	</li>
@@ -61,7 +61,7 @@ class EditLocalView {
 						    		<i class="material-icons mdl-list__item-icon" aria-label="Step three">
 						    			looks_3
 						    		</i>
-						    		Press "<strong>Apply</strong>" in the upper-right corner, 
+						    		Press "<strong>Apply</strong>" in the upper-right corner,
 						    		after you are done with each tool.
 						  		</span>
 						  	</li>
@@ -70,7 +70,7 @@ class EditLocalView {
 						    		<i class="material-icons mdl-list__item-icon" aria-label="Step four">
 						    			looks_4
 						    		</i>
-						    		Press "<strong>Save</strong>" in the upper-right corner 
+						    		Press "<strong>Save</strong>" in the upper-right corner
 						    		when you are done and then close the editor.
 						  		</span>
 						  	</li>
@@ -79,7 +79,7 @@ class EditLocalView {
 						    		<i class="material-icons mdl-list__item-icon" aria-label="Step five">
 						    			looks_5
 						    		</i>
-						    		Press "<strong>Download image</strong>" to download your 
+						    		Press "<strong>Download image</strong>" to download your
 						    		edited image to your computer.
 						  		</span>
 						  	</li>
@@ -113,17 +113,17 @@ class EditLocalView {
             	<!-- Progressbar will be shown while image is being loaded. -->
             	<div id="progressbar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 
-				<p> 
+				<p>
 					<!-- Edit (added from "LocalClass.js") -->
 					<span id="edit-button-field"></span>
 				</p>
-	
-				<p> 
+
+				<p>
 					<!-- Download (added from "AviaryLocal.js") -->
         			<span id="download-button-field"></span>
         		</p>
 
-				<p> 
+				<p>
 					<!-- Go back -->
 					<a href="?'.self::$indexURL.'"
 					   id="go-back-button"
