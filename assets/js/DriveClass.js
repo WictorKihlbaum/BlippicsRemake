@@ -123,28 +123,27 @@ const DriveClass = {
 	 * Load Drive API client library.
 	 */
 	loadDriveApi: () => {
-		gapi.client.load('drive', 'v2', DriveClass.renderImages);
+		gapi.client.load('drive', 'v2', DriveClass.requestDriveImages);
 	},
 
-	renderImages: () => {
+	requestDriveImages: () => {
 		// Show loading animation while images are being loaded.
 		$('#loading-animation').show();
 		DriveClass.imageList.html('');
 
 		const request = gapi.client.drive.files.list({
-			'maxResults': 100, // Change this to get more images.
-			'orderBy': 'createdDate desc'
+			'maxResults': 100, // Change this to get more images (1000 is max).
+			'orderBy': 'createdDate desc',
+			'q': 'mimeType = "image/jpeg" or mimeType = "image/png"'
 		});
 
-		request.execute(resp => {
-			const files = resp.items;
-			DriveClass.imageArray = files;
+		request.execute(response => {
+			const images = response.items;
+			DriveClass.imageArray = images;
 
-			if (files && files.length > 0) {
-				for (let file of files) {
-					if (DriveClass.isValidImageFormat(file))
-						DriveClass.renderImageElement(file);
-				}
+			if (images && images.length > 0) {
+				for (let image of images)
+				  DriveClass.renderImage(image);
 			} else $('#top-text').html(DriveClass.noValidImages);
 
 			$('#loading-animation').hide();
@@ -152,12 +151,7 @@ const DriveClass = {
 		});
 	},
 
-	isValidImageFormat: file => {
-		// Adobe Aviary photo editor only supports Png and Jpg/Jpeg.
-		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.mimeType);
-	},
-
-	renderImageElement: image => {
+	renderImage: image => {
     // Remove unwanted part of url.
 		const largeImageLink = image.webContentLink.replace(/&export=download/i, '');
 
@@ -287,8 +281,8 @@ const DriveClass = {
 			if (!callback) {
         callback = file => {
 				  DriveClass.showSuccessMessage();
-					// Render all images again to show the newly uploaded one.
-					DriveClass.renderImages();
+					// Request and render all images again to show the newly uploaded one.
+					DriveClass.requestDriveImages();
 					document.body.className = 'cursor-default';
       	};
     	} else {
