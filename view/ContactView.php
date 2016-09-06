@@ -28,7 +28,7 @@ class ContactView {
 				  <li class="mdl-list__item mdl-list__item--two-line">
 				    <span class="mdl-list__item-primary-content">
 				      <img src="./assets/img/facebook_logo.png" alt="Facebook logotype" />
-							<a href="https://www.facebook.com/wictor.kihlbaum">
+							<a href="https://www.facebook.com/wictor.kihlbaum" class="hvr-underline-from-left">
 								facebook.com/wictor.kihlbaum
 							</a>
 				    </span>
@@ -38,7 +38,7 @@ class ContactView {
 				  <li class="mdl-list__item mdl-list__item--two-line">
 				    <span class="mdl-list__item-primary-content">
 					    <img src="./assets/img/twitter_logo.png" alt="Twitter logotype" />
-							<a href="https://twitter.com/WictorKihlbaum">
+							<a href="https://twitter.com/WictorKihlbaum" class="hvr-underline-from-left">
 								twitter.com/WictorKihlbaum
 							</a>
 				    </span>
@@ -48,7 +48,7 @@ class ContactView {
 				  <li class="mdl-list__item mdl-list__item--two-line">
 				    <span class="mdl-list__item-primary-content">
 					    <img src="./assets/img/gmail_logo.svg" alt="Gmail logotype" />
-					    <a href="mailto:wictor.kihlbaum@gmail.com">
+					    <a href="mailto:wictor.kihlbaum@gmail.com" class="hvr-underline-from-left">
 					      wictor.kihlbaum@gmail.com
 					    </a>
 				    </span>
@@ -58,7 +58,7 @@ class ContactView {
 				  <li class="mdl-list__item mdl-list__item--two-line">
 				    <span class="mdl-list__item-primary-content">
 				      <img src="./assets/img/github_logo.png" alt="GitHub logotype" />
-							<a href="https://github.com/WictorKihlbaum">
+							<a href="https://github.com/WictorKihlbaum" class="hvr-underline-from-left">
 								github.com/WictorKihlbaum
 							</a>
 				    </span>

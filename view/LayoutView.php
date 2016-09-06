@@ -169,7 +169,6 @@ class LayoutView {
         $this -> pageSpecificStyles = '
           <link rel="stylesheet" href="./assets/css/libs/loading.css" />
           <link rel="stylesheet" href="./assets/css/libs/simplePagination.css" />
-          <link rel="stylesheet" href="./assets/css/editonline.css" />
         ';
         break;
 

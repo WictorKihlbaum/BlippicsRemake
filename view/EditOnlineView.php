@@ -110,12 +110,12 @@ class EditOnlineView {
 					</p>
 	      </div>
 
-	      <div id="top-text">
-	        <p>Your Google Drive images will be listed here.</p>
+	      <div id="google-info-text" class="mdl-color-text--primary mdl-typography--display-1">
+	        Your Google Drive images will be listed here.
 	      </div>
 
 				<div class="pagination-page"></div>
-					<div id="image-list" class="mdl-grid">
+					<div class="mdl-grid" id="image-list">
 						<!-- Images will be rendered from "DriveClass.js" -->
 					</div>
 				<div class="pagination-page"></div>

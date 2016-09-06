@@ -62,31 +62,6 @@ const DriveClass = {
 		checkFragment();
 	},
 
-	addDownloadButton: (id, url) => {
-		const actionsField = $(`#actions-for-${id}`);
-		actionsField.append(`
-			<a href="${url}" download>
-				<i alt="Download edited ${id}"
-				   title="Download edited image"
-				   class="material-icons animated flash">
-				  file_download
-				</i>
-			</a>
-		`);
-	},
-
-	addUploadButton: (id, url) => {
-		const actionsField = $(`#actions-for-${id}`);
-		actionsField.append(`
-			<i alt="Upload edited ${id}"
-			   title="Upload edited image"
-			   class="material-icons"
-			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">
-			  cloud_upload
-			</i>
-		`);
-	},
-
 	/**
 	 * Check if current user has authorized this application.
 	 */
@@ -108,15 +83,21 @@ const DriveClass = {
 	 */
 	handleAuthResult: authResult => {
     if (authResult && !authResult.error) {
-      $('#need-to-login-text').hide();
-      $('#top-text').hide();
-      $('.g-signin2').hide();
+			DriveClass.hideLoginElements();
 			DriveClass.loadDriveApi();
-		} else {
-      $('#need-to-login-text').show();
-      $('#top-text').show();
-      $('.g-signin2').show();
-		}
+		} else DriveClass.showLoginElements();
+	},
+
+	hideLoginElements: () => {
+		$('#need-to-login-text').hide();
+		$('#google-info-text').hide();
+		$('.g-signin2').hide();
+	},
+
+	showLoginElements: () => {
+		$('#need-to-login-text').show();
+		$('#google-info-text').show();
+		$('.g-signin2').show();
 	},
 
 	/**
@@ -177,6 +158,7 @@ const DriveClass = {
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
 					<i alt="Edit ${image.originalFilename}"
 					   title="Edit image"
+						 aria-label="Edit image"
 					   class="material-icons"
 					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">
 					  edit
@@ -184,12 +166,40 @@ const DriveClass = {
 				  <a href="${image.webContentLink}" download>
 						<i alt="Download ${image.originalFilename} original"
 						   title="Download original image"
+							 aria-label="Download original image"
 						   class="material-icons">
 						  cloud_download
 						</i>
 					</a>
 				</div>
 			</div>
+		`);
+	},
+
+	addDownloadButton: (id, url) => {
+		const actionsField = $(`#actions-for-${id}`);
+		actionsField.append(`
+			<a href="${url}" download>
+				<i alt="Download edited ${id}"
+				   title="Download edited image"
+					 aria-label="Download edited image"
+				   class="material-icons animated flash">
+				  file_download
+				</i>
+			</a>
+		`);
+	},
+
+	addUploadButton: (id, url) => {
+		const actionsField = $(`#actions-for-${id}`);
+		actionsField.append(`
+			<i alt="Upload edited ${id}"
+			   title="Upload edited image"
+				 aria-label="Upload edited image"
+			   class="material-icons"
+			   onclick="DriveClass.getImageFromAmazon(\'${url}\')">
+			  cloud_upload
+			</i>
 		`);
 	},
 

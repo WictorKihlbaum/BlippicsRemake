@@ -187,10 +187,6 @@ h1 {
     max-width: 960px;
 }
 
-#editonline-page-container {
-  	text-align: center;
-}
-
 /* Styling for "Choose image"-button */
 
 input[type="file"] {
@@ -279,9 +275,6 @@ input[type="file"] {
     color: #757575 !important;
     text-decoration: none;
 }
-.mdl-list__item a:hover {
-    text-decoration: underline;
-}
 
 .mdl-mini-footer img {
     width: 36px;
@@ -316,4 +309,46 @@ input[type="file"] {
     position: absolute;
     right: 5px;
     top: 5px;
+}
+
+
+/* Edit Online */
+
+#editonline-page-container {
+  	text-align: center;
+}
+
+#need-to-login-text {
+	position: relative;
+	max-width: 930px;
+	margin: 0 auto;
+	padding: 15px;
+	color: #4183D7;
+	background-color: #E4F1FE;
+	border-radius: 8px;
+}
+
+.cursor-default {
+	cursor: default;
+}
+
+.cursor-wait {
+	cursor: wait;
+}
+
+#google-info-text {
+	margin: 35px auto 0 auto;
+	font-size: 26px;
+	text-align: center;
+}
+
+.card-thumbnails {
+	width: 128px;
+	height: 128px;
+}
+
+#loading-animation-text {
+	font-size: 18px;
+	color: #BDC3C7;
+	text-align: center;
 }
