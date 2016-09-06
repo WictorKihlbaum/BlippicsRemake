@@ -215,7 +215,7 @@ const DriveClass = {
 				const reader = new FileReader();
 				reader.onloadend = () => {
           DriveClass.setCurrentImageName(id);
-					AviaryDrive.launchEditor(id, reader.result);
+					AviaryEditor.launchEditor(id, reader.result);
 				};
 				reader.readAsDataURL(xhr.response);
 			};

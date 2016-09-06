@@ -164,7 +164,7 @@ class LayoutView {
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
-          <script src="./assets/js/AviaryDrive.js"></script>
+          <script src="./assets/js/AviaryEditor.js"></script>
         ';
         $this -> pageSpecificStyles = '
           <link rel="stylesheet" href="./assets/css/libs/loading.css" />
@@ -178,7 +178,7 @@ class LayoutView {
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
-          <script src="./assets/js/AviaryLocal.js"></script>
+          <script src="./assets/js/AviaryEditor.js"></script>
           <script src="./assets/js/LocalClass.js"></script>
           <script src="./assets/js/Message.js"></script>
         ';

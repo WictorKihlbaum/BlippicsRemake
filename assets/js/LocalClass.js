@@ -78,7 +78,7 @@ const LocalClass = {
 		$('#edit-button-field').html(`
 			<a href="#"
 			   id="edit-button"
-			   onclick="AviaryLocal.launchEditor('editable-image')"
+			   onclick="AviaryEditor.launchEditor('editable-image')"
 			   class="mdl-button
 					      mdl-js-button
 					      mdl-button--raised
