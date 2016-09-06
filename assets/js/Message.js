@@ -2,36 +2,37 @@
 
 const Message = {
 
-	message: null,
+	field: null,
 
 
 	init: () => {
-		Message.message = $('#user-message');
+		Message.field = $('#user-message-field');
 	},
 
-	show: (message, messageID) => {
-		Message.message.html(message + Message.getCloseButton());
-		Message.message.attr('class', 'user-message-show');
-		Message.message.attr('id', messageID);
+	show: (message, id) => {
+		Message.field.html(`
+      <div id="${id}" class="user-message animated flash">
+        ${message} ${Message.getCloseButton()}
+			</div>
+		`);
 	},
 
 	remove: () => {
-		Message.message.addClass('fadeout');
-		setTimeout(() =>
-			Message.message.attr('class', 'message-hide'), 500);
+	  Message.field.html('');
 	},
 
 	getCloseButton: () => {
 		return `
-			<img src="assets/img/close_button.png"
-				 alt="Close error message"
-				 title="Close message"
-				 class="close-message"
+      <i class="material-icons"
+			   id="close-message-button"
+			   title="Close message"
 				 aria-label="Close message"
-				 onclick="Message.remove()" />
+				 onclick="Message.remove()">
+        close
+			</i>
 		`;
 	}
-	
+
 };
 
 window.onload = Message.init();

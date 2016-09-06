@@ -218,47 +218,27 @@ input[type="file"] {
 
 /* USER MESSAGE */
 
-#user-message {
-    /* Fadeout effect */
-    -webkit-transition: opacity 0.5s;
-    -moz-transition: opacity 0.5s;
-    -o-transition: opacity 0.5s;
-    -ms-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-}
-
-.user-message-show {
-    display: block;
-    position: relative;
-    max-width: 930px;
+.user-message {
+		position: relative;
+		display: block;
+    max-width: 620px;
     margin: 10px auto;
     padding: 15px;
     border-radius: 12px;
 }
 
+#close-message-button {
+	color: white;
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	cursor: pointer;
+}
+
 #user-message-error {
     color: #D64541;
     background-color: #F1A9A0;
-}
-
-.message-hide {
-    display: none;
-}
-
-.fadeout {
-    opacity: 0;
-}
-
-.close-message {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 26px;
-    height: 26px;
-}
-
-.close-message:hover {
-    cursor: pointer;
+		background-color: rgba(241, 169, 160, .7);
 }
 
 /* SNACKBAR */

@@ -8,9 +8,8 @@ const LocalClass = {
 	// Error messages.
 	loadingImageError: 'An error occurred while loading the image! Please try again.',
 	invalidImageError: `
-		File is not valid! The file is either not an image
-		or the format is wrong. Valid formats are Png and Jpg/Jpeg.
-		Please try again.
+		File is not valid! The file has to be an image
+		in format Png or Jpg/Jpeg. Please try again.
 	`,
 
 
@@ -21,7 +20,7 @@ const LocalClass = {
 
 	toggleProgressBar: () => {
 		const progressbar = $('#progressbar');
-		if (progressbar.is(':visible')) 
+		if (progressbar.is(':visible'))
 			progressbar.hide();
 		else progressbar.show();
 	},
@@ -33,12 +32,13 @@ const LocalClass = {
 		if (LocalClass.isValidImageFormat(selectedFile)) {
 			// In case an earlier user message has been shown.
 			Message.remove();
-			
+
 			const reader = new FileReader();
 
 			reader.onloadend = () => {
 				preview.attr('src', reader.result);
 				LocalClass.addEditButton();
+				$('#choose-image-label').html('Choose another image');
 				setTimeout(() => // Dev purpose.
 					LocalClass.toggleProgressBar(), 3000);
 			};
@@ -48,10 +48,10 @@ const LocalClass = {
 				Message.show(LocalClass.loadingImageError, 'user-message-error');
 			}
 
-			reader.onprogress = () => 
+			reader.onprogress = () =>
 				LocalClass.toggleProgressBar();
 
-			if (selectedFile) 
+			if (selectedFile)
 				reader.readAsDataURL(selectedFile);
 			else {
 				preview.attr('src', LocalClass.defaultImagePath);
@@ -80,32 +80,35 @@ const LocalClass = {
 			   id="edit-button"
 			   onclick="AviaryLocal.launchEditor('editable-image')"
 			   class="mdl-button
-					  mdl-js-button
-					  mdl-button--raised
-					  mdl-js-ripple-effect
-					  mdl-button--primary
-					  edit-button">
-				<i class="material-icons">edit</i>
+					      mdl-js-button
+					      mdl-button--raised
+					      mdl-js-ripple-effect
+					      mdl-button--primary">
+			  <i class="material-icons">
+				  edit
+				</i>
 				Edit image
 			</a>
 		`);
 	},
-	
+
 	addDownloadButton: url => {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"
-			   class="mdl-button 
-				   	  mdl-js-button 
-				   	  mdl-button--raised 
-				      mdl-js-ripple-effect 
-				      mdl-button--primary">
-				<i class="material-icons">file_download</i>
-		    	Download image
+			   class="mdl-button
+				   	    mdl-js-button
+				   	    mdl-button--raised
+				        mdl-js-ripple-effect
+				        mdl-button--primary">
+			  <i class="material-icons">
+				  file_download
+				</i>
+		    Download image
 			</a>
 		`);
 	}
-	
+
 };
 
 window.onload = LocalClass.init();

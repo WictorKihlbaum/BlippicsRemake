@@ -31,7 +31,7 @@ class EditLocalView {
 	    	</h1>
 
 				<!-- Response messages will be shown here. -->
-				<div id="user-message"></div>
+				<span id="user-message-field"></span>
 
 				<dialog class="mdl-dialog animated zoomIn">
 					<h4 class="mdl-dialog__title">
@@ -104,7 +104,9 @@ class EditLocalView {
 	            <i class="material-icons">
 							  image
 							</i>
-	            Choose image
+	            <span id="choose-image-label">
+							  Choose image
+							</span>
 	            <input type="file"
 	                   id="input"
 	                   onchange="LocalClass.handleFiles(this.files)"
