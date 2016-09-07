@@ -24,6 +24,8 @@ const AviaryEditor = {
 				$(`#${imageID}`).attr('src', newURL);
         // Add action buttons for new image.
         if (window.location.href.match('editonline')) {
+					// Be able to click "Edit" again and new image will be shown.
+					$('#edit-button').attr('onclick', 'AviaryEditor.launchEditor(DriveClass.lastEditedImageID)');
   				DriveClass.addDownloadButton(imageID, newURL);
   				DriveClass.addUploadButton(imageID, newURL);
         } else LocalClass.addDownloadButton(newURL);

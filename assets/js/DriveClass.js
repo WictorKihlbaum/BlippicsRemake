@@ -1,4 +1,3 @@
-/* This JS-file handles events connected to 'editonline.html' */
 'use strict';
 
 const DriveClass = {
@@ -7,11 +6,13 @@ const DriveClass = {
 	imageArray: [],
 	imageList: null,
 	currentImageName: '',
-	CLIENT_ID: '788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com',
+	lastEditedImageID: '',
+	CLIENT_ID: '117700549617-ol49l4bkna7ch6qbb44gubuj3t2p8vep.apps.googleusercontent.com',
 	SCOPES: ['https://www.googleapis.com/auth/drive'],
 
 	// User messages.
-	uploadSuccessMessage: 'The image was successfully uploaded to your Google Drive',
+	uploadSuccessMessage: 'The image was successfully uploaded to your Google Drive!',
+	removeSuccessMessage: 'The image was successfully removed from your Google Drive!',
 	uploadErrorMessage: 'The image failed to upload to your Google Drive!',
 	driveErrorMessage: 'Error! Could not get image from Google Drive.',
 	amazonErrorMessage: `
@@ -104,7 +105,7 @@ const DriveClass = {
 	 * Load Drive API client library.
 	 */
 	loadDriveApi: () => {
-		gapi.client.load('drive', 'v2', DriveClass.requestDriveImages);
+		gapi.client.load('drive', 'v3', DriveClass.requestDriveImages);
 	},
 
 	requestDriveImages: () => {
@@ -113,18 +114,20 @@ const DriveClass = {
 		DriveClass.imageList.html('');
 
 		const request = gapi.client.drive.files.list({
-			'maxResults': 100, // Change this to get more images (1000 is max).
-			'orderBy': 'createdDate desc',
+			'maxResults': 100,
+      'fields': "files",
 			'q': 'mimeType = "image/jpeg" or mimeType = "image/png"'
 		});
 
 		request.execute(response => {
-			const images = response.items;
+			const images = response.files;
 			DriveClass.imageArray = images;
 
 			if (images && images.length > 0) {
-				for (let image of images)
-				  DriveClass.renderImage(image);
+				for (let image of images) {
+					//console.log(image);
+					DriveClass.renderImage(image);
+				}
 			} else $('#top-text').html(DriveClass.noValidImages);
 
 			$('#loading-animation').hide();
@@ -156,11 +159,11 @@ const DriveClass = {
 				  </a>
 				</div>
 				<div class="mdl-card__actions" id="actions-for-${image.id}">
-					<i alt="Edit ${image.originalFilename}"
-					   title="Edit image"
+					<i title="Edit image"
 						 aria-label="Edit image"
 					   class="material-icons"
-					   onclick="DriveClass.getImageFromDrive(\'${image.id}\', \'${image.downloadUrl}\')">
+						 id="edit-button"
+					   onclick="DriveClass.getImageFromDrive(\'${image.id}\')">
 					  edit
 					</i>
 				  <a href="${image.webContentLink}" download>
@@ -171,10 +174,67 @@ const DriveClass = {
 						  cloud_download
 						</i>
 					</a>
+					<i title="Delete image"
+					   aria-label="Delete image"
+						 class="material-icons"
+						 onclick="DriveClass.showConfirmation(\'${image.id}\', \'${image.originalFilename}\')">
+					  delete_forever
+				  </i>
 				</div>
 			</div>
 		`);
 	},
+
+	showConfirmation: (id, name) => {
+		const dialog = $('#confirm-dialog')[0];
+    if (!dialog.showModal)
+		  dialogPolyfill.registerDialog(dialog);
+
+    // TODO: Remove?
+    $('#confirmation-text').html(`
+			You are about to delete image: ${name} (ID: ${id})
+			The image will be permanently deleted
+			(It will NOT be placed in your Google Drive trashbin).
+			Are you really sure?
+		`);
+
+    dialog.showModal();
+
+		dialog.querySelector('.confirm').addEventListener('click', () => {
+      dialog.close();
+			DriveClass.deleteImageFromDrive(id);
+    });
+
+    dialog.querySelector('.close').addEventListener('click', () =>
+		  dialog.close());
+	},
+
+	/**
+   * Permanently delete an image, skipping the trash.
+   *
+   * @param {String} id ID of the image to delete.
+   */
+ 	deleteImageFromDrive: id => {
+ 		document.body.className = 'cursor-wait';
+
+ 	  const request = gapi.client.drive.files.delete({
+       'fileId': id
+    });
+
+    request.execute(response => {
+ 		  if (!response.hasOwnProperty('code')) {
+ 			  DriveClass.requestDriveImages();
+ 				DriveClass.showSuccessMessage(DriveClass.removeSuccessMessage);
+ 			} else {
+			  Message.show(`
+				  An error occurred! Image couldn't be deleted.
+					Details: ${response.code}: ${response.message}`,
+					'user-message-error'
+				);
+ 			}
+ 		  document.body.className = 'cursor-default';
+ 		});
+ 	},
 
 	addDownloadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
@@ -203,17 +263,19 @@ const DriveClass = {
 		`);
 	},
 
-	getImageFromDrive: (id, downloadURL) => {
+	getImageFromDrive: id => {
+		// Save ID to be able to get it from AviaryEditor onSave.
+		DriveClass.lastEditedImageID = id;
 		// In case an earlier user message has been shown.
 		Message.remove();
 
-		if (downloadURL) {
-			const accessToken = gapi.auth.getToken().access_token;
-			const xhr = new XMLHttpRequest();
+		const accessToken = gapi.auth.getToken().access_token;
+		const url = `https://www.googleapis.com/drive/v3/files/${id}?alt=media`;
+		const xhr = new XMLHttpRequest();
 
-			xhr.onload = () => {
+			xhr.onloadend = () => {
 				const reader = new FileReader();
-				reader.onloadend = () => {
+				reader.onload = () => {
           DriveClass.setCurrentImageName(id);
 					AviaryEditor.launchEditor(id, reader.result);
 				};
@@ -223,11 +285,10 @@ const DriveClass = {
 			xhr.onerror = () =>
 				Message.show(DriveClass.driveErrorMessage, 'user-message-error');
 
-			xhr.open('GET', downloadURL);
+			xhr.open('GET', url);
 			xhr.responseType = 'blob';
 			xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
 			xhr.send();
-		}
 	},
 
 	/**
@@ -255,16 +316,14 @@ const DriveClass = {
 		const boundary = '-------314159265358979323846';
     const delimiter = `\r\n--${boundary}\r\n`;
     const close_delim = `\r\n--${boundary}--`;
-
 		const reader = new FileReader();
-		reader.readAsBinaryString(fileData);
 
+		reader.readAsBinaryString(fileData);
 		reader.onload = () => {
-			const contentType = fileData.type || 'application/octet-stream';
 			const base64Data = btoa(reader.result);
 			const metadata = {
 				'title': DriveClass.currentImageName,
-				'mimeType': contentType
+				'mimeType': fileData.type
 		  };
 
 			const multipartRequestBody =
@@ -272,42 +331,42 @@ const DriveClass = {
 				'Content-Type: application/json\r\n\r\n' +
 				JSON.stringify(metadata) +
 				delimiter +
-				'Content-Type: ' + contentType + '\r\n' +
+				'Content-Type: ' + fileData.type + '\r\n' +
 				'Content-Transfer-Encoding: base64\r\n' +
 				'\r\n' +
 				base64Data +
 				close_delim;
 
-      const request = gapi.client.request(
-        {
-          'path': '/upload/drive/v2/files',
-          'method': 'POST',
-          'params': {'uploadType': 'multipart'},
-          'headers': {'Content-Type': `multipart/mixed; boundary="${boundary}"`},
-          'body': multipartRequestBody
-        }
-      );
+			const request = gapi.client.request({
+        'path': '/upload/drive/v3/files?uploadType=multipart',
+				'method': 'POST',
+        'headers': {
+          'Content-Type': `multipart/related; boundary="${boundary}"`
+        },
+        'body': multipartRequestBody
+			});
 
 			if (!callback) {
         callback = file => {
-				  DriveClass.showSuccessMessage();
-					// Request and render all images again to show the newly uploaded one.
-					DriveClass.requestDriveImages();
+					if (file) {
+						DriveClass.showSuccessMessage(DriveClass.uploadSuccessMessage);
+						// Request and render all images again to show the newly uploaded one.
+						DriveClass.requestDriveImages();
+					} else {
+						Message.show(DriveClass.uploadErrorMessage, 'user-message-error');
+					}
 					document.body.className = 'cursor-default';
       	};
-    	} else {
-				Message.show(DriveClass.uploadErrorMessage, 'user-message-error');
-				document.body.className = 'cursor-default';
-			}
+    	}
 			request.execute(callback);
 		};
 	},
 
-	showSuccessMessage: () => {
+	showSuccessMessage: message => {
 		const snackbarContainer = $('#success-toast')[0];
 		const data = {
-			message: DriveClass.uploadSuccessMessage,
-			timeout: 7000
+			message: message,
+			timeout: 10000
 		};
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},

@@ -38,7 +38,7 @@ class LayoutView {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
-          <meta name="google-signin-client_id" content="788591829115-1uq193qnm8r72ujqej7l3hdj558hj7ej.apps.googleusercontent.com">
+          <meta name="google-signin-client_id" content="117700549617-ol49l4bkna7ch6qbb44gubuj3t2p8vep.apps.googleusercontent.com">
           <title>Blippics | '. $this -> pageTitle .'</title>
           <!-- Google Material Lite -->
           <link rel="stylesheet" href="./assets/css/framework/material.min.css" />

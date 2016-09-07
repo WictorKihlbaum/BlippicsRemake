@@ -29,7 +29,7 @@ class EditOnlineView {
     		</h1>
 
 				<!-- Response messages will be shown here. -->
-	      <div id="user-message"></div>
+				<span id="user-message-field"></span>
 
 	      <dialog class="mdl-dialog animated zoomIn">
 					<h4 class="mdl-dialog__title">
@@ -98,7 +98,8 @@ class EditOnlineView {
 	           data-height="100"
 	           data-longtitle="true"
 	           data-theme="dark"
-	           data-onsuccess="onSignIn"></div>
+	           data-onsuccess="onSignIn">
+				</div>
 
 	      <div id="loading-animation">
 	        <div class="sk-chasing-dots">
@@ -135,6 +136,24 @@ class EditOnlineView {
 						Go back
 					</a>
         </p>
+
+			  <dialog class="mdl-dialog" id="confirm-dialog">
+          <h4 class="mdl-dialog__title">Delete image?</h4>
+          <div class="mdl-dialog__content">
+            <p id="confirmation-text">
+              The image will be permanently deleted (It will not be placed in your Google Drive trashbin).
+							Are you sure?
+            </p>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button confirm">
+						  Yes
+						</button>
+            <button type="button" class="mdl-button close">
+						  Cancel
+						</button>
+          </div>
+        </dialog>
 
       </div>
 		';
