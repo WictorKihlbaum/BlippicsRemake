@@ -11,6 +11,24 @@ header {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2196F3', endColorstr='#B2FF59',GradientType=1 ); /* IE6-9 */
 }
 
+#confirm-dialog {
+	text-align: left;
+	max-width: 450px;
+}
+
+#confirm-dialog ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#confirmation-text p {
+	font-size: 18px;
+}
+
+#cancel-button {
+	color: red;
+}
+
 #top-button {
     position: fixed;
     right: 50px;

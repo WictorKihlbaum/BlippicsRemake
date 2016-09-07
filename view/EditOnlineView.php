@@ -138,18 +138,19 @@ class EditOnlineView {
         </p>
 
 			  <dialog class="mdl-dialog" id="confirm-dialog">
-          <h4 class="mdl-dialog__title">Delete image?</h4>
+          <h4 class="mdl-dialog__title">
+					  Delete image?
+					</h4>
           <div class="mdl-dialog__content">
-            <p id="confirmation-text">
-              The image will be permanently deleted (It will not be placed in your Google Drive trashbin).
-							Are you sure?
-            </p>
+            <span id="confirmation-text">
+              <!-- Text is added from DriveClass.js -->
+            </span>
           </div>
           <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button confirm">
+            <button type="button" class="mdl-button mdl-color-text--primary confirm">
 						  Yes
 						</button>
-            <button type="button" class="mdl-button close">
+            <button type="button" class="mdl-button cancel" id="cancel-button">
 						  Cancel
 						</button>
           </div>

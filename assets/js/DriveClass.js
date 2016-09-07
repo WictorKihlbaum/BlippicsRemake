@@ -190,14 +190,7 @@ const DriveClass = {
     if (!dialog.showModal)
 		  dialogPolyfill.registerDialog(dialog);
 
-    // TODO: Remove?
-    $('#confirmation-text').html(`
-			You are about to delete image: ${name} (ID: ${id})
-			The image will be permanently deleted
-			(It will NOT be placed in your Google Drive trashbin).
-			Are you really sure?
-		`);
-
+    DriveClass.addConfirmationText(id, name);
     dialog.showModal();
 
 		dialog.querySelector('.confirm').addEventListener('click', () => {
@@ -205,8 +198,23 @@ const DriveClass = {
 			DriveClass.deleteImageFromDrive(id);
     });
 
-    dialog.querySelector('.close').addEventListener('click', () =>
+    dialog.querySelector('.cancel').addEventListener('click', () =>
 		  dialog.close());
+	},
+
+	addConfirmationText: (id, name) => {
+		$('#confirmation-text').html(`
+			<ul>
+			  <li>You are about to delete image: ${name}
+				<li>(ID: ${id})</li>
+			  <li>The image will be permanently deleted</li>
+			  <li>
+				  (It will <strong>NOT</strong> be placed in
+					your Google Drive trashbin).
+				</li>
+			</ul>
+			<p>Are you really sure?</p>
+		`);
 	},
 
 	/**
