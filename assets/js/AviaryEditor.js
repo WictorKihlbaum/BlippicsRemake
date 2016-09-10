@@ -28,7 +28,10 @@ const AviaryEditor = {
 					$('#edit-button').attr('onclick', 'AviaryEditor.launchEditor(DriveClass.lastEditedImageID)');
   				DriveClass.addDownloadButton(imageID, newURL);
   				DriveClass.addUploadButton(imageID, newURL);
-        } else LocalClass.addDownloadButton(newURL);
+        } else {
+					LocalClass.addDownloadButton(newURL);
+					DropboxHandler.addDownloadButton(newURL);
+				}
 			},
 
 			onError: errorObj => {

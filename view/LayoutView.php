@@ -10,6 +10,8 @@ class LayoutView {
   private static $editOnlineURL = 'editonline';
   private static $editLocalURL = 'editlocal';
   protected static $attributionURL = 'attribution';
+  private static $editDropboxURL = 'editdropbox';
+  private static $editOneDriveURL = 'editonedrive';
 
   private $pageSpecificScripts = '';
   private $pageSpecificStyles = '';
@@ -22,6 +24,8 @@ class LayoutView {
     $this -> editOnlineView = $views['editonline'];
     $this -> editLocalView = $views['editlocal'];
     $this -> attributionView = $views['attribution'];
+    $this -> editDropboxView = $views['editdropbox'];
+    $this -> editOneDriveView = $views['editonedrive'];
 
     $this -> headerView = $sharedViews['header'];
     $this -> footerView = $sharedViews['footer'];
@@ -51,6 +55,7 @@ class LayoutView {
           <link rel="stylesheet" href="./assets/css/libs/hover.css" />
           <link rel="stylesheet" href="./assets/css/libs/hint.min.css" />
           <link rel="stylesheet" href="./assets/css/libs/animate.min.css" />
+          <script src="https://npmcdn.com/dropbox/dist/Dropbox-sdk.min.js"></script>
           '. $this -> getPageSpecificStyles() .'
         </head>
         <body>
@@ -187,6 +192,27 @@ class LayoutView {
       case self::$attributionURL:
         $this -> pageTitle = 'Attribution';
         $this -> pageContent = $this -> attributionView -> response();
+        break;
+
+      case self::$editDropboxURL:
+        $this -> pageTitle = 'Edit Dropbox';
+        $this -> pageContent = $this -> editDropboxView -> response();
+        $this -> pageSpecificScripts = '
+          <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="c8hfkxzclokzwl0"></script>
+          <script src="./assets/js/DropboxHandler.js"></script>
+          <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+          <script src="./assets/js/AviaryEditor.js"></script>
+          <script src="./assets/js/Message.js"></script>
+        ';
+        break;
+
+      case self::$editOneDriveURL:
+        $this -> pageTitle = 'Edit OneDrive';
+        $this -> pageContent = $this -> editOneDriveView -> response();
+        $this -> pageSpecificScripts = '
+          <script src="https://js.live.net/v7.0/OneDrive.js"></script>
+          <script src="./assets/js/OneDriveHandler.js"></script>
+        ';
         break;
 
       default:

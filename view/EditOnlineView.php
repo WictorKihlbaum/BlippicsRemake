@@ -53,6 +53,14 @@ class EditOnlineView {
 						    	= Download original image.
 						  	</span>
 						  </li>
+							<li class="mdl-list__item">
+						    <span class="mdl-list__item-primary-content">
+						      <i class="material-icons mdl-list__item-icon">
+						    	  delete_forever
+						    	</i>
+						    	= Delete image permanently.
+						  	</span>
+						  </li>
 						  <li class="mdl-list__item">
 						    <span class="mdl-list__item-primary-content">
 						      <i class="material-icons mdl-list__item-icon">

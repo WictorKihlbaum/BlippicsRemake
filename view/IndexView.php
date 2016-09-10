@@ -5,7 +5,9 @@ declare(strict_types = 1);
 class IndexView {
 
 	private static $editOnlineURL = 'editonline';
-  	private static $editLocalURL = 'editlocal';
+  private static $editLocalURL = 'editlocal';
+	private static $editDropboxURL = 'editdropbox';
+	private static $editOneDriveURL = 'editonedrive';
 
 
 	function __construct() {
@@ -30,6 +32,24 @@ class IndexView {
 				  	  <img src="./assets/img/laptop.png" width="60%"
 				  	       alt="Edit image on computer"
 				  	       id="computer-image-button" />
+				  	</a>
+			  	</span>
+			  </div>
+				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+			  	<span class="hint--bottom" aria-label="Edit image on Dropbox">
+				  	<a href="?'.self::$editDropboxURL.'" class="hvr-bob">
+				  	  <img src="./assets/img/dropbox_logo.png" width="55%"
+				  	       alt="Edit image on Dropbox"
+				  	       id="dropbox-image-button" />
+				  	</a>
+			  	</span>
+			  </div>
+				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+			  	<span class="hint--bottom" aria-label="Edit image on OneDrive">
+				  	<a href="?'.self::$editOneDriveURL.'" class="hvr-bob">
+				  	  <img src="./assets/img/onedrive_logo.png" width="55%"
+				  	       alt="Edit image on OneDrive"
+				  	       id="onedrive-image-button" />
 				  	</a>
 			  	</span>
 			  </div>

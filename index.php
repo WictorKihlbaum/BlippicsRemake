@@ -28,6 +28,8 @@ require_once('view/ContactView.php');
 require_once('view/EditOnlineView.php');
 require_once('view/EditLocalView.php');
 require_once('view/AttributionView.php');
+require_once('view/EditDropboxView.php');
+require_once('view/EditOneDriveView.php');
 
 // Shared views
 require_once('view/shared/HeaderView.php');
@@ -46,7 +48,9 @@ $views = [
 	'contact' => new ContactView(),
 	'editonline' => new EditOnlineView(),
 	'editlocal' => new EditLocalView(),
-	'attribution' => new AttributionView()
+	'attribution' => new AttributionView(),
+	'editdropbox' => new EditDropboxView(),
+	'editonedrive' => new EditOneDriveView()
 ];
 
 $sharedViews = [

@@ -11,20 +11,22 @@ header {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2196F3', endColorstr='#B2FF59',GradientType=1 ); /* IE6-9 */
 }
 
+footer li a,
+footer .mdl-logo {
+	font-size: 20px !important;
+}
+
 #confirm-dialog {
 	text-align: left;
 	max-width: 450px;
 }
-
 #confirm-dialog ul {
 	list-style-type: none;
 	padding: 0;
 }
-
 #confirmation-text p {
 	font-size: 18px;
 }
-
 #cancel-button {
 	color: red;
 }
@@ -90,6 +92,14 @@ h1 {
 	text-align: center;
 }
 
+#onedrive-image-button {
+	margin-top: 110px;
+}
+
+#dropbox-image-button {
+	margin-top: 95px;
+}
+
 #drive-logo-button {
 	margin-top: 95px;
 }
@@ -99,7 +109,7 @@ h1 {
 }
 
 #attribution-container {
-    max-width: 550px;
+  max-width: 550px;
 }
 
 #attribution-subtext {
@@ -292,11 +302,6 @@ input[type="file"] {
 .mdl-list__item a {
     color: #757575 !important;
     text-decoration: none;
-}
-
-.mdl-mini-footer img {
-    width: 36px;
-    height: 36px;
 }
 
 #used-techniques {
