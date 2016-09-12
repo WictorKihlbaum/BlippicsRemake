@@ -244,6 +244,11 @@ const DriveClass = {
  		});
  	},
 
+	addActionButtons: (imageID, newURL) => {
+		DriveClass.addDownloadButton(imageID, newURL);
+		DriveClass.addUploadButton(imageID, newURL);
+	},
+
 	addDownloadButton: (id, url) => {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
@@ -272,7 +277,7 @@ const DriveClass = {
 	},
 
 	getImageFromDrive: id => {
-		// Save ID to be able to get it from AviaryEditor onSave.
+		// Save ID to be able to get it from AviaryHandler onSave.
 		DriveClass.lastEditedImageID = id;
 		// In case an earlier user message has been shown.
 		Message.remove();
@@ -285,7 +290,7 @@ const DriveClass = {
 				const reader = new FileReader();
 				reader.onload = () => {
           DriveClass.setCurrentImageName(id);
-					AviaryEditor.launchEditor(id, reader.result);
+					AviaryHandler.launchEditor(id, reader.result);
 				};
 				reader.readAsDataURL(xhr.response);
 			};
@@ -317,8 +322,8 @@ const DriveClass = {
 	},
 
 	postImageToDrive: (fileData, callback) => {
-		/* Indicate image is being uploaded to Google Drive
-		and to avoid user pressing anything. */
+		/* Indicate image is being uploaded
+		   to avoid user pressing anything. */
 		document.body.className = 'cursor-wait';
 
 		const boundary = '-------314159265358979323846';

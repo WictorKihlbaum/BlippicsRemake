@@ -129,7 +129,7 @@ class EditLocalView {
 				</p>
 
 				<p>
-					<!-- Download (added from "AviaryEditor.js") -->
+					<!-- Download (added from "AviaryHandler.js") -->
         	<span id="download-button-field"></span>
         </p>
 

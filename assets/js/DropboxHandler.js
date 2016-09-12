@@ -2,11 +2,9 @@
 
 const DropboxHandler = {
 
-  imageID: 'dropbox-image',
-
-
   init: () => {
-    DropboxHandler.addChooserButton();
+    //DropboxHandler.addChooserButton();
+    //DropboxHandler.addSaverButton();
   },
 
   addChooserButton: () => {
@@ -22,11 +20,27 @@ const DropboxHandler = {
     `);
   },
 
+  addSaverButton: url => {
+    const options = {
+      success: () => {
+          alert("Success! Files saved to your Dropbox.");
+      },
+      progress: progress => {
+        console.log(progress);
+      },
+      error: errorMessage => {
+        Message.show(errorMessage, 'user-message-error');
+      }
+    };
+    const button = Dropbox.createSaveButton(url, options);
+    $('#saver-container').html(button);
+  },
+
   getButtonOptions: () => {
     return {
       success: image => {
-        DropboxHandler.getImageFromDropbox(image[0].link);
-        $('#' + DropboxHandler.imageID).attr('src', image[0].link);
+        const url = image[0].link;
+        DropboxHandler.getImageFromDropbox(url);
       },
       linkType: "direct",
       multiselect: false,
@@ -36,13 +50,14 @@ const DropboxHandler = {
 
   getImageFromDropbox: url => {
 		const xhr = new XMLHttpRequest();
-
     xhr.onloadend = () => {
-      console.log(xhr.response);
       const reader = new FileReader();
       reader.onload = () => {
-        AviaryEditor.launchEditor(DropboxHandler.imageID, reader.result);
-      };
+        $('#dropbox-image').attr('src', reader.result);
+        $('#dropbox-choose-button').html('Choose another Dropbox image');
+        DropboxHandler.removeActionButtons();
+        DropboxHandler.addEditButton();
+      }
       reader.readAsDataURL(xhr.response);
     };
 
@@ -52,6 +67,28 @@ const DropboxHandler = {
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
 		xhr.send();
+	},
+
+  removeActionButtons: () => {
+    $('#download-button').remove();
+    $('#saver-container').html('');
+  },
+
+  addEditButton: () => {
+    $('#edit-button-field').html(`
+      <a href="#"
+         id="edit-button"
+         onclick="AviaryHandler.launchEditor('dropbox-image')"
+         class="mdl-button
+                mdl-button--raised
+                mdl-js-ripple-effect
+                mdl-button--primary">
+         <i class="material-icons">
+           edit
+         </i>
+         Edit image
+      </a>
+    `);
 	},
 
   addDownloadButton: url => {

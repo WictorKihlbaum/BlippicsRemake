@@ -37,6 +37,10 @@ footer .mdl-logo {
     bottom: 130px;
     z-index: 1000;
 }
+#back-to-top-button {
+	color: white;
+	box-shadow: none;
+}
 
 #progressbar {
     margin: 10px auto;

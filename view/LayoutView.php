@@ -92,9 +92,9 @@ class LayoutView {
           <div id="top-button">
             <span class="hint--left" aria-label="Back to Top">
               <a href="#top"
-                 class="mdl-button mdl-js-button
+                 id="back-to-top-button"
+                 class="mdl-button
                         mdl-button--fab
-                        mdl-js-ripple-effect
                         mdl-button--colored">
                 <i class="material-icons">
                   keyboard_arrow_up
@@ -112,9 +112,10 @@ class LayoutView {
           <script src="./assets/js/SignEvent.js"></script>
           <script src="./assets/js/header.js"></script>
           <script src="//fast.eager.io/cluq6Cumbb.js"></script>
+          <script src="https://js.live.net/v7.0/OneDrive.js"></script>
           '. $this -> getPageSpecificScripts() .'
           <script>
-            function onSignIn(googleUser) {
+            onSignIn: googleUser => {
               SignEvent.signIn(googleUser);
             }
           </script>
@@ -169,7 +170,7 @@ class LayoutView {
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
-          <script src="./assets/js/AviaryEditor.js"></script>
+          <script src="./assets/js/AviaryHandler.js"></script>
         ';
         $this -> pageSpecificStyles = '
           <link rel="stylesheet" href="./assets/css/libs/loading.css" />
@@ -183,7 +184,7 @@ class LayoutView {
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
-          <script src="./assets/js/AviaryEditor.js"></script>
+          <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/LocalClass.js"></script>
           <script src="./assets/js/Message.js"></script>
         ';
@@ -201,7 +202,7 @@ class LayoutView {
           <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="c8hfkxzclokzwl0"></script>
           <script src="./assets/js/DropboxHandler.js"></script>
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
-          <script src="./assets/js/AviaryEditor.js"></script>
+          <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/Message.js"></script>
         ';
         break;
@@ -210,8 +211,9 @@ class LayoutView {
         $this -> pageTitle = 'Edit OneDrive';
         $this -> pageContent = $this -> editOneDriveView -> response();
         $this -> pageSpecificScripts = '
-          <script src="https://js.live.net/v7.0/OneDrive.js"></script>
           <script src="./assets/js/OneDriveHandler.js"></script>
+          <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+          <script src="./assets/js/AviaryHandler.js"></script>
         ';
         break;
 

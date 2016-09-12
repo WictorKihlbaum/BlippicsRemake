@@ -34,8 +34,7 @@ const LocalClass = {
 			Message.remove();
 
 			const reader = new FileReader();
-
-			reader.onloadend = () => {
+			reader.onload = () => {
 				preview.attr('src', reader.result);
 				LocalClass.addEditButton();
 				$('#choose-image-label').html('Choose another image');
@@ -78,7 +77,7 @@ const LocalClass = {
 		$('#edit-button-field').html(`
 			<a href="#"
 			   id="edit-button"
-			   onclick="AviaryEditor.launchEditor('editable-image')"
+			   onclick="AviaryHandler.launchEditor('editable-image')"
 			   class="mdl-button
 					      mdl-js-button
 					      mdl-button--raised
