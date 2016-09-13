@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+// TODO: Add all specific URLs to used FreePik images.
+
 class AttributionView {
 
 	function __construct() {

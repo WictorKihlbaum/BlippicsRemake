@@ -11,7 +11,7 @@ class LayoutView {
   protected static $indexURL = '';
   protected static $aboutURL = 'about';
   protected static $contactURL = 'contact';
-  private static $editOnlineURL = 'editonline';
+  private static $editGoogleDriveURL = 'editgoogledrive';
   private static $editLocalURL = 'editlocal';
   protected static $attributionURL = 'attribution';
   private static $editDropboxURL = 'editdropbox';
@@ -25,7 +25,7 @@ class LayoutView {
     $this -> indexView = $views['index'];
 		$this -> aboutView = $views['about'];
 		$this -> contactView = $views['contact'];
-    $this -> editOnlineView = $views['editonline'];
+    $this -> editGoogleDriveView = $views['editgoogledrive'];
     $this -> editLocalView = $views['editlocal'];
     $this -> attributionView = $views['attribution'];
     $this -> editDropboxView = $views['editdropbox'];
@@ -158,15 +158,15 @@ class LayoutView {
         ';
         break;
 
-      case self::$editOnlineURL:
+      case self::$editGoogleDriveURL:
         $this -> pageTitle = 'Edit Online';
-        $this -> pageContent = $this -> editOnlineView -> response();
+        $this -> pageContent = $this -> editGoogleDriveView -> response();
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/libs/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
-          <script src="./assets/js/DriveClass.js"></script>
+          <script src="./assets/js/GoogleDriveHandler.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/SignEvent.js"></script>
           <script>
@@ -188,7 +188,7 @@ class LayoutView {
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
-          <script src="./assets/js/LocalClass.js"></script>
+          <script src="./assets/js/LocalHandler.js"></script>
           <script src="./assets/js/Message.js"></script>
         ';
         break;

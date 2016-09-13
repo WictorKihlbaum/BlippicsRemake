@@ -25,7 +25,7 @@ require_once('view/LayoutView.php');
 require_once('view/IndexView.php');
 require_once('view/AboutView.php');
 require_once('view/ContactView.php');
-require_once('view/EditOnlineView.php');
+require_once('view/EditGoogleDriveView.php');
 require_once('view/EditLocalView.php');
 require_once('view/AttributionView.php');
 require_once('view/EditDropboxView.php');
@@ -46,7 +46,7 @@ $views = [
 	'index' => new IndexView(),
 	'about' => new AboutView(),
 	'contact' => new ContactView(),
-	'editonline' => new EditOnlineView(),
+	'editgoogledrive' => new EditGoogleDriveView(),
 	'editlocal' => new EditLocalView(),
 	'attribution' => new AttributionView(),
 	'editdropbox' => new EditDropboxView(),

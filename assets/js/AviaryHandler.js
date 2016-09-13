@@ -25,12 +25,12 @@ const AviaryHandler = {
         const location = window.location.href;
         // Add action buttons for new image.
 				switch (true) {
-					case location.includes('editonline'):
-  				  DriveClass.addActionButtons(imageID, newURL);
+					case location.includes('editgoogledrive'):
+  				  GoogleDriveHandler.addActionButtons(imageID, newURL);
 					  break;
 
 					case location.includes('editlocal'):
-					  LocalClass.addDownloadButton(newURL);
+					  LocalHandler.addDownloadButton(newURL);
 					  break;
 
 					case location.includes('editdropbox'):

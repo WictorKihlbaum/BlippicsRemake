@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 class IndexView {
 
-	private static $editOnlineURL = 'editonline';
+	private static $editGoogleDriveURL = 'editgoogledrive';
   private static $editLocalURL = 'editlocal';
 	private static $editDropboxURL = 'editdropbox';
 	private static $editOneDriveURL = 'editonedrive';
@@ -19,7 +19,7 @@ class IndexView {
 			<div class="mdl-grid" id="index-grid">
 			  <div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
 			  	<span class="hint--bottom" aria-label="Edit image on Google Drive">
-					  <a href="?'.self::$editOnlineURL.'" class="hvr-bob">
+					  <a href="?'.self::$editGoogleDriveURL.'" class="hvr-bob">
 					    <img src="./assets/img/drive_logo.png" width="47%"
 					         alt="Edit image on Google Drive"
 					         id="drive-logo-button" />

@@ -1,7 +1,7 @@
 /* This JS-file handles events connected to 'editlocal.html' */
 'use strict';
 
-const LocalClass = {
+const LocalHandler = {
 
 	defaultImagePath: 'assets/img/placeholder_image.png',
 
@@ -15,7 +15,7 @@ const LocalClass = {
 
 	init: () => {
 		HelpDialog.setupDialog();
-		LocalClass.toggleProgressBar();
+		LocalHandler.toggleProgressBar();
 	},
 
 	toggleProgressBar: () => {
@@ -29,37 +29,37 @@ const LocalClass = {
 		const preview = $('#editable-image');
 		const selectedFile = fileList[0];
 
-		if (LocalClass.isValidImageFormat(selectedFile)) {
+		if (LocalHandler.isValidImageFormat(selectedFile)) {
 			// In case an earlier user message has been shown.
 			Message.remove();
 
 			const reader = new FileReader();
 			reader.onload = () => {
 				preview.attr('src', reader.result);
-				LocalClass.addEditButton();
+				LocalHandler.addEditButton();
 				$('#choose-image-label').html('Choose another image');
 				setTimeout(() => // Dev purpose.
-					LocalClass.toggleProgressBar(), 3000);
+					LocalHandler.toggleProgressBar(), 3000);
 			};
 
 			reader.onerror = error => {
 				console.log('Error: ' + error); // Dev purpose.
-				Message.show(LocalClass.loadingImageError, 'user-message-error');
+				Message.show(LocalHandler.loadingImageError, 'user-message-error');
 			}
 
 			reader.onprogress = () =>
-				LocalClass.toggleProgressBar();
+				LocalHandler.toggleProgressBar();
 
 			if (selectedFile)
 				reader.readAsDataURL(selectedFile);
 			else {
-				preview.attr('src', LocalClass.defaultImagePath);
-				LocalClass.removeActionButtons();
+				preview.attr('src', LocalHandler.defaultImagePath);
+				LocalHandler.removeActionButtons();
 			}
 		} else {
-			Message.show(LocalClass.invalidImageError, 'user-message-error');
-			preview.attr('src', LocalClass.defaultImagePath);
-			LocalClass.removeActionButtons();
+			Message.show(LocalHandler.invalidImageError, 'user-message-error');
+			preview.attr('src', LocalHandler.defaultImagePath);
+			LocalHandler.removeActionButtons();
 		}
 	},
 
@@ -110,4 +110,4 @@ const LocalClass = {
 
 };
 
-window.onload = LocalClass.init();
+window.onload = LocalHandler.init();

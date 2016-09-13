@@ -14,7 +14,7 @@ const OneDriveHandler = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "download",
       advanced: {
-        redirectUri: "http://localhost:8888/" // TODO: Change if production.
+        redirectUri: "http://localhost:8888/" // TODO: Change in production.
       },
       success: files => {
         const url = files.value[0]['@microsoft.graph.downloadUrl'];

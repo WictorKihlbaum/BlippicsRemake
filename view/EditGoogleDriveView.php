@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-class EditOnlineView {
+class EditGoogleDriveView {
 
 	private static $indexURL = '';
 
@@ -125,7 +125,7 @@ class EditOnlineView {
 
 				<div class="pagination-page"></div>
 					<div class="mdl-grid" id="image-list">
-						<!-- Images will be rendered from "DriveClass.js" -->
+						<!-- Images will be rendered from "GoogleDriveHandler.js" -->
 					</div>
 				<div class="pagination-page"></div>
 
@@ -151,7 +151,7 @@ class EditOnlineView {
 					</h4>
           <div class="mdl-dialog__content">
             <span id="confirmation-text">
-              <!-- Text is added from DriveClass.js -->
+              <!-- Text is added from GoogleDriveHandler.js -->
             </span>
           </div>
           <div class="mdl-dialog__actions">

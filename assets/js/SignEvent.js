@@ -16,7 +16,7 @@ const SignEvent = {
 		//SignEvent.signOutButton.show();
 		// For Google Drive (Edit online) view.
 		//if (window.location.href.match('editonline'))
-		  DriveClass.checkAuth();
+		  GoogleDriveHandler.checkAuth();
 	},
 
 	signOut: () => {

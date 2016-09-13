@@ -109,7 +109,7 @@ class EditLocalView {
 							</span>
 	            <input type="file"
 	                   id="input"
-	                   onchange="LocalClass.handleFiles(this.files)"
+	                   onchange="LocalHandler.handleFiles(this.files)"
 	                   multiple accept="image/png, image/jpg, image/jpeg" />
 	          </label>
 	        </div>
@@ -124,7 +124,7 @@ class EditLocalView {
         <div id="progressbar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 
 				<p>
-					<!-- Edit (added from "LocalClass.js") -->
+					<!-- Edit (added from "LocalHandler.js") -->
 					<span id="edit-button-field"></span>
 				</p>
 
