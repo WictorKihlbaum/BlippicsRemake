@@ -124,10 +124,8 @@ const DriveClass = {
 			DriveClass.imageArray = images;
 
 			if (images && images.length > 0) {
-				for (let image of images) {
-					//console.log(image);
-					DriveClass.renderImage(image);
-				}
+				for (let image of images)
+				  DriveClass.renderImage(image);
 			} else $('#top-text').html(DriveClass.noValidImages);
 
 			$('#loading-animation').hide();
@@ -163,7 +161,7 @@ const DriveClass = {
 						 aria-label="Edit image"
 					   class="material-icons"
 						 id="edit-button"
-					   onclick="DriveClass.getImageFromDrive(\'${image.id}\')">
+					   onclick="DriveClass.getImageFromDrive('${image.id}')">
 					  edit
 					</i>
 				  <a href="${image.webContentLink}" download>

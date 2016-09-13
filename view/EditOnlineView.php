@@ -103,7 +103,7 @@ class EditOnlineView {
 
 	      <div class="g-signin2 mdl-layout--large-screen-only"
 	           data-width="960px"
-	           data-height="100"
+	           data-height="100px"
 	           data-longtitle="true"
 	           data-theme="dark"
 	           data-onsuccess="onSignIn">

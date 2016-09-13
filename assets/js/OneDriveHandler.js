@@ -2,19 +2,26 @@
 
 const OneDriveHandler = {
 
-  imageURL: null,
+  uploadMessage: 'Image was successfully uploaded to your OneDrive!',
 
+
+  init: () => {
+    $('#progress-container').hide();
+  },
 
   launchOneDrivePicker: () => {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "download",
       advanced: {
-        redirectUri: "http://localhost:8888"
+        redirectUri: "http://localhost:8888/" // TODO: Change if production.
       },
       success: files => {
         const url = files.value[0]['@microsoft.graph.downloadUrl'];
-        OneDriveHandler.getImageFromOneDrive(url);
+        $('#onedrive-image').attr('src', url);
+        $('#onedrive-choose-button').html('Choose another OneDrive image');
+        OneDriveHandler.removeActionButtons();
+        OneDriveHandler.addEditButton(url);
       },
       error: errorMessage => {
         console.log(errorMessage);
@@ -23,57 +30,46 @@ const OneDriveHandler = {
     OneDrive.open(odOptions);
   },
 
-  addSaverButton: () => {
+  addSaverButton: url => {
     $('#saver-container').html(`
-      <button onclick="OneDriveHandler.launchOneDriveSaver()">
+      <button onclick="OneDriveHandler.launchOneDriveSaver('${url}')">
         Save image to OneDrive
       </button>
     `);
   },
 
-  launchOneDriveSaver: () => {
+  launchOneDriveSaver: url => {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "save",
-      sourceUri: OneDriveHandler.imageURL,
-      fileName: "testImage.png",
+      sourceUri: url,
+      fileName: "testImage.png", // TODO: Change. Maybe let user choose?
       openInNewWindow: true,
       advanced: {},
-      success: function(files) {
-        console.log(files);
+      success: files => {
+        OneDriveHandler.showSuccessMessage(OneDriveHandler.uploadMessage);
+        $('#progress-container').hide();
       },
-      progress: function(p) {
-        console.log(p);
+      progress: p => {
+        $('#progress-container').show();
       },
-      cancel: function() {
-        console.log('User canceled');
+      cancel: () => {
+        // Empty.
       },
-      error: function(errorMessage) {
+      error: errorMessage => {
         Message.show(`An error occurred! ${errorMessage}`);
       }
     };
     OneDrive.save(odOptions);
   },
 
-  getImageFromOneDrive: url => {
-		const xhr = new XMLHttpRequest();
-    xhr.onloadend = () => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        $('#onedrive-image').attr('src', reader.result);
-        $('#onedrive-choose-button').html('Choose another OneDrive image');
-        OneDriveHandler.removeActionButtons();
-        OneDriveHandler.addEditButton();
-      }
-      reader.readAsDataURL(xhr.response);
-    };
-
-		xhr.onerror = error =>
-			Message.show(error, 'user-message-error');
-
-		xhr.open('GET', url);
-		xhr.responseType = 'blob';
-		xhr.send();
+  showSuccessMessage: message => {
+		const snackbarContainer = $('#success-toast')[0];
+		const data = {
+			message: message,
+			timeout: 10000
+		};
+		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},
 
   removeActionButtons: () => {
@@ -81,11 +77,11 @@ const OneDriveHandler = {
     $('#saver-container').html('');
   },
 
-  addEditButton: () => {
+  addEditButton: url => {
     $('#edit-button-field').html(`
       <a href="#"
          id="edit-button"
-         onclick="AviaryHandler.launchEditor('onedrive-image')"
+         onclick="AviaryHandler.launchEditor('onedrive-image', '${url}')"
          class="mdl-button
                 mdl-button--raised
                 mdl-js-ripple-effect
@@ -116,3 +112,5 @@ const OneDriveHandler = {
 	}
 
 };
+
+window.onload = OneDriveHandler.init();

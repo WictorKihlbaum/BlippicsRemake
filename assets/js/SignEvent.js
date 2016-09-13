@@ -13,9 +13,9 @@ const SignEvent = {
 
 	signIn: googleUser => {
 		const profile = googleUser.getBasicProfile();
-		SignEvent.signOutButton.show();
+		//SignEvent.signOutButton.show();
 		// For Google Drive (Edit online) view.
-		if (window.location.href.match('editonline'))
+		//if (window.location.href.match('editonline'))
 		  DriveClass.checkAuth();
 	},
 
@@ -28,4 +28,4 @@ const SignEvent = {
 
 };
 
-window.onload = SignEvent.init();
+//window.onload = SignEvent.init();

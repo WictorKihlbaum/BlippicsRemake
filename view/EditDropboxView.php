@@ -21,7 +21,7 @@ class EditDropboxView {
 			<!-- Response messages will be shown here. -->
 			<span id="user-message-field"></span>
 
-			<div id="container">
+			<div id="container-div">
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
 								onclick="Dropbox.choose(DropboxHandler.getButtonOptions())">
 					<i class="material-icons">
@@ -49,6 +49,16 @@ class EditDropboxView {
 				<p>
 				  <span id="saver-container"></span>
 				</p>
+
+				<div id="progress-container">
+				  <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+					</div>
+				</div>
+
+				<div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
+					<div class="mdl-snackbar__text"></div>
+					<button class="mdl-snackbar__action" type="button"></button>
+				</div>
 
 			</div>
     ';

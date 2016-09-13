@@ -2,31 +2,21 @@
 
 const DropboxHandler = {
 
-  init: () => {
-    //DropboxHandler.addChooserButton();
-    //DropboxHandler.addSaverButton();
-  },
+  uploadMessage: 'Image was successfully uploaded to your Dropbox!',
 
-  addChooserButton: () => {
-    const options = DropboxHandler.getButtonOptions();
-    $('#container').append(`
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              onclick="Dropbox.choose(${DropboxHandler.getButtonOptions})">
-        <i class="material-icons">
-          photo
-        </i>
-        Choose a Dropbox image
-      </button>
-    `);
+
+  init: () => {
+    $('#progress-container').hide();
   },
 
   addSaverButton: url => {
     const options = {
       success: () => {
-          alert("Success! Files saved to your Dropbox.");
+        $('#progress-container').hide();
+        DropboxHandler.showSuccessMessage(DropboxHandler.uploadMessage);
       },
       progress: progress => {
-        console.log(progress);
+        $('#progress-container').show();
       },
       error: errorMessage => {
         Message.show(errorMessage, 'user-message-error');
@@ -40,7 +30,10 @@ const DropboxHandler = {
     return {
       success: image => {
         const url = image[0].link;
-        DropboxHandler.getImageFromDropbox(url);
+        $('#dropbox-image').attr('src', url);
+        $('#dropbox-choose-button').html('Choose another Dropbox image');
+        DropboxHandler.removeActionButtons();
+        DropboxHandler.addEditButton(url);
       },
       linkType: "direct",
       multiselect: false,
@@ -48,25 +41,13 @@ const DropboxHandler = {
     };
   },
 
-  getImageFromDropbox: url => {
-		const xhr = new XMLHttpRequest();
-    xhr.onloadend = () => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        $('#dropbox-image').attr('src', reader.result);
-        $('#dropbox-choose-button').html('Choose another Dropbox image');
-        DropboxHandler.removeActionButtons();
-        DropboxHandler.addEditButton();
-      }
-      reader.readAsDataURL(xhr.response);
-    };
-
-		xhr.onerror = error =>
-			Message.show(error, 'user-message-error');
-
-		xhr.open('GET', url);
-		xhr.responseType = 'blob';
-		xhr.send();
+  showSuccessMessage: message => {
+		const snackbarContainer = $('#success-toast')[0];
+		const data = {
+			message: message,
+			timeout: 10000
+		};
+		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},
 
   removeActionButtons: () => {
@@ -74,11 +55,11 @@ const DropboxHandler = {
     $('#saver-container').html('');
   },
 
-  addEditButton: () => {
+  addEditButton: url => {
     $('#edit-button-field').html(`
       <a href="#"
          id="edit-button"
-         onclick="AviaryHandler.launchEditor('dropbox-image')"
+         onclick="AviaryHandler.launchEditor('dropbox-image', '${url}')"
          class="mdl-button
                 mdl-button--raised
                 mdl-js-ripple-effect
@@ -110,4 +91,4 @@ const DropboxHandler = {
 
 };
 
-//window.onload = DropboxHandler.init();
+window.onload = DropboxHandler.init();

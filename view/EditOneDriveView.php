@@ -51,6 +51,16 @@ class EditOneDriveView {
 				  <span id="saver-container"></span>
 				</p>
 
+				<div id="progress-container">
+				  <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+					</div>
+				</div>
+
+				<div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
+					<div class="mdl-snackbar__text"></div>
+					<button class="mdl-snackbar__action" type="button"></button>
+				</div>
+
 			</div>
     ';
   }

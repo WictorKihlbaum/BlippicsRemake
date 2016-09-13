@@ -26,8 +26,6 @@ const AviaryHandler = {
         // Add action buttons for new image.
 				switch (true) {
 					case location.includes('editonline'):
-					  // Be able to click "Edit" again and new image will be shown.
-					  $('#edit-button').attr('onclick', 'AviaryHandler.launchEditor(DriveClass.lastEditedImageID)');
   				  DriveClass.addActionButtons(imageID, newURL);
 					  break;
 
@@ -42,8 +40,7 @@ const AviaryHandler = {
 
 					case location.includes('editonedrive'):
 					  OneDriveHandler.addDownloadButton(newURL);
-						OneDriveHandler.imageURL = newURL;
-				 	  OneDriveHandler.addSaverButton();
+				 	  OneDriveHandler.addSaverButton(newURL);
 					  break;
 
 					default: break;

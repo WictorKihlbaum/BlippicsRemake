@@ -4,6 +4,10 @@ declare(strict_types = 1);
 
 class LayoutView {
 
+  // TODO: Redirect user to complete URL ('https' should always be shown).
+  //protected static $baseURL = 'https://www.blippics.com/';
+  protected static $baseURL = 'http://localhost:8888/';
+
   protected static $indexURL = '';
   protected static $aboutURL = 'about';
   protected static $contactURL = 'contact';
@@ -55,7 +59,6 @@ class LayoutView {
           <link rel="stylesheet" href="./assets/css/libs/hover.css" />
           <link rel="stylesheet" href="./assets/css/libs/hint.min.css" />
           <link rel="stylesheet" href="./assets/css/libs/animate.min.css" />
-          <script src="https://npmcdn.com/dropbox/dist/Dropbox-sdk.min.js"></script>
           '. $this -> getPageSpecificStyles() .'
         </head>
         <body>
@@ -109,16 +112,10 @@ class LayoutView {
           <script src="./assets/js/libs/jquery-3.1.0.min.js"></script>
           <script src="//apis.google.com/js/platform.js"></script>
           <script src="//apis.google.com/js/client.js"></script>
-          <script src="./assets/js/SignEvent.js"></script>
           <script src="./assets/js/header.js"></script>
           <script src="//fast.eager.io/cluq6Cumbb.js"></script>
           <script src="https://js.live.net/v7.0/OneDrive.js"></script>
           '. $this -> getPageSpecificScripts() .'
-          <script>
-            onSignIn: googleUser => {
-              SignEvent.signIn(googleUser);
-            }
-          </script>
 
         </body>
       </html>
@@ -171,6 +168,12 @@ class LayoutView {
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/DriveClass.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
+          <script src="./assets/js/SignEvent.js"></script>
+          <script>
+            function onSignIn(googleUser) {
+              SignEvent.signIn(googleUser);
+            }
+          </script>
         ';
         $this -> pageSpecificStyles = '
           <link rel="stylesheet" href="./assets/css/libs/loading.css" />
@@ -200,6 +203,7 @@ class LayoutView {
         $this -> pageContent = $this -> editDropboxView -> response();
         $this -> pageSpecificScripts = '
           <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="c8hfkxzclokzwl0"></script>
+          <!--<script src="https://npmcdn.com/dropbox/dist/Dropbox-sdk.min.js"></script>-->
           <script src="./assets/js/DropboxHandler.js"></script>
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
