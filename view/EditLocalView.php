@@ -98,40 +98,44 @@ class EditLocalView {
 					</div>
 				</dialog>
 
-	    	<div id="image-container">
-	        <div>
-	          <label for="input" class="label-class mdl-button mdl-button--raised mdl-button--primary">
-	            <i class="material-icons">
-							  image
+				<div class="mdl-grid" id="image-container">
+          <div class="mdl-cell mdl-cell--10-col">
+					  <div id="dropzone">
+						  <img src="./assets/img/placeholder_image.png"
+								   alt="Preview of loaded image"
+								   id="editable-image" />
+					  </div>
+					</div>
+          <div class="mdl-cell mdl-cell--1-col">
+						<label for="input"
+						       aria-label="Choose image"
+									 title="Choose image"
+						       class="label-class
+									        mdl-button
+													mdl-js-button
+													mdl-button--fab
+													mdl-button--primary">
+							<i class="material-icons">
+								image
 							</i>
-	            <span id="choose-image-label">
-							  Choose image
-							</span>
-	            <input type="file"
-	                   id="input"
-	                   onchange="LocalHandler.handleFiles(this.files)"
-	                   multiple accept="image/png, image/jpg, image/jpeg" />
-	          </label>
-	        </div>
-	        <div id="dropzone">
-	          <img src="./assets/img/placeholder_image.png"
-							   alt="Preview of loaded image"
-							   id="editable-image" />
-          </div>
+							<input type="file"
+										 id="input"
+										 onchange="LocalHandler.handleFiles(this.files)"
+										 multiple accept="image/png, image/jpg, image/jpeg" />
+						</label>
+						<p>
+							<!-- Edit (added from "LocalHandler.js") -->
+							<span id="edit-button-field"></span>
+						</p>
+						<p>
+							<!-- Download (added from "AviaryHandler.js") -->
+		        	<span id="download-button-field"></span>
+		        </p>
+					</div>
         </div>
 
         <!-- Progressbar will be shown while image is being loaded. -->
         <div id="progressbar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-
-				<p>
-					<!-- Edit (added from "LocalHandler.js") -->
-					<span id="edit-button-field"></span>
-				</p>
-
-				<p>
-					<!-- Download (added from "AviaryHandler.js") -->
-        	<span id="download-button-field"></span>
-        </p>
 
 				<p>
 					<!-- Go back -->

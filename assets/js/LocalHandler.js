@@ -22,7 +22,8 @@ const LocalHandler = {
 		const progressbar = $('#progressbar');
 		if (progressbar.is(':visible'))
 			progressbar.hide();
-		else progressbar.show();
+		else
+		  progressbar.show();
 	},
 
 	handleFiles: fileList => {
@@ -37,9 +38,8 @@ const LocalHandler = {
 			reader.onload = () => {
 				preview.attr('src', reader.result);
 				LocalHandler.addEditButton();
-				$('#choose-image-label').html('Choose another image');
 				setTimeout(() => // Dev purpose.
-					LocalHandler.toggleProgressBar(), 3000);
+					LocalHandler.toggleProgressBar(), 1500);
 			};
 
 			reader.onerror = error => {
@@ -76,17 +76,17 @@ const LocalHandler = {
 	addEditButton: () => {
 		$('#edit-button-field').html(`
 			<a href="#"
-			   id="edit-button"
 			   onclick="AviaryHandler.launchEditor('editable-image')"
+				 aria-label="Edit image"
+				 title="Edit image"
 			   class="mdl-button
-					      mdl-js-button
-					      mdl-button--raised
-					      mdl-js-ripple-effect
-					      mdl-button--primary">
+				        mdl-js-button
+				        mdl-button--fab
+				        mdl-button--primary
+								animated bounceIn">
 			  <i class="material-icons">
 				  edit
 				</i>
-				Edit image
 			</a>
 		`);
 	},
@@ -95,15 +95,16 @@ const LocalHandler = {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"
+				 aria-label="Download image"
+				 title="Download image"
 			   class="mdl-button
-				   	    mdl-js-button
-				   	    mdl-button--raised
-				        mdl-js-ripple-effect
-				        mdl-button--primary">
+				        mdl-js-button
+				        mdl-button--fab
+				        mdl-button--primary
+								animated bounceIn">
 			  <i class="material-icons">
 				  file_download
 				</i>
-		    Download image
 			</a>
 		`);
 	}

@@ -2,6 +2,8 @@
 
 const OneDriveHandler = {
 
+  // TODO: Validate file extension for choosen file.
+
   uploadMessage: 'Image was successfully uploaded to your OneDrive!',
 
 
@@ -17,6 +19,7 @@ const OneDriveHandler = {
         redirectUri: "http://localhost:8888/" // TODO: Change in production.
       },
       success: files => {
+        console.log(files.value[0]);
         const url = files.value[0]['@microsoft.graph.downloadUrl'];
         $('#onedrive-image').attr('src', url);
         $('#onedrive-choose-button').html('Choose another OneDrive image');
@@ -24,7 +27,7 @@ const OneDriveHandler = {
         OneDriveHandler.addEditButton(url);
       },
       error: errorMessage => {
-        console.log(errorMessage);
+        Message.show(errorMessage, 'user-message-error');
       }
     };
     OneDrive.open(odOptions);
@@ -43,7 +46,7 @@ const OneDriveHandler = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "save",
       sourceUri: url,
-      fileName: "testImage.png", // TODO: Change. Maybe let user choose?
+      fileName: "", // TODO: Change. Maybe let user choose?
       openInNewWindow: true,
       advanced: {},
       success: files => {
@@ -57,7 +60,7 @@ const OneDriveHandler = {
         // Empty.
       },
       error: errorMessage => {
-        Message.show(`An error occurred! ${errorMessage}`);
+        Message.show(errorMessage, 'user-message-error');
       }
     };
     OneDrive.save(odOptions);
