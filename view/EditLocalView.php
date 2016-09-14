@@ -17,15 +17,6 @@ class EditLocalView {
 
       <div id="editlocal-page-container">
 
-				<button type="button"
-						    id="show-dialog"
-						    class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-				  <i class="material-icons">
-					  help_outline
-					</i>
-					Show Help
-				</button>
-
 	    	<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
 	    	  Edit image on computer
 	    	</h1>
@@ -99,7 +90,7 @@ class EditLocalView {
 				</dialog>
 
 				<div class="mdl-grid" id="image-container">
-          <div class="mdl-cell mdl-cell--10-col">
+          <div class="mdl-cell mdl-cell--5-col mdl-cell--3-offset">
 					  <div id="dropzone">
 						  <img src="./assets/img/placeholder_image.png"
 								   alt="Preview of loaded image"
@@ -107,30 +98,43 @@ class EditLocalView {
 					  </div>
 					</div>
           <div class="mdl-cell mdl-cell--1-col">
-						<label for="input"
-						       aria-label="Choose image"
-									 title="Choose image"
-						       class="label-class
-									        mdl-button
-													mdl-js-button
-													mdl-button--fab
-													mdl-button--primary">
-							<i class="material-icons">
-								image
-							</i>
-							<input type="file"
-										 id="input"
-										 onchange="LocalHandler.handleFiles(this.files)"
-										 multiple accept="image/png, image/jpg, image/jpeg" />
-						</label>
-						<p>
+
+							<button type="button"
+											id="show-dialog-local"
+											aria-label="Show help"
+											title="Show help"
+											class="mdl-button
+														mdl-js-button
+														mdl-button--fab
+														mdl-button--colored">
+								<i class="material-icons">
+									help_outline
+								</i>
+							</button>
+
+							<label for="input"
+							       aria-label="Choose image"
+										 title="Choose image"
+							       class="label-class
+										        mdl-button
+														mdl-js-button
+														mdl-button--fab
+														mdl-button--primary">
+								<i class="material-icons">
+									image
+								</i>
+								<input type="file"
+											 id="input"
+											 onchange="LocalHandler.handleFiles(this.files)"
+											 multiple accept="image/png, image/jpg, image/jpeg" />
+							</label>
+
 							<!-- Edit (added from "LocalHandler.js") -->
 							<span id="edit-button-field"></span>
-						</p>
-						<p>
+
 							<!-- Download (added from "AviaryHandler.js") -->
 		        	<span id="download-button-field"></span>
-		        </p>
+
 					</div>
         </div>
 

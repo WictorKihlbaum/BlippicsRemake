@@ -135,11 +135,12 @@ h1 {
 #image-container {
   	margin: 20px 0;
 }
-#image-container label {
-    margin-bottom: 15px;
-}
 #image-container .mdl-button {
 	box-shadow: none !important;
+	margin-bottom: 8px;
+}
+#image-container .mdl-button:first-child {
+	color: #2196F3;
 }
 
 #dropzone {

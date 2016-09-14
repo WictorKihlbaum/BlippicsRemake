@@ -4,9 +4,6 @@
 const LocalHandler = {
 
 	defaultImagePath: 'assets/img/placeholder_image.png',
-
-	// Error messages.
-	loadingImageError: 'An error occurred while loading the image! Please try again.',
 	invalidImageError: `
 		File is not valid! The file has to be an image
 		in format Png or Jpg/Jpeg. Please try again.
@@ -15,15 +12,7 @@ const LocalHandler = {
 
 	init: () => {
 		HelpDialog.setupDialog();
-		LocalHandler.toggleProgressBar();
-	},
-
-	toggleProgressBar: () => {
-		const progressbar = $('#progressbar');
-		if (progressbar.is(':visible'))
-			progressbar.hide();
-		else
-		  progressbar.show();
+		$('#progressbar').hide();
 	},
 
 	handleFiles: fileList => {
@@ -33,22 +22,22 @@ const LocalHandler = {
 		if (LocalHandler.isValidImageFormat(selectedFile)) {
 			// In case an earlier user message has been shown.
 			Message.remove();
-
+			LocalHandler.removeActionButtons();
 			const reader = new FileReader();
+
 			reader.onload = () => {
+				$('#progressbar').hide();
 				preview.attr('src', reader.result);
-				LocalHandler.addEditButton();
-				setTimeout(() => // Dev purpose.
-					LocalHandler.toggleProgressBar(), 1500);
+				LocalHandler.addEditButton(reader.result);
+			};
+
+			reader.onprogress = () => {
+				$('#progressbar').show();
 			};
 
 			reader.onerror = error => {
-				console.log('Error: ' + error); // Dev purpose.
-				Message.show(LocalHandler.loadingImageError, 'user-message-error');
-			}
-
-			reader.onprogress = () =>
-				LocalHandler.toggleProgressBar();
+				Message.show(error, 'user-message-error');
+			};
 
 			if (selectedFile)
 				reader.readAsDataURL(selectedFile);
@@ -63,6 +52,53 @@ const LocalHandler = {
 		}
 	},
 
+	updateImageURI: url => {
+		LocalHandler.getImageFromAmazon(url)
+		  .then(blob => {
+				LocalHandler.convertToDataURI(blob)
+				  .then(imageDataURI => {
+						LocalHandler.addEditButton(imageDataURI);
+					});
+			});
+	},
+
+	/**
+	 * Aviary photo editor saves image temporarily on Amazon server.
+	 */
+	getImageFromAmazon: url => {
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.onloadend = () => {
+				resolve(xhr.response);
+			};
+			xhr.onprogress = () => {
+				// Disable button while image dataURI is being updated.
+				$('#edit-button').attr('disabled', true);
+			};
+			xhr.onerror = error => {
+				reject(error);
+				Message.show(error, 'user-message-error');
+			};
+			xhr.open('GET', url);
+			xhr.responseType = 'blob';
+			xhr.send();
+		});
+	},
+
+	convertToDataURI: blob => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = () => {
+				resolve(reader.result);
+			};
+			reader.onerror = () => {
+				reject(reader.error);
+				Message.show(reader.error, 'user-message-error');
+			};
+			reader.readAsDataURL(blob);
+		});
+	},
+
 	removeActionButtons: () => {
 		$('#edit-button').remove();
 		$('#download-button').remove();
@@ -73,10 +109,11 @@ const LocalHandler = {
 		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
 	},
 
-	addEditButton: () => {
+	addEditButton: imageDataURI => {
 		$('#edit-button-field').html(`
 			<a href="#"
-			   onclick="AviaryHandler.launchEditor('editable-image')"
+			   id="edit-button"
+			   onclick="AviaryHandler.launchEditor('editable-image', '${imageDataURI}')"
 				 aria-label="Edit image"
 				 title="Edit image"
 			   class="mdl-button

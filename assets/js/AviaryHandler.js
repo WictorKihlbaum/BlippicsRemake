@@ -3,7 +3,7 @@
 const AviaryHandler = {
 
 	feather: {},
-
+	newURL: null,
 
 	init: () => {
     AviaryHandler.instantiateFeather();
@@ -18,6 +18,7 @@ const AviaryHandler = {
 			appendTo: '',
 			displayImageSize: true,
 			showWaitIndicator: true,
+			closeDelay: 500,
 
 			onSave: (imageID, newURL) => {
         // Show the new edited image.
@@ -30,6 +31,8 @@ const AviaryHandler = {
 					  break;
 
 					case location.includes('editlocal'):
+					  //LocalHandler.updateImageURI(newURL);
+					  AviaryHandler.newURL = newURL;
 					  LocalHandler.addDownloadButton(newURL);
 					  break;
 
@@ -45,6 +48,12 @@ const AviaryHandler = {
 
 					default: break;
 				}
+			},
+
+			onClose: isDirty => {
+				const location = window.location.href;
+				if (location.includes('editlocal'))
+				  LocalHandler.updateImageURI(AviaryHandler.newURL);
 			},
 
 			onError: errorObj => {
