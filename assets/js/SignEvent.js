@@ -5,21 +5,21 @@ const SignEvent = {
 	signOutButton: null,
 
 
-	init: () => {
-		SignEvent.signOutButton = $('#signout-button');
-		SignEvent.signOutButton.hide();
-		SignEvent.signOutButton.click(SignEvent.signOut);
+	init: function() {
+		this.signOutButton = $('#signout-button');
+		this.signOutButton.hide();
+		this.signOutButton.click(this.signOut);
 	},
 
-	signIn: googleUser => {
+	signIn: function(googleUser) {
 		const profile = googleUser.getBasicProfile();
-		//SignEvent.signOutButton.show();
+		//this.signOutButton.show();
 		// For Google Drive (Edit online) view.
 		//if (window.location.href.match('editonline'))
 		  GoogleDriveHandler.checkAuth();
 	},
 
-	signOut: () => {
+	signOut: function() {
 		const auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
 		auth2.disconnect();

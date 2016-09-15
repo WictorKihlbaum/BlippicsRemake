@@ -3,15 +3,16 @@
 const OneDriveHandler = {
 
   // TODO: Validate file extension for choosen file.
+  // Microsoft doesn't give this functionality. Keep updated on this!
 
   uploadMessage: 'Image was successfully uploaded to your OneDrive!',
 
 
-  init: () => {
+  init: function() {
     $('#progress-container').hide();
   },
 
-  launchOneDrivePicker: () => {
+  launchOneDrivePicker: function() {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "download",
@@ -19,12 +20,10 @@ const OneDriveHandler = {
         redirectUri: "http://localhost:8888/" // TODO: Change in production.
       },
       success: files => {
-        console.log(files.value[0]);
         const url = files.value[0]['@microsoft.graph.downloadUrl'];
         $('#onedrive-image').attr('src', url);
-        $('#onedrive-choose-button').html('Choose another OneDrive image');
-        OneDriveHandler.removeActionButtons();
-        OneDriveHandler.addEditButton(url);
+        this.removeActionButtons();
+        this.addEditButton(url);
       },
       error: errorMessage => {
         Message.show(errorMessage, 'user-message-error');
@@ -33,7 +32,7 @@ const OneDriveHandler = {
     OneDrive.open(odOptions);
   },
 
-  addSaverButton: url => {
+  addSaverButton: function(url) {
     $('#saver-container').html(`
       <button onclick="OneDriveHandler.launchOneDriveSaver('${url}')">
         Save image to OneDrive
@@ -41,7 +40,7 @@ const OneDriveHandler = {
     `);
   },
 
-  launchOneDriveSaver: url => {
+  launchOneDriveSaver: function(url) {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "save",
@@ -50,14 +49,11 @@ const OneDriveHandler = {
       openInNewWindow: true,
       advanced: {},
       success: files => {
-        OneDriveHandler.showSuccessMessage(OneDriveHandler.uploadMessage);
+        this.showSuccessMessage(this.uploadMessage);
         $('#progress-container').hide();
       },
       progress: p => {
         $('#progress-container').show();
-      },
-      cancel: () => {
-        // Empty.
       },
       error: errorMessage => {
         Message.show(errorMessage, 'user-message-error');
@@ -66,7 +62,7 @@ const OneDriveHandler = {
     OneDrive.save(odOptions);
   },
 
-  showSuccessMessage: message => {
+  showSuccessMessage: function(message) {
 		const snackbarContainer = $('#success-toast')[0];
 		const data = {
 			message: message,
@@ -75,12 +71,17 @@ const OneDriveHandler = {
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},
 
-  removeActionButtons: () => {
+  addActionButtons: function(url) {
+    this.addEditButton(url);
+		this.addDownloadButton(url);
+	},
+
+  removeActionButtons: function() {
     $('#download-button').remove();
     $('#saver-container').html('');
   },
 
-  addEditButton: url => {
+  addEditButton: function(url) {
     $('#edit-button-field').html(`
       <a href="#"
          id="edit-button"
@@ -97,7 +98,7 @@ const OneDriveHandler = {
     `);
 	},
 
-  addDownloadButton: url => {
+  addDownloadButton: function(url) {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"

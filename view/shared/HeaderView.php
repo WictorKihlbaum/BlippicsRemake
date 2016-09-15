@@ -64,8 +64,8 @@ class HeaderView extends LayoutView {
       </div>
       <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         <h1 class="mdl-typography--display-4
-                   mdl-typography--display-4-color-white"
-                   id="header-topic">
+                   mdl-typography--display-4-color-white
+									 animated fadeIn">
           Blippics
         </h1>
       </div>

@@ -5,23 +5,23 @@ const Message = {
 	field: null,
 
 
-	init: () => {
-		Message.field = $('#user-message-field');
+	init: function() {
+		this.field = $('#user-message-field');
 	},
 
-	show: (message, id) => {
-		Message.field.html(`
+	show: function(message, id) {
+		this.field.html(`
       <div id="${id}" class="user-message animated flash">
-        ${message} ${Message.getCloseButton()}
+        ${message} ${this.getCloseButton()}
 			</div>
 		`);
 	},
 
-	remove: () => {
-	  Message.field.html('');
+	remove: function() {
+	  this.field.html('');
 	},
 
-	getCloseButton: () => {
+	getCloseButton: function() {
 		return `
       <i class="material-icons"
 			   id="close-message-button"

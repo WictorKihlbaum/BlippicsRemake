@@ -112,7 +112,6 @@ class LayoutView {
           <script src="./assets/js/libs/jquery-3.1.0.min.js"></script>
           <script src="//apis.google.com/js/platform.js"></script>
           <script src="//apis.google.com/js/client.js"></script>
-          <script src="./assets/js/header.js"></script>
           <script src="//fast.eager.io/cluq6Cumbb.js"></script>
           <script src="https://js.live.net/v7.0/OneDrive.js"></script>
           '. $this -> getPageSpecificScripts() .'

@@ -5,15 +5,15 @@ const DropboxHandler = {
   uploadMessage: 'Image was successfully uploaded to your Dropbox!',
 
 
-  init: () => {
+  init: function() {
     $('#progress-container').hide();
   },
 
-  addSaverButton: url => {
+  addSaverButton: function(url) {
     const options = {
       success: () => {
         $('#progress-container').hide();
-        DropboxHandler.showSuccessMessage(DropboxHandler.uploadMessage);
+        this.showSuccessMessage(this.uploadMessage);
       },
       progress: progress => {
         $('#progress-container').show();
@@ -26,14 +26,14 @@ const DropboxHandler = {
     $('#saver-container').html(button);
   },
 
-  getButtonOptions: () => {
+  getButtonOptions: function() {
     return {
       success: image => {
         const url = image[0].link;
         $('#dropbox-image').attr('src', url);
         $('#dropbox-choose-button').html('Choose another Dropbox image');
-        DropboxHandler.removeActionButtons();
-        DropboxHandler.addEditButton(url);
+        this.removeActionButtons();
+        this.addEditButton(url);
       },
       linkType: "direct",
       multiselect: false,
@@ -41,7 +41,7 @@ const DropboxHandler = {
     };
   },
 
-  showSuccessMessage: message => {
+  showSuccessMessage: function(message) {
 		const snackbarContainer = $('#success-toast')[0];
 		const data = {
 			message: message,
@@ -50,12 +50,17 @@ const DropboxHandler = {
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},
 
-  removeActionButtons: () => {
+  addActionButtons: function(url) {
+		this.addEditButton(url);
+		this.addDownloadButton(url);
+	},
+
+  removeActionButtons: function() {
     $('#download-button').remove();
     $('#saver-container').html('');
   },
 
-  addEditButton: url => {
+  addEditButton: function(url) {
     $('#edit-button-field').html(`
       <a href="#"
          id="edit-button"
@@ -72,7 +77,7 @@ const DropboxHandler = {
     `);
 	},
 
-  addDownloadButton: url => {
+  addDownloadButton: function(url) {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"

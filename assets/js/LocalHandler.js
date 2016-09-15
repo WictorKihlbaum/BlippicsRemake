@@ -10,25 +10,25 @@ const LocalHandler = {
 	`,
 
 
-	init: () => {
+	init: function() {
 		HelpDialog.setupDialog();
 		$('#progressbar').hide();
 	},
 
-	handleFiles: fileList => {
+	handleFiles: function(fileList) {
 		const preview = $('#editable-image');
 		const selectedFile = fileList[0];
 
-		if (LocalHandler.isValidImageFormat(selectedFile)) {
-			// In case an earlier user message has been shown.
+		if (this.isValidImageFormat(selectedFile)) {
+			// In case an earlier message has been shown.
 			Message.remove();
-			LocalHandler.removeActionButtons();
+			this.removeActionButtons();
 			const reader = new FileReader();
 
 			reader.onload = () => {
 				$('#progressbar').hide();
 				preview.attr('src', reader.result);
-				LocalHandler.addEditButton(reader.result);
+				this.addEditButton(reader.result);
 			};
 
 			reader.onprogress = () => {
@@ -42,78 +42,31 @@ const LocalHandler = {
 			if (selectedFile)
 				reader.readAsDataURL(selectedFile);
 			else {
-				preview.attr('src', LocalHandler.defaultImagePath);
-				LocalHandler.removeActionButtons();
+				preview.attr('src', this.defaultImagePath);
+				this.removeActionButtons();
 			}
 		} else {
-			Message.show(LocalHandler.invalidImageError, 'user-message-error');
-			preview.attr('src', LocalHandler.defaultImagePath);
-			LocalHandler.removeActionButtons();
+			Message.show(this.invalidImageError, 'user-message-error');
+			preview.attr('src', this.defaultImagePath);
+			this.removeActionButtons();
 		}
 	},
 
-	updateImageURI: url => {
-		LocalHandler.getImageFromAmazon(url)
-		  .then(blob => {
-				LocalHandler.convertToDataURI(blob)
-				  .then(imageDataURI => {
-						LocalHandler.addEditButton(imageDataURI);
-					});
-			});
-	},
-
-	/**
-	 * Aviary photo editor saves image temporarily on Amazon server.
-	 */
-	getImageFromAmazon: url => {
-		return new Promise((resolve, reject) => {
-			const xhr = new XMLHttpRequest();
-			xhr.onloadend = () => {
-				resolve(xhr.response);
-			};
-			xhr.onprogress = () => {
-				// Disable button while image dataURI is being updated.
-				$('#edit-button').attr('disabled', true);
-			};
-			xhr.onerror = error => {
-				reject(error);
-				Message.show(error, 'user-message-error');
-			};
-			xhr.open('GET', url);
-			xhr.responseType = 'blob';
-			xhr.send();
-		});
-	},
-
-	convertToDataURI: blob => {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.onload = () => {
-				resolve(reader.result);
-			};
-			reader.onerror = () => {
-				reject(reader.error);
-				Message.show(reader.error, 'user-message-error');
-			};
-			reader.readAsDataURL(blob);
-		});
-	},
-
-	removeActionButtons: () => {
+	removeActionButtons: function() {
 		$('#edit-button').remove();
 		$('#download-button').remove();
 	},
 
-	isValidImageFormat: file => {
+	isValidImageFormat: function(file) {
 		// Adobe Aviary photo editor only supports Png and Jpg/Jpeg.
 		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
 	},
 
-	addEditButton: imageDataURI => {
+	addEditButton: function(url) {
 		$('#edit-button-field').html(`
 			<a href="#"
 			   id="edit-button"
-			   onclick="AviaryHandler.launchEditor('editable-image', '${imageDataURI}')"
+			   onclick="AviaryHandler.launchEditor('editable-image', '${url}')"
 				 aria-label="Edit image"
 				 title="Edit image"
 			   class="mdl-button
@@ -128,7 +81,7 @@ const LocalHandler = {
 		`);
 	},
 
-	addDownloadButton: url => {
+	addDownloadButton: function(url) {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"

@@ -5,19 +5,20 @@ const AviaryHandler = {
 	feather: {},
 	newURL: null,
 
-	init: () => {
-    AviaryHandler.instantiateFeather();
+	init: function() {
+    this.instantiateFeather();
 	},
 
-	instantiateFeather: () => {
+	instantiateFeather: function() {
 		// Instantiate Aviary editor.
-		AviaryHandler.feather = new Aviary.Feather({
+		this.feather = new Aviary.Feather({
 			apiKey: 'eb5f4fca52634bbf94da9389bd974012',
 			theme: 'minimum',
 			tools: 'all',
 			appendTo: '',
 			displayImageSize: true,
 			showWaitIndicator: true,
+			launchDelay: 500,
 			closeDelay: 500,
 
 			onSave: (imageID, newURL) => {
@@ -31,41 +32,39 @@ const AviaryHandler = {
 					  break;
 
 					case location.includes('editlocal'):
-					  //LocalHandler.updateImageURI(newURL);
-					  AviaryHandler.newURL = newURL;
+					  this.newURL = newURL;
 					  LocalHandler.addDownloadButton(newURL);
 					  break;
 
 					case location.includes('editdropbox'):
-					  DropboxHandler.addDownloadButton(newURL);
-						DropboxHandler.addSaverButton(newURL);
+					  DropboxHandler.addActionButtons(newURL);
 					  break;
 
 					case location.includes('editonedrive'):
-					  OneDriveHandler.addDownloadButton(newURL);
-				 	  OneDriveHandler.addSaverButton(newURL);
+					  OneDriveHandler.addActionButtons(newURL);
 					  break;
 
 					default: break;
 				}
 			},
 
-			onClose: isDirty => {
-				const location = window.location.href;
-				if (location.includes('editlocal'))
-				  LocalHandler.updateImageURI(AviaryHandler.newURL);
+			onClose: userHasSaved => {
+				if (userHasSaved) {
+					const location = window.location.href;
+					if (location.includes('editlocal'))
+					  LocalHandler.addEditButton(this.newURL);
+				}
 			},
 
 			onError: errorObj => {
-				console.log(errorObj); // Dev purpose.
-				const message = `An error occurred! Message: ${errorObj.message}`;
+				const message = errorObj.message;
 				Message.show(message, 'user-message-error')
 			}
 		});
 	},
 
-	launchEditor: (id, src) => {
-	  AviaryHandler.feather.launch({ image: id, url: src });
+	launchEditor: function(id, src) {
+	  this.feather.launch({ image: id, url: src });
 		return false;
 	}
 

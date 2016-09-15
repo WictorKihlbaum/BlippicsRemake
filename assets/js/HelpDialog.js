@@ -2,7 +2,7 @@
 
 const HelpDialog = {
 
-	setupDialog: () => {
+	setupDialog: function() {
 		const dialog = $('dialog')[0];
 		let showDialogButton = null;
 		if (window.location.href.includes('editgoogledrive'))
