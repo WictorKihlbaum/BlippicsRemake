@@ -235,7 +235,7 @@ const GoogleDriveHandler = {
     request.execute(response => {
  		  if (!response.hasOwnProperty('code')) {
  			  GoogleDriveHandler.requestImages();
- 				GoogleDriveHandler.showSuccessMessage(GoogleDriveHandler.removeSuccessMessage);
+ 				Toast.showSuccess(GoogleDriveHandler.removeSuccessMessage);
  			} else {
 			  Message.show(`
 				  An error occurred! Image couldn't be deleted.
@@ -365,7 +365,7 @@ const GoogleDriveHandler = {
 			if (!callback) {
         callback = file => {
 					if (file) {
-						GoogleDriveHandler.showSuccessMessage(GoogleDriveHandler.uploadSuccessMessage);
+						Toast.showSuccess(GoogleDriveHandler.uploadSuccessMessage);
 						// Request and render all images again to show the newly uploaded one.
 						GoogleDriveHandler.requestImages();
 					} else {
@@ -376,15 +376,6 @@ const GoogleDriveHandler = {
     	}
 			request.execute(callback);
 		};
-	},
-
-	showSuccessMessage: function(message) {
-		const snackbarContainer = $('#success-toast')[0];
-		const data = {
-			message: message,
-			timeout: 10000
-		};
-		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	},
 
 	setCurrentImageName: function(imageID) {

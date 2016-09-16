@@ -16,7 +16,7 @@ class EditGoogleDriveView {
 			<div id="editonline-page-container">
 
 				<button type="button"
-						    id="show-dialog"
+						    id="show-dialog-google"
 						    class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
 					<i class="material-icons">
 						help_outline

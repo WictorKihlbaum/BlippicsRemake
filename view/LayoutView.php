@@ -22,13 +22,11 @@ class LayoutView {
 		$this -> aboutView = $views['about'];
 		$this -> contactView = $views['contact'];
     $this -> editGoogleDriveView = $views['editgoogledrive'];
-    $this -> editLocalView = $views['editlocal'];
     $this -> attributionView = $views['attribution'];
-    $this -> editDropboxView = $views['editdropbox'];
-    $this -> editOneDriveView = $views['editonedrive'];
 
     $this -> headerView = $sharedViews['header'];
     $this -> footerView = $sharedViews['footer'];
+    $this -> editView = $sharedViews['editview'];
 
     $this -> setCurrentURL();
     $this -> setupPageContent();
@@ -166,6 +164,7 @@ class LayoutView {
           <script src="./assets/js/GoogleDriveHandler.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/SignHandler.js"></script>
+          <script src="./assets/js/Toast.js"></script>
           <script>
             function onSignIn(googleUser) {
               SignHandler.signIn(googleUser);
@@ -179,14 +178,15 @@ class LayoutView {
         break;
 
       case self::$editLocalURL:
-        $this -> pageTitle = 'Edit Local';
-        $this -> pageContent = $this -> editLocalView -> response();
+        $this -> pageTitle = 'Edit computer';
+        $this -> pageContent = $this -> editView -> response($this -> currentURL);
         $this -> pageSpecificScripts = '
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/LocalHandler.js"></script>
           <script src="./assets/js/Message.js"></script>
+          <script src="./assets/js/ActionButtons.js"></script>
         ';
         break;
 
@@ -197,24 +197,29 @@ class LayoutView {
 
       case self::$editDropboxURL:
         $this -> pageTitle = 'Edit Dropbox';
-        $this -> pageContent = $this -> editDropboxView -> response();
+        $this -> pageContent = $this -> editView -> response($this -> currentURL);
         $this -> pageSpecificScripts = '
+          <script src="./assets/js/HelpDialog.js"></script>
           <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="c8hfkxzclokzwl0"></script>
-          <!--<script src="https://npmcdn.com/dropbox/dist/Dropbox-sdk.min.js"></script>-->
           <script src="./assets/js/DropboxHandler.js"></script>
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
           <script src="./assets/js/Message.js"></script>
+          <script src="./assets/js/ActionButtons.js"></script>
+          <script src="./assets/js/Toast.js"></script>
         ';
         break;
 
       case self::$editOneDriveURL:
         $this -> pageTitle = 'Edit OneDrive';
-        $this -> pageContent = $this -> editOneDriveView -> response();
+        $this -> pageContent = $this -> editView -> response($this -> currentURL);
         $this -> pageSpecificScripts = '
+          <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/OneDriveHandler.js"></script>
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
+          <script src="./assets/js/ActionButtons.js"></script>
+          <script src="./assets/js/Toast.js"></script>
         ';
         break;
 

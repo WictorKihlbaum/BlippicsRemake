@@ -5,9 +5,6 @@ const AviaryHandler = {
 	feather: {},
 	newURL: null,
 
-	init: function() {
-    this.instantiateFeather();
-	},
 
 	instantiateFeather: function() {
 		// Instantiate Aviary editor.
@@ -22,38 +19,14 @@ const AviaryHandler = {
 			closeDelay: 500,
 
 			onSave: (imageID, newURL) => {
+				this.newURL = newURL;
         // Show the new edited image.
 				$('#' + imageID).attr('src', newURL);
-        const location = window.location.href;
-        // Add action buttons for new image.
-				switch (true) {
-					case location.includes('editgoogledrive'):
-  				  GoogleDriveHandler.addActionButtons(imageID, newURL);
-					  break;
-
-					case location.includes('editlocal'):
-					  this.newURL = newURL;
-					  LocalHandler.addDownloadButton(newURL);
-					  break;
-
-					case location.includes('editdropbox'):
-					  DropboxHandler.addActionButtons(newURL);
-					  break;
-
-					case location.includes('editonedrive'):
-					  OneDriveHandler.addActionButtons(newURL);
-					  break;
-
-					default: break;
-				}
+        this.handleButtons(imageID, newURL);
 			},
 
 			onClose: userHasSaved => {
-				if (userHasSaved) {
-					const location = window.location.href;
-					if (location.includes('editlocal'))
-					  LocalHandler.addEditButton(this.newURL);
-				}
+				if (userHasSaved) ActionButtons.addEditButton(this.newURL);
 			},
 
 			onError: errorObj => {
@@ -63,6 +36,24 @@ const AviaryHandler = {
 		});
 	},
 
+	handleButtons: function(id, url) {
+		const location = window.location.href;
+		// Add action buttons for new image.
+		switch (true) {
+			case location.includes('editgoogledrive'):
+				GoogleDriveHandler.addActionButtons(id, url);
+				break;
+
+			case location.includes('editlocal'):
+				ActionButtons.addDownloadButton(url);
+				break;
+
+			default:
+				ActionButtons.addButtons(url);
+				break;
+		}
+	},
+
 	launchEditor: function(id, src) {
 	  this.feather.launch({ image: id, url: src });
 		return false;
@@ -70,4 +61,4 @@ const AviaryHandler = {
 
 };
 
-window.onload = AviaryHandler.init();
+window.onload = AviaryHandler.instantiateFeather();

@@ -82,10 +82,6 @@ h1 {
 	padding: 0 20px;
 }
 
-.page-topic {
-    /* Empty for now. */
-}
-
 #index-grid {
 	margin: 0 auto;
 }
@@ -142,7 +138,7 @@ h1 {
 	box-shadow: none !important;
 	margin-bottom: 8px;
 }
-#show-dialog-local {
+#show-dialog-other {
 	color: #2196F3;
 }
 
@@ -228,7 +224,7 @@ h1 {
   margin-top: 50px;
 }
 
-#editlocal-page-container {
+#editview-page-container {
     text-align: center;
     max-width: 960px;
 }
@@ -335,11 +331,15 @@ input[type="file"] {
     color: #2196F3;
 }
 
-#go-back-button {
-    margin-top: 50px;
+#spinner {
+	color: #2196F3;
 }
 
-#show-dialog {
+#go-back-button {
+	margin-top: 50px;
+}
+
+#show-dialog-google {
     position: absolute;
     right: 5px;
     top: 5px;

@@ -5,10 +5,11 @@ const HelpDialog = {
 	setupDialog: function() {
 		const dialog = $('dialog')[0];
 		let showDialogButton = null;
+		
 		if (window.location.href.includes('editgoogledrive'))
-		  showDialogButton = $('#show-dialog')[0];
+		  showDialogButton = $('#show-dialog-google')[0];
 		else
-		  showDialogButton = $('#show-dialog-local')[0];
+		  showDialogButton = $('#show-dialog-other')[0];
 
 		const closeDialogButton = $('.close')[0];
 
