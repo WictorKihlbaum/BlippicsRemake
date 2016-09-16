@@ -38,7 +38,7 @@ footer .mdl-logo {
     z-index: 1000;
 }
 #back-to-top-button {
-	color: white;
+	color: #B2FF59;
 	box-shadow: none;
 }
 
@@ -63,6 +63,9 @@ footer a {
 }
 footer a:hover {
     text-decoration: underline;
+}
+.footer-content {
+	margin-top: 20px;
 }
 
 h1 {
@@ -340,6 +343,14 @@ input[type="file"] {
     position: absolute;
     right: 5px;
     top: 5px;
+}
+
+#signout-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+		color: #B2FF59;
+		box-shadow: none;
 }
 
 

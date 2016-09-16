@@ -104,9 +104,9 @@ class EditLocalView {
 											aria-label="Show help"
 											title="Show help"
 											class="mdl-button
-														mdl-js-button
-														mdl-button--fab
-														mdl-button--colored">
+														 mdl-js-button
+														 mdl-button--fab
+														 mdl-button--colored">
 								<i class="material-icons">
 									help_outline
 								</i>

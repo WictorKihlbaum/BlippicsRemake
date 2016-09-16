@@ -4,10 +4,6 @@ declare(strict_types = 1);
 
 class LayoutView {
 
-  // TODO: Redirect user to complete URL ('https' should always be shown).
-  //protected static $baseURL = 'https://www.blippics.com/';
-  protected static $baseURL = 'http://localhost:8888/';
-
   protected static $indexURL = '';
   protected static $aboutURL = 'about';
   protected static $contactURL = 'contact';
@@ -43,6 +39,7 @@ class LayoutView {
       <!DOCTYPE html>
       <html lang="en">
         <head>
+          <!--<base href="https://www.blippics.com/" />-->
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
@@ -86,7 +83,7 @@ class LayoutView {
                 '. $this -> pageContent .'
               </div>
             </main>
-            <footer class="mdl-mini-footer">
+            <footer class="mdl-mega-footer">
               '. $this -> footerView -> renderFooter() .'
             </footer>
           </div>
@@ -98,7 +95,7 @@ class LayoutView {
                  id="back-to-top-button"
                  class="mdl-button
                         mdl-button--fab
-                        mdl-button--colored">
+                        mdl-button--primary">
                 <i class="material-icons">
                   keyboard_arrow_up
                 </i>
@@ -106,12 +103,11 @@ class LayoutView {
             </span>
           </div>
 
+          <!--<script src="./assets/js/HTTPSReplace.js"></script>-->
           <!-- Google Material Lite -->
           <script src="./assets/js/framework/material.min.js"></script>
           <script src="./assets/js/libs/pace.js"></script>
           <script src="./assets/js/libs/jquery-3.1.0.min.js"></script>
-          <script src="//apis.google.com/js/platform.js"></script>
-          <script src="//apis.google.com/js/client.js"></script>
           <script src="//fast.eager.io/cluq6Cumbb.js"></script>
           <script src="https://js.live.net/v7.0/OneDrive.js"></script>
           '. $this -> getPageSpecificScripts() .'
@@ -158,19 +154,21 @@ class LayoutView {
         break;
 
       case self::$editGoogleDriveURL:
-        $this -> pageTitle = 'Edit Online';
+        $this -> pageTitle = 'Edit Google Drive';
         $this -> pageContent = $this -> editGoogleDriveView -> response();
         $this -> pageSpecificScripts = '
+          <script src="https://apis.google.com/js/platform.js"></script>
+          <script src="https://apis.google.com/js/client.js"></script>
           <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
           <script src="./assets/js/libs/jquery.simplePagination.js"></script>
           <script src="./assets/js/Message.js"></script>
           <script src="./assets/js/HelpDialog.js"></script>
           <script src="./assets/js/GoogleDriveHandler.js"></script>
           <script src="./assets/js/AviaryHandler.js"></script>
-          <script src="./assets/js/SignEvent.js"></script>
+          <script src="./assets/js/SignHandler.js"></script>
           <script>
             function onSignIn(googleUser) {
-              SignEvent.signIn(googleUser);
+              SignHandler.signIn(googleUser);
             }
           </script>
         ';

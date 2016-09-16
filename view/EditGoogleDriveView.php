@@ -24,6 +24,10 @@ class EditGoogleDriveView {
 					Show Help
 				</button>
 
+        <span id="signout-button-field">
+					<!-- Signout button added from "SignHandler.js" -->
+				</span>
+
     		<h1 class="mdl-typography--display-1 mdl-color-text--primary page-topic">
     		  Edit image on Google Drive
     		</h1>
@@ -101,7 +105,7 @@ class EditGoogleDriveView {
 					These are the formats the photo editor accepts.
 	      </div>
 
-	      <div class="g-signin2 mdl-layout--large-screen-only"
+	      <div class="g-signin2 mdl-layout--large-screen-only" id="signin-button"
 	           data-width="960px"
 	           data-height="100px"
 	           data-longtitle="true"

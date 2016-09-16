@@ -2,6 +2,8 @@
 
 const GoogleDriveHandler = {
 
+	// TODO: Change GoogleDriveHandler to this. BUT fix the problem with this being undefined!
+
 	pagination: null,
 	imageArray: [],
 	imageList: null,
@@ -25,8 +27,8 @@ const GoogleDriveHandler = {
 	init: function() {
 		HelpDialog.setupDialog();
 		$('#loading-animation').hide();
-		this.imageList = $('#image-list');
-		this.pagination = $('.pagination-page');
+		GoogleDriveHandler.imageList = $('#image-list');
+		GoogleDriveHandler.pagination = $('.pagination-page');
 	},
 
 	setupPagination: function() {
@@ -58,60 +60,60 @@ const GoogleDriveHandler = {
 				$("#pagination").pagination('selectPage', parseInt(hash[1]));
 		};
 
-		// Call this function whenever the back/forward is pressed.
+		// Call GoogleDriveHandler function whenever the back/forward is pressed.
 		$(window).bind('popstate', checkFragment);
 		checkFragment();
 	},
 
 	/**
-	 * Check if current user has authorized this application.
+	 * Check if current user has authorized GoogleDriveHandler application.
 	 */
 	checkAuth: function() {
 		gapi.auth.authorize(
       {
-        'client_id': this.CLIENT_ID,
-        'scope': this.SCOPES.join(' '),
+        'client_id': GoogleDriveHandler.CLIENT_ID,
+        'scope': GoogleDriveHandler.SCOPES.join(' '),
         'immediate': true
       },
-      this.handleAuthResult
+      GoogleDriveHandler.handleAuthResult
     );
 	},
 
 	/**
 	 * Handle response from authorization server.
-	 *
-	 * @param {Object} authResult Authorization result.
 	 */
 	handleAuthResult: function(authResult) {
     if (authResult && !authResult.error) {
-			this.hideLoginElements();
-			this.loadDriveApi();
-		} else this.showLoginElements();
+			GoogleDriveHandler.hideLoginElements();
+			GoogleDriveHandler.loadDriveApi();
+		} else {
+			GoogleDriveHandler.showLoginElements();
+		}
 	},
 
 	hideLoginElements: function() {
 		$('#need-to-login-text').hide();
 		$('#google-info-text').hide();
-		$('.g-signin2').hide();
+		$('#signin-button').hide();
 	},
 
 	showLoginElements: function() {
 		$('#need-to-login-text').show();
 		$('#google-info-text').show();
-		$('.g-signin2').show();
+		$('#signin-button').show();
 	},
 
 	/**
 	 * Load Drive API client library.
 	 */
 	loadDriveApi: function() {
-		gapi.client.load('drive', 'v3', this.requestDriveImages);
+		gapi.client.load('drive', 'v3', GoogleDriveHandler.requestImages);
 	},
 
-	requestDriveImages: function() {
+	requestImages: function() {
 		// Show loading animation while images are being loaded.
 		$('#loading-animation').show();
-		this.imageList.html('');
+		GoogleDriveHandler.imageList.html('');
 
 		const request = gapi.client.drive.files.list({
 			'maxResults': 100, // Change to get more (max 1000).
@@ -121,15 +123,18 @@ const GoogleDriveHandler = {
 
 		request.execute(response => {
 			const images = response.files;
-			this.imageArray = images;
+			GoogleDriveHandler.imageArray = images;
 
 			if (images && images.length > 0) {
-				for (let image of images)
-				  this.renderImage(image);
-			} else $('#top-text').html(this.noValidImages);
+				for (let image of images) {
+					GoogleDriveHandler.renderImage(image);
+				}
+			} else {
+				$('#top-text').html(GoogleDriveHandler.noValidImages);
+			}
 
 			$('#loading-animation').hide();
-			this.setupPagination();
+			GoogleDriveHandler.setupPagination();
 		});
 	},
 
@@ -137,7 +142,7 @@ const GoogleDriveHandler = {
     // Remove unwanted part of url.
 		const largeImageLink = image.webContentLink.replace(/&export=download/i, '');
 
-		this.imageList.append(`
+		GoogleDriveHandler.imageList.append(`
 			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col animated zoomIn"
 			     itemscope itemtype ="http://schema.org/ImageObject">
 				<div class="mdl-card__title">
@@ -188,12 +193,12 @@ const GoogleDriveHandler = {
     if (!dialog.showModal)
 		  dialogPolyfill.registerDialog(dialog);
 
-    this.addConfirmationText(id, name);
+    GoogleDriveHandler.addConfirmationText(id, name);
     dialog.showModal();
 
 		dialog.querySelector('.confirm').addEventListener('click', () => {
       dialog.close();
-			this.deleteImageFromDrive(id);
+			GoogleDriveHandler.deleteImageFromDrive(id);
     });
 
     dialog.querySelector('.cancel').addEventListener('click', () =>
@@ -229,8 +234,8 @@ const GoogleDriveHandler = {
 
     request.execute(response => {
  		  if (!response.hasOwnProperty('code')) {
- 			  this.requestDriveImages();
- 				this.showSuccessMessage(this.removeSuccessMessage);
+ 			  GoogleDriveHandler.requestImages();
+ 				GoogleDriveHandler.showSuccessMessage(GoogleDriveHandler.removeSuccessMessage);
  			} else {
 			  Message.show(`
 				  An error occurred! Image couldn't be deleted.
@@ -243,8 +248,8 @@ const GoogleDriveHandler = {
  	},
 
 	addActionButtons: function(imageID, newURL) {
-		this.addDownloadButton(imageID, newURL);
-		this.addUploadButton(imageID, newURL);
+		GoogleDriveHandler.addDownloadButton(imageID, newURL);
+		GoogleDriveHandler.addUploadButton(imageID, newURL);
 	},
 
 	addDownloadButton: function(id, url) {
@@ -276,7 +281,7 @@ const GoogleDriveHandler = {
 
 	getImageFromDrive: function(id) {
 		// Save ID to be able to get it from AviaryHandler onSave.
-		this.lastEditedImageID = id;
+		GoogleDriveHandler.lastEditedImageID = id;
 		// In case an earlier user message has been shown.
 		Message.remove();
 
@@ -287,14 +292,14 @@ const GoogleDriveHandler = {
 		xhr.onloadend = () => {
 			const reader = new FileReader();
 			reader.onload = () => {
-        this.setCurrentImageName(id);
+        GoogleDriveHandler.setCurrentImageName(id);
 				AviaryHandler.launchEditor(id, reader.result);
 			};
 			reader.readAsDataURL(xhr.response);
 		};
 
 		xhr.onerror = () =>
-			Message.show(this.driveErrorMessage, 'user-message-error');
+			Message.show(GoogleDriveHandler.driveErrorMessage, 'user-message-error');
 
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
@@ -309,10 +314,10 @@ const GoogleDriveHandler = {
 		const xhr = new XMLHttpRequest();
 
 		xhr.onload = () =>
-			this.postImageToDrive(xhr.response);
+			GoogleDriveHandler.postImageToDrive(xhr.response);
 
 		xhr.onerror = () =>
-			Message.show(this.amazonErrorMessage, 'user-message-error');
+			Message.show(GoogleDriveHandler.amazonErrorMessage, 'user-message-error');
 
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
@@ -333,7 +338,7 @@ const GoogleDriveHandler = {
 		reader.onload = () => {
 			const base64Data = btoa(reader.result);
 			const metadata = {
-				'title': this.currentImageName,
+				'title': GoogleDriveHandler.currentImageName,
 				'mimeType': fileData.type
 		  };
 
@@ -360,11 +365,11 @@ const GoogleDriveHandler = {
 			if (!callback) {
         callback = file => {
 					if (file) {
-						this.showSuccessMessage(this.uploadSuccessMessage);
+						GoogleDriveHandler.showSuccessMessage(GoogleDriveHandler.uploadSuccessMessage);
 						// Request and render all images again to show the newly uploaded one.
-						this.requestDriveImages();
+						GoogleDriveHandler.requestImages();
 					} else {
-						Message.show(this.uploadErrorMessage, 'user-message-error');
+						Message.show(GoogleDriveHandler.uploadErrorMessage, 'user-message-error');
 					}
 					document.body.className = 'cursor-default';
       	};
@@ -383,8 +388,8 @@ const GoogleDriveHandler = {
 	},
 
 	setCurrentImageName: function(imageID) {
-		let imageName = this.currentImageName;
-		const images = this.imageArray;
+		let imageName = GoogleDriveHandler.currentImageName;
+		const images = GoogleDriveHandler.imageArray;
 		const image = images.find(image => image.id == imageID);
 		imageName = image.originalFilename;
 
@@ -392,7 +397,7 @@ const GoogleDriveHandler = {
 			imageName = imageName.substr(0, imageName.lastIndexOf('.')) || imageName;
 			imageName += '_Edited';
 		}
-		this.currentImageName = imageName;
+		GoogleDriveHandler.currentImageName = imageName;
 	}
 
 };
