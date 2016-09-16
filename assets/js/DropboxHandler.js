@@ -25,12 +25,12 @@ const DropboxHandler = {
     return {
       files: [{'url': `${url}`, 'filename': `${this.image.name}`}],
       success: () => {
-        $('#spinner').removeClass('is-active');
+        $('.spinner').addClass('is-hidden');
         Toast.showSuccess(this.uploadMessage);
         ActionButtons.reStyleSaveButton();
       },
       progress: progress => {
-        $('#spinner').addClass('is-active');
+        $('.spinner').removeClass('is-hidden');
       },
       error: errorMessage => {
         Message.show(errorMessage, 'user-message-error');

@@ -21,13 +21,13 @@ const LocalHandler = {
 			const reader = new FileReader();
 
 			reader.onload = () => {
-				$('#spinner').removeClass('is-active');
+				$('.spinner').addClass('is-hidden');
 				preview.attr('src', reader.result);
 				ActionButtons.addEditButton(reader.result);
 			};
 
 			reader.onprogress = () => {
-				$('#spinner').addClass('is-active');
+				$('.spinner').removeClass('is-hidden');
 			};
 
 			reader.onerror = error => {

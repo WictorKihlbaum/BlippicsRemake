@@ -45,11 +45,11 @@ const OneDriveHandler = {
       advanced: {},
       success: files => {
         Toast.showSuccess(this.uploadMessage);
-        $('#spinner').removeClass('is-active');
+        $('.spinner').addClass('is-hidden');
         ActionButtons.reStyleSaveButton();
       },
       progress: p => {
-        $('#spinner').addClass('is-active');
+        $('.spinner').removeClass('is-hidden');
       },
       error: errorMessage => {
         Message.show(errorMessage, 'user-message-error');

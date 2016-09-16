@@ -88,7 +88,7 @@ const ActionButtons = {
     const saveButton = $('#save-button');
     saveButton.attr('title', 'Image is saved');
     saveButton.attr('aria-label', 'Image is saved');
-    saveButton.css('color', '#B2FF59');
+    saveButton.css('color', '#2196F3');
     saveButton.attr('disabled', true);
     $('#save-icon').html('done');
   }

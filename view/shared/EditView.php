@@ -122,10 +122,9 @@ class EditView {
           </div>
         </div>
 
-        <div id="spinner"
-             class="mdl-spinner
-                    mdl-spinner--single-color
-                    mdl-js-spinner">
+        <div class="spinner is-hidden">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
         </div>
 
         <div id="success-toast" class="mdl-js-snackbar mdl-snackbar">
