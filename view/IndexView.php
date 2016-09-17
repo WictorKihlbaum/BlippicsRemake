@@ -17,39 +17,43 @@ class IndexView {
 	public function response() : string {
 		return '
 			<div class="mdl-grid" id="index-grid">
-			  <div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+			  <div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell animated rotateIn">
 			  	<span class="hint--bottom" aria-label="Edit image on Google Drive">
 					  <a href="?'.self::$editGoogleDriveURL.'" class="hvr-bob">
 					    <img src="./assets/img/drive_logo.png" width="47%"
 					         alt="Edit image on Google Drive"
-					         id="drive-logo-button" />
+					         id="drive-logo-button"
+									 class="animated zoomInDown" />
 					  </a>
 				  </span>
 			  </div>
-			  <div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+			  <div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell animated rotateIn">
 			  	<span class="hint--bottom" aria-label="Edit image on computer">
 				  	<a href="?'.self::$editLocalURL.'" class="hvr-bob">
 				  	  <img src="./assets/img/laptop.png" width="60%"
 				  	       alt="Edit image on computer"
-				  	       id="computer-image-button" />
+				  	       id="computer-image-button"
+									 class="animated zoomInDown" />
 				  	</a>
 			  	</span>
 			  </div>
-				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell animated rotateIn">
 			  	<span class="hint--bottom" aria-label="Edit image on Dropbox">
 				  	<a href="?'.self::$editDropboxURL.'" class="hvr-bob">
 				  	  <img src="./assets/img/dropbox_logo.png" width="55%"
 				  	       alt="Edit image on Dropbox"
-				  	       id="dropbox-image-button" />
+				  	       id="dropbox-image-button"
+									 class="animated zoomInDown" />
 				  	</a>
 			  	</span>
 			  </div>
-				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell">
+				<div class="mdl-cell mdl-cell--5-col mdl-cell--middle index-cell animated rotateIn">
 			  	<span class="hint--bottom" aria-label="Edit image on OneDrive">
 				  	<a href="?'.self::$editOneDriveURL.'" class="hvr-bob">
 				  	  <img src="./assets/img/onedrive_logo.png" width="55%"
 				  	       alt="Edit image on OneDrive"
-				  	       id="onedrive-image-button" />
+				  	       id="onedrive-image-button"
+									 class="animated zoomInDown" />
 				  	</a>
 			  	</span>
 			  </div>

@@ -115,7 +115,9 @@ const GoogleDriveHandler = {
 		const request = gapi.client.drive.files.list({
 			'maxResults': 100, // Change to get more (max 1000).
       'fields': "files",
-			'q': 'mimeType = "image/jpeg" or mimeType = "image/png"'
+			'q': `mimeType = "image/png" or
+			      mimeType = "image/jpg" or
+						mimeType = "image/jpeg"`
 		});
 
 		request.execute(response => {
@@ -131,7 +133,9 @@ const GoogleDriveHandler = {
 			}
 
 			$('#loading-animation').hide();
-			GoogleDriveHandler.setupPagination();
+			if (images.length > 8) {
+				GoogleDriveHandler.setupPagination();
+			}
 		});
 	},
 
@@ -177,72 +181,13 @@ const GoogleDriveHandler = {
 					<i title="Delete image"
 					   aria-label="Delete image"
 						 class="material-icons"
-						 onclick="GoogleDriveHandler.showConfirmation(\'${image.id}\', \'${image.originalFilename}\')">
+						 onclick="GoogleDriveHandler.showConfirmation('${image.id}', '${image.originalFilename}')">
 					  delete_forever
 				  </i>
 				</div>
 			</div>
 		`);
 	},
-
-	showConfirmation: function(id, name) {
-		const dialog = $('#confirm-dialog')[0];
-    if (!dialog.showModal)
-		  dialogPolyfill.registerDialog(dialog);
-
-    GoogleDriveHandler.addConfirmationText(id, name);
-    dialog.showModal();
-
-		dialog.querySelector('.confirm').addEventListener('click', () => {
-      dialog.close();
-			GoogleDriveHandler.deleteImageFromDrive(id);
-    });
-
-    dialog.querySelector('.cancel').addEventListener('click', () =>
-		  dialog.close());
-	},
-
-	addConfirmationText: function(id, name) {
-		$('#confirmation-text').html(`
-			<ul>
-			  <li>You are about to delete image: ${name}
-				<li>(ID: ${id})</li>
-			  <li>The image will be permanently deleted</li>
-			  <li>
-				  (It will <strong>NOT</strong> be placed in
-					your Google Drive trashbin).
-				</li>
-			</ul>
-			<p>Are you really sure?</p>
-		`);
-	},
-
-	/**
-   * Permanently delete an image, skipping the trash.
-   *
-   * @param {String} id ID of the image to delete.
-   */
- 	deleteImageFromDrive: function(id) {
- 		document.body.className = 'cursor-wait';
-
- 	  const request = gapi.client.drive.files.delete({
-       'fileId': id
-    });
-
-    request.execute(response => {
- 		  if (!response.hasOwnProperty('code')) {
- 			  GoogleDriveHandler.requestImages();
- 				Toast.showSuccess(GoogleDriveHandler.removeSuccessMessage);
- 			} else {
-			  Message.show(`
-				  An error occurred! Image couldn't be deleted.
-					Details: ${response.code}: ${response.message}`,
-					'user-message-error'
-				);
- 			}
- 		  document.body.className = 'cursor-default';
- 		});
- 	},
 
 	addActionButtons: function(imageID, newURL) {
 		GoogleDriveHandler.addDownloadButton(imageID, newURL);
@@ -270,11 +215,69 @@ const GoogleDriveHandler = {
 			   title="Upload edited image"
 				 aria-label="Upload edited image"
 			   class="material-icons"
-			   onclick="GoogleDriveHandler.getImageFromAmazon(\'${url}\')">
+			   onclick="GoogleDriveHandler.getImageFromAmazon('${url}')">
 			  cloud_upload
 			</i>
 		`);
 	},
+
+	addConfirmationText: function(name) {
+		$('#confirmation-text').html(`
+			<ul>
+			  <li>You are about to delete image: ${name}</li>
+			  <li>The image will be permanently deleted</li>
+			  <li>
+				  It will <strong>NOT</strong> be placed in
+					your Google Drive trashbin.
+				</li>
+			</ul>
+			<p>Are you really sure?</p>
+		`);
+	},
+
+	showConfirmation: function(id, name) {
+		const dialog = $('#confirm-dialog')[0];
+    if (!dialog.showModal)
+		  dialogPolyfill.registerDialog(dialog);
+
+    GoogleDriveHandler.addConfirmationText(name);
+    dialog.showModal();
+
+		dialog.querySelector('.confirm').addEventListener('click', () => {
+      dialog.close();
+			GoogleDriveHandler.deleteImageFromDrive(id);
+    });
+
+    dialog.querySelector('.cancel').addEventListener('click', () =>
+		  dialog.close());
+	},
+
+	/**
+   * Permanently delete an image, skipping the trash.
+   *
+   * @param {String} id ID of the image to delete.
+   */
+ 	deleteImageFromDrive: function(id) {
+ 		document.body.className = 'cursor-wait';
+
+ 	  const request = gapi.client.drive.files.delete({
+       'fileId': id
+    });
+
+    request.execute(response => {
+ 		  if (!response.hasOwnProperty('code')) {
+ 			  GoogleDriveHandler.requestImages();
+ 				Toast.showSuccess(GoogleDriveHandler.removeSuccessMessage);
+ 			} else {
+			  Message.show(`
+				  Image couldn't be deleted.
+					Details: ${response.code}: ${response.message}`,
+					'user-message-error'
+				);
+ 			}
+ 		  document.body.className = 'cursor-default';
+ 		});
+ 	},
 
 	getImageFromDrive: function(id) {
 		// Save ID to be able to get it from AviaryHandler onSave.
