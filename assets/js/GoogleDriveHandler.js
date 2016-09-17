@@ -2,7 +2,7 @@
 
 const GoogleDriveHandler = {
 
-	// TODO: Change GoogleDriveHandler to this. BUT fix the problem with this being undefined!
+	// TODO: Change GoogleDriveHandler to GoogleDriveHandler. BUT fix the problem with GoogleDriveHandler being undefined!
 
 	pagination: null,
 	imageArray: [],
@@ -69,14 +69,11 @@ const GoogleDriveHandler = {
 	 * Check if current user has authorized GoogleDriveHandler application.
 	 */
 	checkAuth: function() {
-		gapi.auth.authorize(
-      {
-        'client_id': GoogleDriveHandler.CLIENT_ID,
-        'scope': GoogleDriveHandler.SCOPES.join(' '),
-        'immediate': true
-      },
-      GoogleDriveHandler.handleAuthResult
-    );
+		gapi.auth.authorize({
+      'client_id': GoogleDriveHandler.CLIENT_ID,
+      'scope': GoogleDriveHandler.SCOPES.join(' '),
+      'immediate': true
+    }, GoogleDriveHandler.handleAuthResult);
 	},
 
 	/**

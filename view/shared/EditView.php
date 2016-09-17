@@ -179,11 +179,10 @@ class EditView {
             </i>
             <input type="file"
                    id="input"
-                   onchange="LocalHandler.handleFiles(this.files)"
                    multiple accept="image/png, image/jpg, image/jpeg" />
           </label>
         ';
-
+        
       case 'editdropbox':
         return '
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"

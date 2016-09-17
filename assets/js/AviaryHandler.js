@@ -26,7 +26,8 @@ const AviaryHandler = {
 			},
 
 			onClose: userHasSaved => {
-				if (userHasSaved) ActionButtons.addEditButton(this.newURL);
+				if (userHasSaved && !window.location.href.match('google'))
+				  ActionButtons.addEditButton(this.newURL);
 			},
 
 			onError: errorObj => {
