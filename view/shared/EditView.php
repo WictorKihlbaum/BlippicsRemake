@@ -35,8 +35,8 @@ class EditView {
                   <i class="material-icons mdl-list__item-icon" aria-label="Step one">
                     looks_one
                   </i>
-                  Press "<strong>Choose image</strong>" to choose which image
-                  you want to edit (Png or Jpg/Jpeg).
+                  Press<i class="material-icons help-dialog-icons">photo</i>
+                  to choose which image you want to edit (Png or Jpg/Jpeg).
                 </span>
               </li>
               <li class="mdl-list__item">
@@ -44,7 +44,7 @@ class EditView {
                   <i class="material-icons mdl-list__item-icon" aria-label="Step two">
                     looks_two
                   </i>
-                  Press "<strong>Edit image</strong>".
+                  Press <i class="material-icons help-dialog-icons">edit</i>
                   The photo editor will automatically open.
                 </span>
               </li>
@@ -71,8 +71,8 @@ class EditView {
                   <i class="material-icons mdl-list__item-icon" aria-label="Step five">
                     looks_5
                   </i>
-                  Press "<strong>Download image</strong>" to download your
-                  edited image to your computer.
+                  Press <i class="material-icons help-dialog-icons">file_download</i>
+                  to download your edited image to your computer.
                 </span>
               </li>
             </ul>
@@ -90,14 +90,14 @@ class EditView {
         </dialog>
 
         <div class="mdl-grid" id="image-container">
-          <div class="mdl-cell mdl-cell--5-col mdl-cell--3-offset">
+          <div class="mdl-cell mdl-cell--7-col mdl-cell--2-offset">
             <div id="dropzone">
               <img src="./assets/img/placeholder_image.png"
                    alt="Preview of loaded image"
                    id="editable-image" />
             </div>
           </div>
-          <div class="mdl-cell mdl-cell--1-col">
+          <div class="mdl-cell mdl-cell--1-col" id="action-buttons-field">
 
               <button type="button"
                       id="show-dialog-other"
@@ -168,7 +168,7 @@ class EditView {
           <label for="input"
                  aria-label="Choose image"
                  title="Choose image"
-                 id="Choose image"
+                 id="choose-button"
                  class="label-class
                         mdl-button
                         mdl-js-button
@@ -182,11 +182,11 @@ class EditView {
                    multiple accept="image/png, image/jpg, image/jpeg" />
           </label>
         ';
-        
+
       case 'editdropbox':
         return '
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
-                  id="Choose image"
+                  id="choose-button"
                   onclick="Dropbox.choose(DropboxHandler.getChooserOptions())">
             <i class="material-icons">
               photo
@@ -197,7 +197,7 @@ class EditView {
       case 'editonedrive':
         return '
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
-                  id="Choose image"
+                  id="choose-button"
                   onclick="OneDriveHandler.launchOneDrivePicker()">
             <i class="material-icons">
               photo

@@ -18,16 +18,16 @@ class AttributionView {
 		      Attribution
 		    </h1>
 
-		    <p id="attribution-subtext">
+		    <div id="attribution-subtext" class="mdl-typography--display-1">
 		      The purpose of this page is to give credit to all used techniques
 		    	and resources which I have been using to develop this website.
-		    </p>
+		    </div>
 
 		    <h2 class="attribution-topics">
 				  Images
 				</h2>
 
-		    <ul class="mdl-list attribution-list">
+		    <ul class="mdl-list attribution-list" id="freepik-list">
 				  <li class="mdl-list__item">
 				    <span class="mdl-list__item-primary-content">
 				      <a href="http://www.freepik.com/">
@@ -35,10 +35,36 @@ class AttributionView {
 							</a>
 				    </span>
 				  </li>
+					<ul>
+					  <li class="mdl-typography--display-3">
+						  Social buttons:
+						  <a href="http://www.freepik.com/free-photos-vectors/icon">
+							  Icon vector designed by Starline - Freepik.com
+							</a>
+						</li>
+						<li class="mdl-typography--display-3">
+						  GitHub head logo:
+						  <a href="http://www.flaticon.com/free-icon/github_23586/">Icon</a>
+							made by <a href="http://www.flaticon.com/authors/icomoon/">Icomoon</a>
+							from <a href="http://www.flaticon.com/">www.flaticon.com</a>
+						</li>
+						<li class="mdl-typography--display-3">
+						  Laptop:
+						  <a href="http://www.freepik.com/free-photos-vectors/computer">
+							  Computer vector designed by Freepik
+							</a>
+						</li>
+						<li class="mdl-typography--display-3">
+						  Circles:
+						  <a href="http://www.freepik.com/free-photos-vectors/background">
+							  Background vector designed by Freepik
+							</a>
+						</li>
+					</ul>
 				</ul>
 
 		    <h2 class="attribution-topics">
-				  Frameworks
+				  Framework
 				</h2>
 
 		    <ul class="mdl-list attribution-list">

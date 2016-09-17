@@ -37,7 +37,6 @@ class LayoutView {
       <!DOCTYPE html>
       <html lang="en">
         <head>
-          <!--<base href="https://www.blippics.com/" />-->
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="google-signin-scope" content="https://www.googleapis.com/auth/drive">
@@ -58,7 +57,6 @@ class LayoutView {
         </head>
         <body>
           <div class="mdl-layout mdl-js-layout">
-            <a name="top"></a> <!-- Top anchor -->
             <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary-dark" id="page-header">
               '. $this -> headerView -> renderHeader() .'
             </header>
@@ -84,21 +82,23 @@ class LayoutView {
             <footer class="mdl-mega-footer">
               '. $this -> footerView -> renderFooter() .'
             </footer>
-          </div>
 
-          <!-- Go-to-top-button (Needs to be outside framework container div) -->
-          <div id="top-button">
-            <span class="hint--left" aria-label="Back to Top">
-              <a href="#top"
-                 id="back-to-top-button"
-                 class="mdl-button
-                        mdl-button--fab
-                        mdl-button--primary">
-                <i class="material-icons">
-                  keyboard_arrow_up
-                </i>
-              </a>
-            </span>
+            <!-- Go-to-top-->
+            <div id="top-button">
+              <span class="hint--left" aria-label="Back to Top">
+                <a href="#"
+                   id="back-to-top-button"
+                   onclick="Scroll.toTop()"
+                   class="mdl-button
+                          mdl-button--fab
+                          mdl-button--primary">
+                  <i class="material-icons">
+                    keyboard_arrow_up
+                  </i>
+                </a>
+              </span>
+            </div>
+
           </div>
 
           <!--<script src="./assets/js/HTTPSReplace.js"></script>-->
@@ -108,6 +108,7 @@ class LayoutView {
           <script src="./assets/js/libs/jquery-3.1.0.min.js"></script>
           <script src="//fast.eager.io/cluq6Cumbb.js"></script>
           <script src="https://js.live.net/v7.0/OneDrive.js"></script>
+          <script src="./assets/js/Scroll.js"></script>
           '. $this -> getPageSpecificScripts() .'
 
         </body>

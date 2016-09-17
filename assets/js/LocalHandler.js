@@ -28,7 +28,14 @@ const LocalHandler = {
 			// Click anywhere in Droparea to upload file.
 		  this.fileInput.click();
 		})
+		.on('dragover', e => {
+			this.dropArea.css('background-color', '#E4F1FE');
+		})
+		.on('dragleave', e => {
+			this.dropArea.css('background-color', 'white');
+		})
 		.on('drop', e => {
+			this.dropArea.css('background-color', 'white');
 			// Get the dropped file.
 			const file = e.originalEvent.dataTransfer.files[0];
 			this.handleFile(file);
@@ -63,7 +70,7 @@ const LocalHandler = {
 		const reader = new FileReader();
 		reader.onload = () => {
 			this.hideSpinner();
-			this.updatePreview();
+			this.updatePreview(reader.result);
 			ActionButtons.addEditButton(reader.result);
 		};
 		reader.onprogress = () => {
@@ -80,8 +87,8 @@ const LocalHandler = {
 		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
 	},
 
-	updatePreview: function() {
-		this.preview.attr('src', reader.result);
+	updatePreview: function(result) {
+		this.preview.attr('src', result);
 	},
 
 	resetPreview: function() {

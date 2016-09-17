@@ -1,5 +1,6 @@
 /* Primary color: #2196F3
-   Accent color: #B2FF59 */
+   Accent color: #B2FF59
+	 Primary dark color: #1976D2 */
 
 
 header {
@@ -14,6 +15,20 @@ header {
 footer li a,
 footer .mdl-logo {
 	font-size: 20px !important;
+}
+
+#freepik-list ul {
+	list-style-type: none;
+}
+#freepik-list ul li {
+	font-size: 16px;
+}
+#freepik-list a {
+	color: #2196F3;
+	text-decoration: none;
+}
+#attribution-container a:hover {
+	text-decoration: underline;
 }
 
 #confirm-dialog {
@@ -116,7 +131,9 @@ h1 {
 }
 
 #attribution-subtext {
-    font-size: 16px;
+	margin: 10px 0 25px 0;
+		line-height: 1.3;
+		font-size: 22px;
 }
 
 .attribution-topics {
@@ -137,9 +154,6 @@ h1 {
 #image-container .mdl-button {
 	box-shadow: none !important;
 	margin-bottom: 8px;
-}
-#show-dialog-other {
-	color: #2196F3;
 }
 
 #dropzone {
@@ -233,6 +247,19 @@ h1 {
 
 input[type="file"] {
     display: none;
+}
+
+#show-dialog-other:hover {
+	background-color: rgba(178, 255, 89, 0.8);
+}
+#action-buttons-field #choose-button:hover,
+#action-buttons-field #edit-button:hover,
+#action-buttons-field #download-button:hover {
+	background-color: rgba(33, 150, 243, 0.8);
+}
+#action-buttons-field .has-hover:hover {
+	/*background-color: rgba(33, 150, 243, 0.8);*/
+	background-color: red;
 }
 
 #toast-container {
@@ -343,6 +370,13 @@ input[type="file"] {
     position: absolute;
     right: 5px;
     top: 5px;
+}
+
+#show-dialog-other {
+	color: #2196F3;
+}
+.help-dialog-icons {
+	margin: 0 10px !important;
 }
 
 #signout-button {

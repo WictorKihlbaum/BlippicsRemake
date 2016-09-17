@@ -58,13 +58,13 @@ const ActionButtons = {
 
   addSaveButtonDropbox: function(url) {
     $('#save-button-field').html(`
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary has-hover"
               id="save-button"
               aria-label="Save image on Dropbox"
               title="Save image on Dropbox"
               onclick="Dropbox.save(DropboxHandler.getSaverOptions('${url}'))">
         <i class="material-icons" id="save-icon">
-          save
+          cloud_upload
         </i>
       </button>
     `);
@@ -78,7 +78,7 @@ const ActionButtons = {
               title="Save image on OneDrive"
               onclick="OneDriveHandler.launchOneDriveSaver('${url}')">
         <i class="material-icons" id="save-icon">
-          save
+          cloud_upload
         </i>
       </button>
     `);
@@ -91,6 +91,8 @@ const ActionButtons = {
     saveButton.css('color', '#2196F3');
     saveButton.attr('disabled', true);
     $('#save-icon').html('done');
+    saveButton.css('background-color');
+    saveButton.removeClass('has-hover');
   }
 
 };

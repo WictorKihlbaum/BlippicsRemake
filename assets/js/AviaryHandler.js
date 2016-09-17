@@ -2,7 +2,7 @@
 
 const AviaryHandler = {
 
-	feather: {},
+	feather: null,
 	newURL: null,
 
 
@@ -32,7 +32,7 @@ const AviaryHandler = {
 
 			onError: errorObj => {
 				const message = errorObj.message;
-				Message.show(message, 'user-message-error')
+				Message.show(message, 'user-message-error');
 			}
 		});
 	},
