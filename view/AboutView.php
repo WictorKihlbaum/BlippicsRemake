@@ -17,14 +17,14 @@ class AboutView {
 			<div class="quote">
 	  	  <div id="about-text">
 				  <p class="mdl-typography--display-2">
-					  Blippics is the product of a final project in one of my previously
-						courses at Linnaeus university. Blippics has been undergoing several
+					  Blippics was initially the product of a final project in one of my previously
+						courses at Linnaeus university. Blippics has however been undergoing several
 						updates ever since and still is. The main idea with the Blippics site
 						is to offer you the tools you need to edit your desired images.
-						This web application gives you the chance to either edit an image on
-						your computer or one on your Google Drive.<br />
-						When you are done editing you can either download the image to your
-						computer or save it on your Google Drive.
+						This application gives you the chance to edit your images from
+						your computer, Google Drive, Dropbox and OneDrive. When you are
+						done editing you can choose to either download the image or upload
+						it to the cloud of the choosen service.
 					</p>
 
 					<p class="mdl-typography--display-2">

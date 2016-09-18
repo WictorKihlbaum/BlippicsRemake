@@ -32,7 +32,7 @@ class LayoutView {
     $this -> setupPageContent();
   }
 
-  public function renderLayout() { // Remember to add: manifest="manifest.appcache" in production.
+  public function renderLayout() {
 		echo '
       <!DOCTYPE html>
       <html lang="en">
@@ -87,7 +87,6 @@ class LayoutView {
             <div id="top-button">
               <span class="hint--left" aria-label="Back to Top">
                 <a href="#"
-                   id="back-to-top-button"
                    onclick="Scroll.toTop()"
                    class="mdl-button
                           mdl-button--fab
@@ -100,6 +99,18 @@ class LayoutView {
             </div>
 
           </div>
+
+          <script>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("./sw.js").then(registration => {
+                // Registration was successful
+                // console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
+              }).catch(err => {
+                // registration failed :(
+                // console.log(`ServiceWorker registration failed: ${err}`);
+              });
+            }
+          </script>
 
           <!--<script src="./assets/js/HTTPSReplace.js"></script>-->
           <!-- Google Material Lite -->
