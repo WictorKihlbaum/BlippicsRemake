@@ -47,7 +47,7 @@ class ContactView {
 				<ul class="mdl-list">
 				  <li class="mdl-list__item mdl-list__item--two-line">
 				    <span class="mdl-list__item-primary-content">
-					    <img src="./assets/img/gmail_logo.svg" alt="Gmail logotype" />
+					    <img src="./assets/img/gmail_logo.png" alt="Gmail logotype" />
 					    <a href="mailto:wictor.kihlbaum@gmail.com" class="hvr-underline-from-left">
 					      wictor.kihlbaum@gmail.com
 					    </a>
