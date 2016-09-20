@@ -68,10 +68,10 @@ class IndexView {
 			  </div>
 				<div class="mdl-cell mdl-cell--4-col index-cell animated rotateIn">
 				  <div id="selfie-cell-content">
-				  	<span class="hint--bottom" aria-label="Take selfie">
+				  	<span class="hint--bottom" aria-label="Take selfie and edit it">
 					  	<a href="?'.self::$selfieURL.'" class="hvr-bob">
 					  	  <img src="./assets/img/selfie.png"
-					  	       alt="Take selfie"
+					  	       alt="Take selfie and edit it"
 					  	       id="selfie-image-button"
 										 class="animated zoomInDown" />
 					  	</a>

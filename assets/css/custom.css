@@ -103,43 +103,44 @@ h1 {
 }
 
 .index-cell {
-	height: 350px;
+	height: 310px;
 	margin: 0 auto;
 	background: url('../img/circle-2.png') center / contain;
 	background-repeat: no-repeat;
 	text-align: center;
+	/*background-color: #CCC;*/
 }
 
 #local-cell-content {
-	margin-top: 135px;
+	margin-top: 115px;
 }
 #local-cell-content img {
 	width: 160px;
 }
 
 #googledrive-cell-content {
-	margin-top: 105px;
+	margin-top: 85px;
 }
 #googledrive-cell-content img {
 	width: 140px;
 }
 
 #dropbox-cell-content {
-	margin-top: 110px;
+	margin-top: 90px;
 }
 #dropbox-cell-content img {
 	width: 140px;
 }
 
 #onedrive-cell-content {
-	margin-top: 130px;
+	margin-top: 110px;
 }
 #onedrive-cell-content img {
 	width: 150px;
 }
 
 #selfie-cell-content {
-	margin-top: 90px;
+	margin-top: 70px;
 }
 #selfie-cell-content img {
 	width: 80px;
