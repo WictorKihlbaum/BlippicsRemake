@@ -46,11 +46,11 @@ const SelfieHandler = {
       stream => {
         // Create an object URL for the video stream and
         // set it as src of our HTLM video element.
-        video.src = window.URL.createObjectURL(stream);
+        this.video.src = window.URL.createObjectURL(stream);
         // Play the video element to start the stream.
-        video.play();
-        video.onplay = () => {
-          showVideo();
+        this.video.play();
+        this.video.onplay = () => {
+          this.showVideo();
         };
       },
       // Error Callback
@@ -84,7 +84,7 @@ const SelfieHandler = {
   setupTakePhotoButton: function() {
     this.takePhotoButton.addEventListener('click', e => {
       e.preventDefault();
-      this.snap = takeSnapshot();
+      this.snap = this.takeSnapshot();
       // Show image.
       this.image.setAttribute('src', this.snap);
       this.image.classList.add('visible');
@@ -132,7 +132,7 @@ const SelfieHandler = {
       hidden_canvas.width = width;
       hidden_canvas.height = height;
       // Make a copy of the current frame in the video on the canvas.
-      context.drawImage(video, 0, 0, width, height);
+      context.drawImage(this.video, 0, 0, width, height);
       // Turn the canvas image into a dataURL that can be used as a src for our photo.
       return hidden_canvas.toDataURL('image/png');
     }
@@ -156,7 +156,7 @@ const SelfieHandler = {
     this.startCameraButton.classList.remove('visible');
     this.video.classList.remove('visible');
     this.errorMessage.classList.remove('visible');
-    if (this.snap) {
+    if (this.snap) { // TODO: Fix error. snap or classList is undefined.
       this.snap.classList.remove('visible');
     }
   }
