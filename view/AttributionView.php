@@ -60,6 +60,18 @@ class AttributionView {
 							  Background vector designed by Freepik
 							</a>
 						</li>
+						<li class="mdl-typography--display-3">
+						  Arrows:
+						  <a href="http://www.freepik.com/free-photos-vectors/arrow">
+							  Arrow vector designed by Freepik
+							</a>
+						</li>
+						<li class="mdl-typography--display-3">
+						  Selfie:
+						  <a href="http://www.freepik.com/free-photos-vectors/hand">
+							  Hand vector designed by Freepik
+							</a>
+						</li>
 					</ul>
 				</ul>
 

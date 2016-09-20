@@ -12,6 +12,7 @@ class LayoutView {
   protected static $attributionURL = 'attribution';
   private static $editDropboxURL = 'editdropbox';
   private static $editOneDriveURL = 'editonedrive';
+  private static $selfieURL = 'selfie';
 
   private $pageSpecificScripts = '';
   private $pageSpecificStyles = '';
@@ -23,6 +24,7 @@ class LayoutView {
 		$this -> contactView = $views['contact'];
     $this -> editGoogleDriveView = $views['editgoogledrive'];
     $this -> attributionView = $views['attribution'];
+    $this -> selfieView = $views['selfie'];
 
     $this -> headerView = $sharedViews['header'];
     $this -> footerView = $sharedViews['footer'];
@@ -90,7 +92,8 @@ class LayoutView {
                    onclick="Scroll.toTop()"
                    class="mdl-button
                           mdl-button--fab
-                          mdl-button--primary">
+                          mdl-button--primary
+                          animated zoomIn">
                   <i class="material-icons">
                     keyboard_arrow_up
                   </i>
@@ -99,18 +102,18 @@ class LayoutView {
             </div>
 
           </div>
-
+          <!--
           <script>
             if ("serviceWorker" in navigator) {
                 navigator.serviceWorker.register("./sw.js").then(registration => {
                 // Registration was successful
-                // console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
+                console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
               }).catch(err => {
-                // registration failed :(
-                // console.log(`ServiceWorker registration failed: ${err}`);
+                console.log(`ServiceWorker registration failed: ${err}`);
               });
             }
           </script>
+          -->
 
           <!--<script src="./assets/js/HTTPSReplace.js"></script>-->
           <!-- Google Material Lite -->
@@ -145,6 +148,9 @@ class LayoutView {
       case self::$indexURL:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
+        $this -> pageSpecificStyles = '
+          <script src="./assets/js/Hej.js"></script>
+        ';
         break;
 
       case self::$aboutURL:
@@ -235,9 +241,23 @@ class LayoutView {
         ';
         break;
 
+      case self::$selfieURL:
+        $this -> pageTitle = 'Take selfie';
+        $this -> pageContent = $this -> selfieView -> response();
+        $this -> pageSpecificScripts = '
+          <script src="./assets/js/SelfieHandler.js"></script>
+        ';
+        $this -> pageSpecificStyles = '
+          <link rel="stylesheet" href="./assets/css/selfie-styles.css" />
+        ';
+        break;
+
       default:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
+        $this -> pageSpecificStyles = '
+          <script src="./assets/js/Hej.js"></script>
+        ';
         break;
     }
   }

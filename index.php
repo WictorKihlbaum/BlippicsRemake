@@ -27,6 +27,7 @@ require_once('view/AboutView.php');
 require_once('view/ContactView.php');
 require_once('view/EditGoogleDriveView.php');
 require_once('view/AttributionView.php');
+require_once('view/SelfieView.php');
 
 // Shared views
 require_once('view/shared/HeaderView.php');
@@ -45,7 +46,8 @@ $views = [
 	'about' => new AboutView(),
 	'contact' => new ContactView(),
 	'editgoogledrive' => new EditGoogleDriveView(),
-	'attribution' => new AttributionView()
+	'attribution' => new AttributionView(),
+	'selfie' => new SelfieView()
 ];
 
 $sharedViews = [

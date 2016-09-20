@@ -10,11 +10,11 @@ class AboutView {
 
 	public function response() : string {
 		return '
-			<h1 class="mdl-typography--display-3 mdl-color-text--primary page-topic">
+			<h1 class="mdl-typography--display-3 mdl-color-text--primary page-topic animated rollIn">
 				About
 			</h1>
 
-			<div class="quote">
+			<div class="quote animated rollIn">
 	  	  <div id="about-text">
 				  <p class="mdl-typography--display-2">
 					  Blippics was initially the product of a final project in one of my previously

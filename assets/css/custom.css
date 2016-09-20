@@ -110,32 +110,39 @@ h1 {
 	text-align: center;
 }
 
-#googledrive-cell-content {
-	margin-top: 85px;
-}
-#googledrive-cell-content img {
-	width: 180px;
-}
-
 #local-cell-content {
-	margin-top: 120px;
+	margin-top: 135px;
 }
 #local-cell-content img {
-	width: 210px;
+	width: 160px;
+}
+
+#googledrive-cell-content {
+	margin-top: 105px;
+}
+#googledrive-cell-content img {
+	width: 140px;
 }
 
 #dropbox-cell-content {
-	margin-top: 85px;
+	margin-top: 110px;
 }
 #dropbox-cell-content img {
-	width: 180px;
+	width: 140px;
 }
 
 #onedrive-cell-content {
-	margin-top: 115px;
+	margin-top: 130px;
 }
 #onedrive-cell-content img {
-	width: 200px;
+	width: 150px;
+}
+
+#selfie-cell-content {
+	margin-top: 90px;
+}
+#selfie-cell-content img {
+	width: 80px;
 }
 
 #attribution-container {

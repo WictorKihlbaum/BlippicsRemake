@@ -186,6 +186,8 @@ class EditView {
       case 'editdropbox':
         return '
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
+                  aria-label="Choose image"
+                  title="Choose image"
                   id="choose-button"
                   onclick="Dropbox.choose(DropboxHandler.getChooserOptions())">
             <i class="material-icons">
@@ -197,6 +199,8 @@ class EditView {
       case 'editonedrive':
         return '
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
+                  aria-label="Choose image"
+                  title="Choose image"
                   id="choose-button"
                   onclick="OneDriveHandler.launchOneDrivePicker()">
             <i class="material-icons">
