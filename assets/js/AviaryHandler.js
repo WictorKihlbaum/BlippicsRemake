@@ -1,12 +1,7 @@
-'use strict';
 
-const AviaryHandler = {
+class AviaryHandler {
 
-	feather: null,
-	newURL: null,
-
-
-	instantiateFeather: function() {
+	static instantiateFeather() {
 		// Instantiate Aviary editor.
 		this.feather = new Aviary.Feather({
 			apiKey: 'eb5f4fca52634bbf94da9389bd974012',
@@ -35,9 +30,9 @@ const AviaryHandler = {
 				Message.show(message, 'user-message-error');
 			}
 		});
-	},
+	}
 
-	handleButtons: function(id, url) {
+	static handleButtons(id, url) {
 		const location = window.location.href;
 		// Add action buttons for new image.
 		switch (true) {
@@ -53,13 +48,13 @@ const AviaryHandler = {
 				ActionButtons.addButtons(url);
 				break;
 		}
-	},
+	}
 
-	launchEditor: function(id, src) {
+	static launchEditor(id, src) {
 	  this.feather.launch({ image: id, url: src });
 		return false;
 	}
 
-};
+}
 
 window.onload = AviaryHandler.instantiateFeather();

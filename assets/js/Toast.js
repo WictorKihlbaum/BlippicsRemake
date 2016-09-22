@@ -1,8 +1,6 @@
-'use strict';
+class Toast {
 
-const Toast = {
-
-  showSuccess: function(message) {
+  static showSuccess(message) {
     const snackbarContainer = $('#success-toast')[0];
 		const data = {
 			message: message,
@@ -11,4 +9,4 @@ const Toast = {
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);
   }
 
-};
+}

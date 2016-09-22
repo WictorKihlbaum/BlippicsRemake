@@ -1,12 +1,7 @@
-'use strict';
 
-const DropboxHandler = {
+class DropboxHandler {
 
-  image: null,
-  uploadMessage: 'Image was successfully uploaded to your Dropbox!',
-
-
-  getChooserOptions: function() {
+  static getChooserOptions() {
     return {
       success: image => {
         const url = image[0].link;
@@ -19,14 +14,15 @@ const DropboxHandler = {
       multiselect: false,
       extensions: ['.png', '.jpg', '.jpeg']
     };
-  },
+  }
 
-  getSaverOptions: function(url) {
+  static getSaverOptions(url) {
     return {
       files: [{'url': `${url}`, 'filename': `${this.image.name}`}],
       success: () => {
         $('.spinner').addClass('is-hidden');
-        Toast.showSuccess(this.uploadMessage);
+        const message = 'Image was successfully uploaded to your Dropbox!';
+        Toast.showSuccess(message);
         ActionButtons.reStyleSaveButton();
       },
       progress: progress => {
@@ -38,4 +34,4 @@ const DropboxHandler = {
     };
   }
 
-};
+}

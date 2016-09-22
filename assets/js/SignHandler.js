@@ -1,14 +1,13 @@
-'use strict';
 
-const SignHandler = {
+class SignHandler {
 
-	signIn: function(googleUser) {
+	static signIn(googleUser) {
 		//const profile = googleUser.getBasicProfile();
 		this.addSignOutButton();
 		GoogleDriveHandler.checkAuth();
-	},
+	}
 
-	addSignOutButton: function() {
+	static addSignOutButton() {
 		$('#signout-button-field').html(`
 			<button type="button"
 							id="signout-button"
@@ -25,13 +24,13 @@ const SignHandler = {
 				</i>
 			</button>
 		`);
-	},
+	}
 
-	signOut: function() {
+	static signOut() {
 		const auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
 		auth2.disconnect();
 		window.location.reload();
   }
 
-};
+}

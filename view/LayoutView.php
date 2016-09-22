@@ -148,9 +148,6 @@ class LayoutView {
       case self::$indexURL:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
-        $this -> pageSpecificStyles = '
-          <script src="./assets/js/Hej.js"></script>
-        ';
         break;
 
       case self::$aboutURL:
@@ -255,9 +252,6 @@ class LayoutView {
       default:
         $this -> pageTitle = 'Home';
         $this -> pageContent = $this -> indexView -> response();
-        $this -> pageSpecificStyles = '
-          <script src="./assets/js/Hej.js"></script>
-        ';
         break;
     }
   }

@@ -1,11 +1,10 @@
-'use strict';
 
-const HelpDialog = {
+class HelpDialog {
 
-	setupDialog: function() {
+	static setupDialog() {
 		const dialog = $('dialog')[0];
 		let showDialogButton = null;
-		
+
 		if (window.location.href.includes('editgoogledrive'))
 		  showDialogButton = $('#show-dialog-google')[0];
 		else
@@ -20,6 +19,6 @@ const HelpDialog = {
 		closeDialogButton.addEventListener('click', () => dialog.close());
 	}
 
-};
+}
 
 window.onload = HelpDialog.setupDialog();

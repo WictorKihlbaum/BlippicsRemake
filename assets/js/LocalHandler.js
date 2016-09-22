@@ -1,24 +1,19 @@
-/* This JS-file handles events connected to 'editlocal.html' */
-'use strict';
 
-const LocalHandler = {
+class LocalHandler {
 
-	dropArea: $("#dropzone"),
-	preview: $('#editable-image'),
-	fileInput: $('#input'),
-	defaultImagePath: 'assets/img/placeholder_image.png',
-
-	invalidImageError: `
-		Invalid file! The file has to be a Png or Jpg/Jpeg image.
-		Please try again.
-	`,
-
-
-	init: function() {
+	static init() {
+    this.dropArea = $("#dropzone");
+  	this.preview = $('#editable-image');
+  	this.fileInput = $('#input');
+  	this.defaultImagePath = 'assets/img/placeholder_image.png';
+  	this.invalidImageError = `
+  		Invalid file! The file has to be a
+      Png or Jpg/Jpeg image. Please try again.
+  	`;
 		this.setupDroparea();
-	},
+	}
 
-	setupDroparea: function() {
+	static setupDroparea() {
 		// Prevent defaults on drag/drop events.
 		this.dropArea.on('drag dragstart dragend dragover dragenter dragleave drop', e => {
 			if (e.preventDefault) e.preventDefault();
@@ -45,9 +40,9 @@ const LocalHandler = {
 			const file = e.originalEvent.target.files[0];
 			this.handleFile(file);
 		});
-	},
+	}
 
-	handleFile: function(file) {
+	static handleFile(file) {
 		if (this.isValidImageFormat(file)) {
 			// In case an earlier message has been shown.
 			Message.remove();
@@ -64,9 +59,9 @@ const LocalHandler = {
 			this.resetPreview();
 			ActionButtons.removeButtons();
 		}
-	},
+	}
 
-	createFileReader: function(file) {
+	static createFileReader(file) {
 		const reader = new FileReader();
 		reader.onload = () => {
 			this.hideSpinner();
@@ -80,29 +75,29 @@ const LocalHandler = {
 			Message.show(error, 'user-message-error');
 		};
 		reader.readAsDataURL(file);
-	},
+	}
 
-	isValidImageFormat: function(file) {
+	static isValidImageFormat(file) {
 		// Adobe Aviary photo editor only supports Png and Jpg/Jpeg.
 		return ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
-	},
+	}
 
-	updatePreview: function(result) {
+	static updatePreview(result) {
 		this.preview.attr('src', result);
-	},
+	}
 
-	resetPreview: function() {
+	static resetPreview() {
 		this.preview.attr('src', this.defaultImagePath);
-	},
+	}
 
-	showSpinner: function() {
+	static showSpinner() {
 		$('.spinner').removeClass('is-hidden');
-	},
+	}
 
-	hideSpinner: function() {
+	static hideSpinner() {
 		$('.spinner').addClass('is-hidden');
 	}
 
-};
+}
 
 window.onload = LocalHandler.init();

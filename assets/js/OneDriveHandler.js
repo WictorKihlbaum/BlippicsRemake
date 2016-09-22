@@ -1,14 +1,10 @@
-'use strict';
 
-const OneDriveHandler = {
+class OneDriveHandler {
 
   // TODO: Validate file extension for choosen file.
   // Microsoft doesn't give this functionality. Keep updated on this!
 
-  uploadMessage: 'Image was successfully uploaded to your OneDrive!',
-
-
-  launchOneDrivePicker: function() {
+  static launchOneDrivePicker() {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "download",
@@ -26,16 +22,16 @@ const OneDriveHandler = {
       }
     };
     OneDrive.open(odOptions);
-  },
+  }
 
-  getRedirectUri: function() {
+  static getRedirectUri() {
     if (window.location.origin.match('localhost')) {
       return 'http://localhost:8888/'; // Developer
     }
     return 'https://www.blippics.com/'; // Production
-  },
+  }
 
-  launchOneDriveSaver: function(url) {
+  static launchOneDriveSaver(url) {
     const odOptions = {
       clientId: "c3e33c0d-c915-4e56-bbb5-52c74f7d040e",
       action: "save",
@@ -44,11 +40,12 @@ const OneDriveHandler = {
       openInNewWindow: true,
       advanced: {},
       success: files => {
-        Toast.showSuccess(this.uploadMessage);
+        const message = 'Image was successfully uploaded to your OneDrive!';
+        Toast.showSuccess(message);
         $('.spinner').addClass('is-hidden');
         ActionButtons.reStyleSaveButton();
       },
-      progress: p => {
+      progress: progress => {
         $('.spinner').removeClass('is-hidden');
       },
       error: errorMessage => {
@@ -58,4 +55,4 @@ const OneDriveHandler = {
     OneDrive.save(odOptions);
   }
 
-};
+}

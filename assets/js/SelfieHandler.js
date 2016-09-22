@@ -1,19 +1,8 @@
-'use strict';
 
-const SelfieHandler = {
+class SelfieHandler {
 
-  video: $('#camera-stream')[0],
-  image: $('#snap')[0],
-  startCameraButton: $('#start-camera')[0],
-  controls: $('.controls')[0],
-  takePhotoButton: $('#take-photo')[0],
-  deletePhotoButton: $('#delete-photo')[0],
-  downloadPhotoButton: $('#download-photo')[0],
-  errorMessage: $('#error-message')[0],
-  snap: null,
-
-
-  init: function() {
+  static init() {
+    this.setupVariables();
     if (this.isBrowserSupported()) {
       this.requestCamera();
       this.setupButtons();
@@ -23,9 +12,21 @@ const SelfieHandler = {
         the navigator.getUserMedia interface.
       `);
     }
-  },
+  }
 
-  isBrowserSupported: function() {
+  static setupVariables() {
+    this.video = $('#camera-stream')[0];
+    this.image = $('#snap')[0];
+    this.startCameraButton = $('#start-camera')[0];
+    this.controls = $('.controls')[0];
+    this.takePhotoButton = $('#take-photo')[0];
+    this.deletePhotoButton = $('#delete-photo')[0];
+    this.downloadPhotoButton = $('#download-photo')[0];
+    this.errorMessage = $('#error-message')[0];
+    this.snap = null;
+  }
+
+  static isBrowserSupported() {
     // The getUserMedia interface is used for handling camera input.
     // Some browsers need a prefix so here we're covering all the options
     navigator.getMedia = navigator.getUserMedia ||
@@ -35,9 +36,9 @@ const SelfieHandler = {
 
     if (navigator.getMedia) return true;
     return false;
-  },
+  }
 
-  requestCamera: function() {
+  static requestCamera() {
     navigator.getMedia(
       {
         video: true
@@ -62,15 +63,15 @@ const SelfieHandler = {
         );
       }
     );
-  },
+  }
 
-  setupButtons: function() {
+  static setupButtons() {
     this.setupStartCameraButton();
     this.setupTakePhotoButton();
     this.setupDeletePhotoButton();
-  },
+  }
 
-  setupStartCameraButton: function() {
+  static setupStartCameraButton() {
     // Mobile browsers cannot play video without user input,
     // so here we're using a button to start it manually.
     this.startCameraButton.addEventListener('click', e => {
@@ -79,9 +80,9 @@ const SelfieHandler = {
       this.video.play();
       this.showVideo();
     });
-  },
+  }
 
-  setupTakePhotoButton: function() {
+  static setupTakePhotoButton() {
     this.takePhotoButton.addEventListener('click', e => {
       e.preventDefault();
       this.snap = this.takeSnapshot();
@@ -96,9 +97,9 @@ const SelfieHandler = {
       // Pause video playback of stream.
       this.video.pause();
     });
-  },
+  }
 
-  setupDeletePhotoButton: function() {
+  static setupDeletePhotoButton() {
     this.deletePhotoButton.addEventListener('click', e => {
       e.preventDefault();
       // Hide image.
@@ -110,16 +111,16 @@ const SelfieHandler = {
       // Resume playback of stream.
       this.video.play();
     });
-  },
+  }
 
-  showVideo: function() {
+  static showVideo() {
     // Display the video stream and the controls.
     this.hideUI();
     this.video.classList.add('visible');
     this.controls.classList.add('visible');
-  },
+  }
 
-  takeSnapshot: function() {
+  static takeSnapshot() {
     // Here we're using a trick that involves a hidden canvas element.
     let hidden_canvas = document.querySelector('canvas'),
         context = hidden_canvas.getContext('2d');
@@ -136,10 +137,10 @@ const SelfieHandler = {
       // Turn the canvas image into a dataURL that can be used as a src for our photo.
       return hidden_canvas.toDataURL('image/png');
     }
-  },
+  }
 
   // Remove later.
-  displayErrorMessage: function(error_msg, error) {
+  static displayErrorMessage(error_msg, error) {
     error = error || '';
     if (error) {
       console.error(error);
@@ -148,19 +149,20 @@ const SelfieHandler = {
     this.errorMessage.innerText = error_msg;
     this.hideUI();
     this.errorMessage.classList.add('visible');
-  },
+  }
 
-  hideUI: function() {
+  static hideUI() {
     // Helper function for clearing the app UI.
     this.controls.classList.remove('visible');
     this.startCameraButton.classList.remove('visible');
     this.video.classList.remove('visible');
     this.errorMessage.classList.remove('visible');
     if (this.snap) { // TODO: Fix error. snap or classList is undefined.
-      this.snap.classList.remove('visible');
+      //this.snap.classList.remove('visible');
+      this.snap.removeClass('visible');
     }
   }
 
-};
+}
 
 window.onload = SelfieHandler.init();

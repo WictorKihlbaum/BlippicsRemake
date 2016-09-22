@@ -438,7 +438,10 @@ input[type="file"] {
 }
 
 .card-thumbnails {
-	/* Empty for now */
+	max-height: 243px !important;
+}
+.card-thumbnails img {
+	max-height: 138px !important;
 }
 
 #loading-animation-text {

@@ -1,8 +1,7 @@
-'use strict';
 
-const ActionButtons = {
+class ActionButtons {
 
-  addButtons: function(url) {
+  static addButtons(url) {
 		this.addEditButton(url);
 		this.addDownloadButton(url);
     // Add save button.
@@ -11,15 +10,15 @@ const ActionButtons = {
       this.addSaveButtonDropbox(url);
     else if (location.match('onedrive'))
       this.addSaveButtonOneDrive(url);
-	},
+	}
 
-  removeButtons: function() {
+  static removeButtons() {
     $('#edit-button').remove();
     $('#download-button').remove();
     $('#save-button').remove();
-  },
+  }
 
-  addEditButton: function(url) {
+  static addEditButton(url) {
 		$('#edit-button-field').html(`
 			<a href="#"
 			   id="edit-button"
@@ -36,9 +35,9 @@ const ActionButtons = {
 				</i>
 			</a>
 		`);
-	},
+	}
 
-  addDownloadButton: function(url) {
+  static addDownloadButton(url) {
 		$('#download-button-field').html(`
 			<a href="${url}" download
 			   id="download-button"
@@ -54,9 +53,9 @@ const ActionButtons = {
 				</i>
 			</a>
 		`);
-	},
+	}
 
-  addSaveButtonDropbox: function(url) {
+  static addSaveButtonDropbox(url) {
     $('#save-button-field').html(`
       <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary has-hover"
               id="save-button"
@@ -68,11 +67,11 @@ const ActionButtons = {
         </i>
       </button>
     `);
-  },
+  }
 
-  addSaveButtonOneDrive: function(url) {
+  static addSaveButtonOneDrive(url) {
     $('#save-button-field').html(`
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary"
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary has-hover"
               id="save-button"
               aria-label="Save image on OneDrive"
               title="Save image on OneDrive"
@@ -82,9 +81,9 @@ const ActionButtons = {
         </i>
       </button>
     `);
-  },
+  }
 
-  reStyleSaveButton: function() {
+  static reStyleSaveButton() {
     const saveButton = $('#save-button');
     saveButton.attr('title', 'Image is saved');
     saveButton.attr('aria-label', 'Image is saved');

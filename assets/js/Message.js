@@ -1,27 +1,23 @@
-'use strict';
 
-const Message = {
+class Message {
 
-	field: null,
-
-
-	init: function() {
+	static init() {
 		this.field = $('#user-message-field');
-	},
+	}
 
-	show: function(message, id) {
+	static show(message, id) {
 		this.field.html(`
       <div id="${id}" class="user-message animated flash">
         ${message} ${this.getCloseButton()}
 			</div>
 		`);
-	},
+	}
 
-	remove: function() {
+	static remove() {
 	  this.field.html('');
-	},
+	}
 
-	getCloseButton: function() {
+	static getCloseButton() {
 		return `
       <i class="material-icons"
 			   id="close-message-button"
@@ -33,6 +29,6 @@ const Message = {
 		`;
 	}
 
-};
+}
 
 window.onload = Message.init();
