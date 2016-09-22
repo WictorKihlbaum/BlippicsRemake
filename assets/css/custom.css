@@ -278,8 +278,7 @@ input[type="file"] {
 	background-color: rgba(33, 150, 243, 0.8);
 }
 #action-buttons-field .has-hover:hover {
-	/*background-color: rgba(33, 150, 243, 0.8);*/
-	background-color: red;
+	background-color: rgba(33, 150, 243, 0.8);
 }
 
 #toast-container {

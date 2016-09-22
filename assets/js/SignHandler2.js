@@ -1,12 +1,8 @@
-'use strict';
 
-class Hej {
-
-  static init() {
-    console.log('hejsan');
-  }
+class SignHandler {
 
 	static signIn(googleUser) {
+		//const profile = googleUser.getBasicProfile();
 		this.addSignOutButton();
 		GoogleDriveHandler.checkAuth();
 	}
@@ -38,5 +34,3 @@ class Hej {
   }
 
 }
-
-window.onload = Hej.init();

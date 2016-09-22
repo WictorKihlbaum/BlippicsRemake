@@ -1,37 +1,38 @@
-'use strict';
 
-const GoogleDriveHandler = {
+class GoogleDriveHandler {
 
-	// TODO: Fix the problem with GoogleDriveHandler being undefined!
-
-	pagination: null,
-	imageArray: [],
-	imageList: null,
-	currentImageName: '',
-	lastEditedImageID: '',
-	CLIENT_ID: '117700549617-ol49l4bkna7ch6qbb44gubuj3t2p8vep.apps.googleusercontent.com',
-	SCOPES: ['https://www.googleapis.com/auth/drive'],
-
-	// User messages.
-	uploadSuccessMessage: 'The image was successfully uploaded to your Google Drive!',
-	removeSuccessMessage: 'The image was successfully removed from your Google Drive!',
-	uploadErrorMessage: 'The image failed to upload to your Google Drive!',
-	driveErrorMessage: 'Error! Could not get image from Google Drive.',
-	amazonErrorMessage: `
-		An error occurred! Failed to get the edited image.
-		Therefore an upload to your Google Drive can not be pursued.
-	`,
-	noValidImages: 'No valid images (Png, Jpg/Jpeg) found in your Google Drive.',
-
-
-	init: function() {
+	static init() {
+    this.setupVariables();
+    this.setupMessages();
 		HelpDialog.setupDialog();
 		$('#loading-animation').hide();
 		GoogleDriveHandler.imageList = $('#image-list');
 		GoogleDriveHandler.pagination = $('.pagination-page');
-	},
+	}
 
-	setupPagination: function() {
+  static setupVariables() {
+    this.pagination = null;
+  	this.imageArray = [];
+  	this.imageList = null;
+  	this.currentImageName = '';
+  	this.lastEditedImageID = '';
+  	this.CLIENT_ID = '117700549617-ol49l4bkna7ch6qbb44gubuj3t2p8vep.apps.googleusercontent.com';
+  	this.SCOPES = ['https://www.googleapis.com/auth/drive'];
+  }
+
+  static setupMessages() {
+    this.uploadSuccessMessage = 'The image was successfully uploaded to your Google Drive!';
+  	this.removeSuccessMessage = 'The image was successfully removed from your Google Drive!';
+  	this.uploadErrorMessage = 'The image failed to upload to your Google Drive!';
+  	this.driveErrorMessage = 'Error! Could not get image from Google Drive.';
+  	this.amazonErrorMessage = `
+  		An error occurred! Failed to get the edited image.
+  		Therefore an upload to your Google Drive can not be pursued.
+  	`;
+  	this.noValidImages = 'No valid images (Png, Jpg/Jpeg) found in your Google Drive.';
+  }
+
+	static setupPagination() {
 		const items = $('#image-list .mdl-card');
 		const numItems = items.length;
 		const perPage = 8;
@@ -63,51 +64,51 @@ const GoogleDriveHandler = {
 		// Call GoogleDriveHandler function whenever the back/forward is pressed.
 		$(window).bind('popstate', checkFragment);
 		checkFragment();
-	},
+	}
 
 	/**
 	 * Check if current user has authorized GoogleDriveHandler application.
 	 */
-	checkAuth: function() {
+	static checkAuth() {
 		gapi.auth.authorize({
       'client_id': GoogleDriveHandler.CLIENT_ID,
       'scope': GoogleDriveHandler.SCOPES.join(' '),
       'immediate': true
     }, GoogleDriveHandler.handleAuthResult);
-	},
+	}
 
 	/**
 	 * Handle response from authorization server.
 	 */
-	handleAuthResult: function(authResult) {
+	static handleAuthResult(authResult) {
     if (authResult && !authResult.error) {
 			GoogleDriveHandler.hideLoginElements();
 			GoogleDriveHandler.loadDriveApi();
 		} else {
 			GoogleDriveHandler.showLoginElements();
 		}
-	},
+	}
 
-	hideLoginElements: function() {
+	static hideLoginElements() {
 		$('#need-to-login-text').hide();
 		$('#google-info-text').hide();
 		$('#signin-button').hide();
-	},
+	}
 
-	showLoginElements: function() {
+	static showLoginElements() {
 		$('#need-to-login-text').show();
 		$('#google-info-text').show();
 		$('#signin-button').show();
-	},
+	}
 
 	/**
 	 * Load Drive API client library.
 	 */
-	loadDriveApi: function() {
+	static loadDriveApi() {
 		gapi.client.load('drive', 'v3', GoogleDriveHandler.requestImages);
-	},
+	}
 
-	requestImages: function() {
+	static requestImages() {
 		// Show loading animation while images are being loaded.
 		$('#loading-animation').show();
 		GoogleDriveHandler.imageList.html('');
@@ -137,9 +138,9 @@ const GoogleDriveHandler = {
 				GoogleDriveHandler.setupPagination();
 			}
 		});
-	},
+	}
 
-	renderImage: function(image) {
+	static renderImage(image) {
     // Remove unwanted part of url.
 		const largeImageLink = image.webContentLink.replace(/&export=download/i, '');
 
@@ -187,14 +188,14 @@ const GoogleDriveHandler = {
 				</div>
 			</div>
 		`);
-	},
+	}
 
-	addActionButtons: function(imageID, newURL) {
+	static addActionButtons(imageID, newURL) {
 		GoogleDriveHandler.addDownloadButton(imageID, newURL);
 		GoogleDriveHandler.addUploadButton(imageID, newURL);
-	},
+	}
 
-	addDownloadButton: function(id, url) {
+	static addDownloadButton(id, url) {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
 			<a href="${url}" download>
@@ -206,9 +207,9 @@ const GoogleDriveHandler = {
 				</i>
 			</a>
 		`);
-	},
+	}
 
-	addUploadButton: function(id, url) {
+	static addUploadButton(id, url) {
 		const actionsField = $(`#actions-for-${id}`);
 		actionsField.append(`
 			<i alt="Upload edited ${id}"
@@ -219,9 +220,9 @@ const GoogleDriveHandler = {
 			  cloud_upload
 			</i>
 		`);
-	},
+	}
 
-	addConfirmationText: function(name) {
+	static addConfirmationText(name) {
 		$('#confirmation-text').html(`
 			<ul>
 			  <li>You are about to delete image: ${name}</li>
@@ -233,9 +234,9 @@ const GoogleDriveHandler = {
 			</ul>
 			<p>Are you really sure?</p>
 		`);
-	},
+	}
 
-	showConfirmation: function(id, name) {
+	static showConfirmation(id, name) {
 		const dialog = $('#confirm-dialog')[0];
     if (!dialog.showModal)
 		  dialogPolyfill.registerDialog(dialog);
@@ -250,14 +251,14 @@ const GoogleDriveHandler = {
 
     dialog.querySelector('.cancel').addEventListener('click', () =>
 		  dialog.close());
-	},
+	}
 
 	/**
    * Permanently delete an image, skipping the trash.
    *
    * @param {String} id ID of the image to delete.
    */
- 	deleteImageFromDrive: function(id) {
+ 	static deleteImageFromDrive(id) {
  		document.body.className = 'cursor-wait';
 
  	  const request = gapi.client.drive.files.delete({
@@ -277,9 +278,9 @@ const GoogleDriveHandler = {
  			}
  		  document.body.className = 'cursor-default';
  		});
- 	},
+ 	}
 
-	getImageFromDrive: function(id) {
+	static getImageFromDrive(id) {
 		// Save ID to be able to get it from AviaryHandler onSave.
 		GoogleDriveHandler.lastEditedImageID = id;
 		// In case an earlier user message has been shown.
@@ -305,12 +306,12 @@ const GoogleDriveHandler = {
 		xhr.responseType = 'blob';
 		xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
 		xhr.send();
-	},
+	}
 
 	/**
 	 * Aviary photo editor saves image temporarily on Amazon server.
 	 */
-	getImageFromAmazon: function(url) {
+	static getImageFromAmazon(url) {
 		const xhr = new XMLHttpRequest();
 
 		xhr.onload = () =>
@@ -322,9 +323,9 @@ const GoogleDriveHandler = {
 		xhr.open('GET', url);
 		xhr.responseType = 'blob';
 		xhr.send();
-	},
+	}
 
-	postImageToDrive: function(fileData, callback) {
+	static postImageToDrive(fileData, callback) {
 		/* Indicate image is being uploaded
 		   to avoid user pressing anything. */
 		document.body.className = 'cursor-wait';
@@ -376,9 +377,9 @@ const GoogleDriveHandler = {
     	}
 			request.execute(callback);
 		};
-	},
+	}
 
-	setCurrentImageName: function(imageID) {
+	static setCurrentImageName(imageID) {
 		let imageName = GoogleDriveHandler.currentImageName;
 		const images = GoogleDriveHandler.imageArray;
 		const image = images.find(image => image.id == imageID);
@@ -391,6 +392,6 @@ const GoogleDriveHandler = {
 		GoogleDriveHandler.currentImageName = imageName;
 	}
 
-};
+}
 
 window.onload = GoogleDriveHandler.init();
