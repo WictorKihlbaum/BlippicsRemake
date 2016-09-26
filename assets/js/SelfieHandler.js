@@ -55,11 +55,11 @@ class SelfieHandler {
         };
       },
       // Error Callback
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
         this.displayErrorMessage(`
           There was an error with accessing
-          the camera stream: ${err.name}`, err
+          the camera stream: ${err.name}`, error
         );
       }
     );
@@ -157,10 +157,6 @@ class SelfieHandler {
     this.startCameraButton.classList.remove('visible');
     this.video.classList.remove('visible');
     this.errorMessage.classList.remove('visible');
-    if (this.snap) { // TODO: Fix error. snap or classList is undefined.
-      //this.snap.classList.remove('visible');
-      this.snap.removeClass('visible');
-    }
   }
 
 }

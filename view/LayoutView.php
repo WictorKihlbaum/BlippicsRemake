@@ -102,6 +102,7 @@ class LayoutView {
             </div>
 
           </div>
+
           <!--
           <script>
             if ("serviceWorker" in navigator) {

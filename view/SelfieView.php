@@ -13,6 +13,7 @@ class SelfieView {
 		  <h1 class="mdl-typography--display-3 mdl-color-text--primary page-topic">
 			  Take a selfie
 		  </h1>
+			<h4>This page is still under development</h4>
 
 			<div class="container">
 				<div class="app">
