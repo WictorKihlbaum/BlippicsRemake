@@ -11,7 +11,7 @@ class FooterView extends LayoutView {
 	public function renderFooter() : string {
 		return '
 		  <div class="mdl-mega-footer__bottom-section">
-		    <div class="mdl-logo footer-content">© 2016 Blippics</div>
+		    <div class="mdl-logo footer-content">© 2017 Blippics</div>
 		    <ul class="mdl-mega-footer__link-list footer-content">
 				<li>
 					<a href="?'.self::$aboutURL.'">
