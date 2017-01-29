@@ -116,7 +116,6 @@ class LayoutView {
           </script>
           -->
 
-          <!--<script src="./assets/js/HTTPSReplace.js"></script>-->
           <!-- Google Material Lite -->
           <script src="./assets/js/framework/material.min.js"></script>
           <script src="./assets/js/libs/pace.js"></script>
